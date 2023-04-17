@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>4.5. Práctica Grupal: Problemas de Contorno &#8212; Curso de Informática ETSIAE</title>
+    <title>4.5. Práctica Grupal: Problemas de Contorno &#8212; Curso de Informática GIA</title>
   
   
   
@@ -227,7 +227,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE" target="_blank"
+      <li><a href="https://github.com/MathETSIAE/InformaticaGIA" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -244,7 +244,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/04-DerivacionIntegracion/practica_pde.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/MathETSIAE/InformaticaGIA/issues/new?title=Issue%20on%20page%20%2Fnotebooks/04-DerivacionIntegracion/practica_pde.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -392,8 +392,8 @@ document.write(`
 <p>Por ejemplo <span class="math notranslate nohighlight">\(U(x) = cos(x)\)</span> ó <span class="math notranslate nohighlight">\(U(x) = sin(x)\)</span>, <span class="math notranslate nohighlight">\(U(x) = cos(x) + sin(x) \)</span>… hay infinitas soluciones.
 Si añadimos las condiciones de contorno <span class="math notranslate nohighlight">\(U(0) = 2\)</span>; <span class="math notranslate nohighlight">\(U(\frac{3\pi}{2})= 2\)</span>, tenemos el siguiente problema de contorno:</p>
 <p>Hallar <span class="math notranslate nohighlight">\(U(x) \in \mathcal{C^2[0, \frac{3\pi}{2}]}\)</span> tal que:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-91367242-69a6-4769-8566-69755f8290e4">
-<span class="eqno">(4.25)<a class="headerlink" href="#equation-91367242-69a6-4769-8566-69755f8290e4" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e336e14a-11a6-4ffa-b344-e5d3fd1cc38e">
+<span class="eqno">(4.25)<a class="headerlink" href="#equation-e336e14a-11a6-4ffa-b344-e5d3fd1cc38e" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;U''(x) + U(x) = 0  \text{ con }\\
 &amp;U(0) = 2 \\
 &amp;U(\dfrac{3\pi}{2})= 2
@@ -403,14 +403,14 @@ Si añadimos las condiciones de contorno <span class="math notranslate nohighlig
 <h2><span class="section-number">4.5.1. </span>Resolución Numérica. Operador diferencial<a class="headerlink" href="#resolucion-numerica-operador-diferencial" title="Permalink to this heading">#</a></h2>
 <p>Hemos visto que, a partir de los valores de una función en unos puntos <span class="math notranslate nohighlight">\(\left[ a=x_0, x_1, x_2,...,x_N = b \right]\)</span>, podemos calcular el valor de la derivada de dicha función en esos puntos multiplicando por una matriz de derivación. En forma vectorial lo hemos escrito como: <span class="math notranslate nohighlight">\(U' = DU\)</span> siendo <span class="math notranslate nohighlight">\(U\)</span> un vector que contiene el valor de <span class="math notranslate nohighlight">\(U(x)\)</span> en el conjunto de puntos equiespaciados del intervalo <span class="math notranslate nohighlight">\(\left[ a,b \right]\)</span> y <span class="math notranslate nohighlight">\(U'\)</span> el vector de las derivadas en esos mismos puntos.</p>
 <p>Si quisieramos hallar el valor de <span class="math notranslate nohighlight">\(U''(x) + U(x)\)</span> en los puntos de discretización podriamos construir el operador <span class="math notranslate nohighlight">\(M = DD + I\)</span>, con <span class="math notranslate nohighlight">\(I\)</span> la matriz identidad, de manera que al calcular <span class="math notranslate nohighlight">\(MU\)</span> tendríamos:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-95b6bbf4-fc5c-4cef-b34a-2426716c89b7">
-<span class="eqno">(4.26)<a class="headerlink" href="#equation-95b6bbf4-fc5c-4cef-b34a-2426716c89b7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-de751d58-d653-4282-9be7-69e7853e0532">
+<span class="eqno">(4.26)<a class="headerlink" href="#equation-de751d58-d653-4282-9be7-69e7853e0532" title="Permalink to this equation">#</a></span>\[\begin{equation}
 MU = (DD+I)U = DDU + IU = U'' + U
 \end{equation}\]</div>
 <p>Pero este no es el caso que queremos resolver. En nuestro ejemplo <strong>no</strong> conocemos el valor de <span class="math notranslate nohighlight">\(U(x)\)</span>, de hecho es precisamente eso lo que buscamos, una función que cumpla <span class="math notranslate nohighlight">\(U''(x) + U(x)= 0\)</span>.</p>
 <p>Vamos a plantear el problema de manera que las incógnitas sean los valores de la función en <span class="math notranslate nohighlight">\(\left[ x_0, x_1, x_2,...,x_N \right]\)</span>, es decir el vector de incognitas será:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9d2bc410-33f5-4bee-b6dc-bbe37845749c">
-<span class="eqno">(4.27)<a class="headerlink" href="#equation-9d2bc410-33f5-4bee-b6dc-bbe37845749c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-da7e8547-3feb-41e5-a2dd-d33aaed1ae3f">
+<span class="eqno">(4.27)<a class="headerlink" href="#equation-da7e8547-3feb-41e5-a2dd-d33aaed1ae3f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 U = \begin{pmatrix}
 U(x_0)\\
 U(x_1)\\
@@ -420,8 +420,8 @@ U(x_N)
 \end{pmatrix}
 \end{equation}\]</div>
 <p>y la información que tenemos es que <span class="math notranslate nohighlight">\(U''(x) + U(x)= 0\)</span> que en forma matricial podemos escribir como:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b9dc96f6-5545-4287-98f0-99145106b7d7">
-<span class="eqno">(4.28)<a class="headerlink" href="#equation-b9dc96f6-5545-4287-98f0-99145106b7d7" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-67c91ca6-69f4-4fa6-a9ae-19ab1a41034e">
+<span class="eqno">(4.28)<a class="headerlink" href="#equation-67c91ca6-69f4-4fa6-a9ae-19ab1a41034e" title="Permalink to this equation">#</a></span>\[\begin{align}
 \begin{pmatrix}
  &amp;   &amp;  \\
   &amp; D &amp;  \\
@@ -454,8 +454,8 @@ U(x_N)
 \end{pmatrix}
 \end{align}\]</div>
 <p>O</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a8607c9a-8d12-42da-9539-19017ecd4353">
-<span class="eqno">(4.29)<a class="headerlink" href="#equation-a8607c9a-8d12-42da-9539-19017ecd4353" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-abc87db5-2a90-4bc5-9730-23246db4160f">
+<span class="eqno">(4.29)<a class="headerlink" href="#equation-abc87db5-2a90-4bc5-9730-23246db4160f" title="Permalink to this equation">#</a></span>\[\begin{align}
 \begin{pmatrix}
  &amp;   &amp;  \\
   &amp; M &amp;  \\
@@ -473,8 +473,8 @@ U(x_N)
 \end{pmatrix}
 \end{align}\]</div>
 <p>siendo:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-741c7596-1f6a-40f8-80c1-91e2bb7fd030">
-<span class="eqno">(4.30)<a class="headerlink" href="#equation-741c7596-1f6a-40f8-80c1-91e2bb7fd030" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-fc93832f-8288-4c9e-b270-48632b50ac95">
+<span class="eqno">(4.30)<a class="headerlink" href="#equation-fc93832f-8288-4c9e-b270-48632b50ac95" title="Permalink to this equation">#</a></span>\[\begin{align}
 \begin{pmatrix}
  &amp;   &amp;  \\
   &amp; M &amp;  \\
@@ -504,8 +504,8 @@ Ahora solo falta por ver como imponer las condiciones de contorno.</p>
 <p>En el ejemplo inicial hemos visto que existen infinitas funciones que cumplen <span class="math notranslate nohighlight">\(U''(x) = -U(x)\)</span> en <span class="math notranslate nohighlight">\([0, \frac{3\pi}{2}]\)</span>.
 En terminos del problema matricial <span class="math notranslate nohighlight">\(Ax = b\)</span> que hemos planteado para resolverlo diríamos que el problema no tiene solución única (Teorema de Rouche-Frobenius). Necesitamos incluir las condiciones de contorno para que el sistema lineal sea compatible determinado y tenga, por tanto, solución única.</p>
 <p>De momento el sistema se puede escribir como:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c54dc8a9-c61c-4f65-8e17-da32c8d73d58">
-<span class="eqno">(4.31)<a class="headerlink" href="#equation-c54dc8a9-c61c-4f65-8e17-da32c8d73d58" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8a54df6c-92f0-4fa8-8a56-bf83f3ea3dc2">
+<span class="eqno">(4.31)<a class="headerlink" href="#equation-8a54df6c-92f0-4fa8-8a56-bf83f3ea3dc2" title="Permalink to this equation">#</a></span>\[\begin{align}
 \begin{pmatrix}
 M_{00} &amp; M_{01} &amp; \dots   &amp; M_{0N} \\
 M_{10} &amp; M_{11} &amp; \dots   &amp; M_{1N} \\
@@ -526,8 +526,8 @@ U(x_N)
 \end{pmatrix}
 \end{align}\]</div>
 <p>Las condiciones de contorno dicen que <span class="math notranslate nohighlight">\(U(0) = U(x_0) = 2\)</span> y que  <span class="math notranslate nohighlight">\(U(\frac{3\pi}{2})= U(x_N) = 2\)</span>. Vamos a forzar al sistema linbeal <span class="math notranslate nohighlight">\(Ax = b\)</span> para que verifique esas ecuaciones. El modo de hacerlo va a ser sustituir la primera y la última ecuación, -la primera y la última fila de la matriz <span class="math notranslate nohighlight">\(M\)</span> y del vector <span class="math notranslate nohighlight">\(b\)</span>-, para imponer las condiciones de contorno:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e1fe3d88-0f2c-4e5d-984a-b2e7ac212e22">
-<span class="eqno">(4.32)<a class="headerlink" href="#equation-e1fe3d88-0f2c-4e5d-984a-b2e7ac212e22" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8e8d874d-ec42-49de-9491-4b133cd29546">
+<span class="eqno">(4.32)<a class="headerlink" href="#equation-8e8d874d-ec42-49de-9491-4b133cd29546" title="Permalink to this equation">#</a></span>\[\begin{align}
 \begin{pmatrix}
 {\color{red} 1 }&amp; {\color{red} 0 } &amp; \color{red} {\dots} &amp; {\color{red} 0 } &amp; {\color{red} 0}  \\
 M_{10} &amp; M_{11} &amp; \dots &amp; M_{1N{\tiny -1}}   &amp; M_{1N} \\
@@ -553,8 +553,8 @@ U(x_{N-1}) \\
 <section id="practica-1">
 <h3><span class="section-number">4.5.2.1. </span>Practica 1.<a class="headerlink" href="#practica-1" title="Permalink to this heading">#</a></h3>
 <p>Resolver el problema de contorno:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-489be364-735b-4e6b-9478-b404b485b02f">
-<span class="eqno">(4.33)<a class="headerlink" href="#equation-489be364-735b-4e6b-9478-b404b485b02f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ea04a111-5e05-4501-9fe2-c22e55c91400">
+<span class="eqno">(4.33)<a class="headerlink" href="#equation-ea04a111-5e05-4501-9fe2-c22e55c91400" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;U''(x) + U(x) = 0  \text{ con }\\
 &amp;U(0) = 2 \\
 &amp;U(\frac{3\pi}{2})= 2
@@ -564,8 +564,8 @@ U(x_{N-1}) \\
 <section id="practica-2">
 <h3><span class="section-number">4.5.2.2. </span>Práctica 2.<a class="headerlink" href="#practica-2" title="Permalink to this heading">#</a></h3>
 <p>Resolver el problema de contorno:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a6ee5aba-ac73-4d8b-bbf7-c3aa765a8fa8">
-<span class="eqno">(4.34)<a class="headerlink" href="#equation-a6ee5aba-ac73-4d8b-bbf7-c3aa765a8fa8" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-4a4a5017-cb33-406d-a1a9-733a71489039">
+<span class="eqno">(4.34)<a class="headerlink" href="#equation-4a4a5017-cb33-406d-a1a9-733a71489039" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;U''(x) + 9U(x) = cos(x)  \text{ con }\\
 &amp;U'(0) = 5 \\
 &amp;U(\pi)= \frac{-9}{8}

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1. Sistemas lineales &#8212; Curso de Informática ETSIAE</title>
+    <title>1. Sistemas lineales &#8212; Curso de Informática GIA</title>
   
   
   
@@ -227,7 +227,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE" target="_blank"
+      <li><a href="https://github.com/MathETSIAE/InformaticaGIA" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -244,7 +244,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/01-SistemasLineales/sistemas_lineales.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/MathETSIAE/InformaticaGIA/issues/new?title=Issue%20on%20page%20%2Fnotebooks/01-SistemasLineales/sistemas_lineales.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -427,20 +427,20 @@ document.write(`
 <section id="introduccion-a-los-sistemas-lineales">
 <h2><span class="section-number">1.2. </span>Introducción a los sistemas lineales<a class="headerlink" href="#introduccion-a-los-sistemas-lineales" title="Permalink to this heading">#</a></h2>
 <p>Definimos un sistema lineal como un sistema con <span class="math notranslate nohighlight">\(m\)</span> ecuaciones lineales y <span class="math notranslate nohighlight">\(n\)</span> incógnitas, este puede ser escrito de la siguiente manera:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dd3de688-e45b-4da5-b3aa-b422fe28e3e4">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-dd3de688-e45b-4da5-b3aa-b422fe28e3e4" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b9fda4e9-980c-4044-898e-020ea45ca8bd">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-b9fda4e9-980c-4044-898e-020ea45ca8bd" title="Permalink to this equation">#</a></span>\[\begin{align}
 {\left\{{\begin{matrix}a_{11}x_{1}&amp;+a_{12}x_{2}&amp;+\dots &amp;+a_{1n}x_{n}&amp;=b_{1}\\a_{21}x_{1}&amp;+a_{22}x_{2}&amp;+\dots &amp;+a_{2n}x_{n}&amp;=b_{2}\\\dots &amp;\dots &amp;\dots &amp;\dots &amp;\dots \\a_{m1}x_{1}&amp;+a_{m2}x_{2}&amp;+\dots &amp;+a_{mn}x_{n}&amp;=b_{m}\end{matrix}}\right.}
 \end{align}\]</div>
 <p>Donde <span class="math notranslate nohighlight">\({ x_{1},\dots ,x_{n}}\)</span> son las incógnitas y los números <span class="math notranslate nohighlight">\({ a_{ij}\in \mathbb {K} }\)</span> son los coeficientes del sistema sobre el cuerpo <span class="math notranslate nohighlight">\({ \mathbb {K} \ [=\mathbb {R} ,\mathbb {C} ,\dots ]}\)</span> <span class="math notranslate nohighlight">\({ \mathbb {K} \ [=\mathbb {R} ,\mathbb {C} ,\dots ]}\)</span>. El sistema se puede escribir con notación matricial:
 <br><br></p>
-<div class="amsmath math notranslate nohighlight" id="equation-fc2f826f-3762-4c41-995e-bff6da64afe1">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-fc2f826f-3762-4c41-995e-bff6da64afe1" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f7ebae4e-0ca6-453a-a0e4-f1e5f051afb2">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-f7ebae4e-0ca6-453a-a0e4-f1e5f051afb2" title="Permalink to this equation">#</a></span>\[\begin{align}
 { {\begin{pmatrix}a_{11}&amp;a_{12}&amp;\cdots &amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots &amp;a_{2n}\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\a_{m1}&amp;a_{m2}&amp;\cdots &amp;a_{mn}\end{pmatrix}}{\begin{pmatrix}x_{1}\\x_{2}\\\vdots \\x_{n}\end{pmatrix}}={\begin{pmatrix}b_{1}\\b_{2}\\\vdots \\b_{m}\end{pmatrix}}}
 \end{align}\]</div>
 <p><br><br>
 Si representamos con notación matricial compacta:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-30ae694a-6c05-4979-98b3-0d2dd112a96b">
-<span class="eqno">(1.3)<a class="headerlink" href="#equation-30ae694a-6c05-4979-98b3-0d2dd112a96b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-087d3cd2-fde6-48c2-9adf-070ec458a36c">
+<span class="eqno">(1.3)<a class="headerlink" href="#equation-087d3cd2-fde6-48c2-9adf-070ec458a36c" title="Permalink to this equation">#</a></span>\[\begin{align}
 \mathbf {Ax} =\mathbf {b}
 \end{align}\]</div>
 <p><br><br>
@@ -760,16 +760,16 @@ El sistema tiene una dimension de n = 4
 <p><br><br>
 La factorización LU de la matriz es una descomposición en factores de la matriz <span class="math notranslate nohighlight">\(A\)</span> como el producto de una matriz triangular inferior (Lower) y una superior (Upper): <span class="math notranslate nohighlight">\(A=LU\)</span>
 <br><br></p>
-<div class="amsmath math notranslate nohighlight" id="equation-ed47f2be-ebe2-4e2c-ae0e-b178a8110ac2">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-ed47f2be-ebe2-4e2c-ae0e-b178a8110ac2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b650ca4a-8dbd-4750-b5c9-04841ddc89c1">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-b650ca4a-8dbd-4750-b5c9-04841ddc89c1" title="Permalink to this equation">#</a></span>\[\begin{align}
 A = \begin{pmatrix}a_{11}&amp;a_{12}&amp;a_{13}\\a_{21}&amp;a_{22}&amp;a_{23}\\a_{31}&amp;a_{32}&amp;a_{33}\\\end{pmatrix}
 =\begin{pmatrix}1&amp;0&amp;0\\l_{21}&amp;1&amp;0\\l_{31}&amp;l_{32}&amp;1\\\end{pmatrix} \begin{pmatrix}u_{11}&amp;u_{12}&amp;u_{13}\\0&amp;u_{22}&amp;u_{23}\\0&amp;0&amp;u_{33}\\\end{pmatrix} = LU .
 \end{align}\]</div>
 <p><br><br>
 Existen diferentes técnicas de factorizar la matriz <span class="math notranslate nohighlight">\(A\)</span>, nos vamos a apoyar en la eliminación gaussiana. Transformamos la matriz <span class="math notranslate nohighlight">\(A\)</span> en una matriz triangular superior <span class="math notranslate nohighlight">\(U\)</span> anulando los elementos debajo de la diagonal. Entonces,
 <br><br></p>
-<div class="amsmath math notranslate nohighlight" id="equation-b0f27d89-5c98-4f11-a793-dff432ec33bd">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-b0f27d89-5c98-4f11-a793-dff432ec33bd" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-9d107628-6609-47d7-b994-099b5add6b37">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-9d107628-6609-47d7-b994-099b5add6b37" title="Permalink to this equation">#</a></span>\[\begin{align}
 L_{1}*L_{2}*...*L_{n}*A=U, 
 \end{align}\]</div>
 <br>
@@ -1115,14 +1115,14 @@ El vector solución del sistema, x= [1. 1. 1. 1.]
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tiempo de ejecucion de los distintos métodos de resolución de sistemas lineales
- Método de Gauss: 0.00047707557678222656 seg
+ Método de Gauss: 0.0007910728454589844 seg
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Método de Gauss pivote: 0.2986338138580322 seg
- Método de Gauss-Jordan pivote: 0.03532218933105469 seg
- Método de LU pivote: 0.022087812423706055 seg
- Método de LU (Numpy): 0.00031375885009765625 seg
- Método de LU (Scipy): 0.0005581378936767578 seg
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Método de Gauss pivote: 0.2643411159515381 seg
+ Método de Gauss-Jordan pivote: 0.03529500961303711 seg
+ Método de LU pivote: 0.021939992904663086 seg
+ Método de LU (Numpy): 0.00025916099548339844 seg
+ Método de LU (Scipy): 0.0019140243530273438 seg
 </pre></div>
 </div>
 </div>
@@ -1133,8 +1133,8 @@ El vector solución del sistema, x= [1. 1. 1. 1.]
 <section id="determinante-de-una-matriz">
 <h3><span class="section-number">1.6.1. </span>Determinante de una matriz<a class="headerlink" href="#determinante-de-una-matriz" title="Permalink to this heading">#</a></h3>
 <p>Las matrices <span class="math notranslate nohighlight">\(L\)</span> y <span class="math notranslate nohighlight">\(U\)</span> pueden ser usadas para calcular el determinante de la matriz <span class="math notranslate nohighlight">\(A\)</span> muy eficientemente porque <span class="math notranslate nohighlight">\(det(A)=det(L)det(U)\)</span> y los determinantes de matrices triangulares son simplemente el producto de los elementos de sus diagonales. En particular, si <span class="math notranslate nohighlight">\(L\)</span> es una matriz triangular en cuya diagonal todos los elementos son uno, entonces:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b96e918d-18bf-4a93-b074-62741f9efadd">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-b96e918d-18bf-4a93-b074-62741f9efadd" title="Permalink to this equation">#</a></span>\[\begin{align}    
+<div class="amsmath math notranslate nohighlight" id="equation-f70abc90-4ac6-4564-991d-08c4289f2107">
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-f70abc90-4ac6-4564-991d-08c4289f2107" title="Permalink to this equation">#</a></span>\[\begin{align}    
 \det(A)=\det(L)\det(U)=\det(U)=\prod _{i=1}^{n}u_{ii} 
 \end{align}\]</div>
 <p>La misma aproximación al problema puede ser usada para factorizaciones <span class="math notranslate nohighlight">\(LUP\)</span> en las que aparece matrices de permutación, pues el determinante de una matriz de permutación <span class="math notranslate nohighlight">\(P\)</span> es <span class="math notranslate nohighlight">\((-1)^{S}\)</span>, donde <span class="math notranslate nohighlight">\(S\)</span> es el número de permutaciones de filas en la descomposición.</p>
@@ -1263,33 +1263,33 @@ Estos puntos pueden venir dados con un patrón determinado o no</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(p=1\)</span>, la máxima suma absoluta de las columnas de la matriz:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-7c80e1db-4247-4f52-83c6-1a0fdb2b56f6">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-7c80e1db-4247-4f52-83c6-1a0fdb2b56f6" title="Permalink to this equation">#</a></span>\[\begin{align}    
+<div class="amsmath math notranslate nohighlight" id="equation-f16ee10b-6c5f-455f-b8eb-3f0e6465cbd7">
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-f16ee10b-6c5f-455f-b8eb-3f0e6465cbd7" title="Permalink to this equation">#</a></span>\[\begin{align}    
 ||A||_1=\max \limits_{1\leq j\leq n}\sum_{i=1}^{n}a_{ij}.
 \end{align}\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(p=\infty\)</span>, es la máxima suma absoluta de las columnas de la matriz:</p></li>
 </ul>
-<div class="amsmath math notranslate nohighlight" id="equation-413d0cbd-d3a5-42fe-a780-e67ec78a4e02">
-<span class="eqno">(1.8)<a class="headerlink" href="#equation-413d0cbd-d3a5-42fe-a780-e67ec78a4e02" title="Permalink to this equation">#</a></span>\[\begin{align}    
+<div class="amsmath math notranslate nohighlight" id="equation-f0061cc7-4914-4281-b4fa-3dfaff535798">
+<span class="eqno">(1.8)<a class="headerlink" href="#equation-f0061cc7-4914-4281-b4fa-3dfaff535798" title="Permalink to this equation">#</a></span>\[\begin{align}    
 ||A||_{\infty}=\max \limits_{1\leq j\leq n}\sum_{j=1}^{n}a_{ij}.
 \end{align}\]</div>
 </section>
 <section id="perturbacion-de-b-en-el-sistema-ax-b">
 <h4><span class="section-number">1.6.4.2. </span>Perturbación de <span class="math notranslate nohighlight">\(b\)</span> en el sistema <span class="math notranslate nohighlight">\(Ax = b\)</span><a class="headerlink" href="#perturbacion-de-b-en-el-sistema-ax-b" title="Permalink to this heading">#</a></h4>
 <p>Partimos de un sistema lineal <span class="math notranslate nohighlight">\(Ax = b\)</span> y lo perturbamos el vector <span class="math notranslate nohighlight">\(b\)</span> con <span class="math notranslate nohighlight">\(\delta b\)</span>, el sistema perturbado quedaría:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-227bc112-4179-4032-9081-730e8760a159">
-<span class="eqno">(1.9)<a class="headerlink" href="#equation-227bc112-4179-4032-9081-730e8760a159" title="Permalink to this equation">#</a></span>\[\begin{align}    
+<div class="amsmath math notranslate nohighlight" id="equation-7fcb390a-6d30-418a-866c-926f7dbdb7b6">
+<span class="eqno">(1.9)<a class="headerlink" href="#equation-7fcb390a-6d30-418a-866c-926f7dbdb7b6" title="Permalink to this equation">#</a></span>\[\begin{align}    
 Ax = b + \delta b
 \end{align}\]</div>
 <p>Si denominamos <span class="math notranslate nohighlight">\(x_0\)</span> a la única solución del sistema inicial ( con <span class="math notranslate nohighlight">\(x_0\neq 0\)</span>), la solución del sistema perturbado sería <span class="math notranslate nohighlight">\(x_0 + \delta x0\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-acbaedb0-a6c4-4770-ac02-b7eb9682d14c">
-<span class="eqno">(1.10)<a class="headerlink" href="#equation-acbaedb0-a6c4-4770-ac02-b7eb9682d14c" title="Permalink to this equation">#</a></span>\[\begin{align}    
+<div class="amsmath math notranslate nohighlight" id="equation-1e8069ae-fcec-4c73-9002-9742694e384c">
+<span class="eqno">(1.10)<a class="headerlink" href="#equation-1e8069ae-fcec-4c73-9002-9742694e384c" title="Permalink to this equation">#</a></span>\[\begin{align}    
 A(x + \delta x_0) = b + \delta b \rightarrow Ax + A\delta x_0 = b + \delta b \rightarrow A\delta x_0 = \delta b \rightarrow \delta x_0 = A^{-1}\delta b  
 \end{align}\]</div>
 <p>Aplicando normas de matrices, <span class="math notranslate nohighlight">\(||\,\,||\)</span>, se deduce que  <span class="math notranslate nohighlight">\(||\delta x_0|| = ||A^{-1}\delta b|| \rightarrow ||\delta x_0|| \leq ||A^{-1}||\,||\delta b||\)</span>. Y que multiplicando y dividiendo por <span class="math notranslate nohighlight">\(||A||\)</span>, <span class="math notranslate nohighlight">\(||\delta x_0|| \leq ||A^{-1}||\,\frac{||A||}{||A||}||\delta b||,\)</span> llegamos a la siguiente expresión:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-72ad0206-d8a2-4990-942c-037d46c3cd27">
-<span class="eqno">(1.11)<a class="headerlink" href="#equation-72ad0206-d8a2-4990-942c-037d46c3cd27" title="Permalink to this equation">#</a></span>\[\begin{align}    
+<div class="amsmath math notranslate nohighlight" id="equation-57f4980f-a6e0-4705-8cff-48dbead9e0a3">
+<span class="eqno">(1.11)<a class="headerlink" href="#equation-57f4980f-a6e0-4705-8cff-48dbead9e0a3" title="Permalink to this equation">#</a></span>\[\begin{align}    
 \frac{||\delta x_0||}{||x_0||} \leq ||A^{-1}||\,||A||\frac{||\delta b||}{||b||}
 \end{align}\]</div>
 <p>donde ||A^{-1}||,||A|| es el número de condición de la matriz A y se indica como <span class="math notranslate nohighlight">\(\kappa(A)\)</span>.</p>
@@ -1298,8 +1298,8 @@ A(x + \delta x_0) = b + \delta b \rightarrow Ax + A\delta x_0 = b + \delta b \ri
 <li><p>Si <span class="math notranslate nohighlight">\(\kappa(A) &gt;&gt; 1\)</span>, el sistema es sensible a perturbaciones y se dice que la matriz está mal condicionada.</p></li>
 </ul>
 <p>Vamos a ver con un ejemplo como afecta a la solución del sistema el condicionamiento de la matriz cuando se perturba el vector b:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7b9a1794-b04f-40bd-9a3f-2bc2a3fd0a2c">
-<span class="eqno">(1.12)<a class="headerlink" href="#equation-7b9a1794-b04f-40bd-9a3f-2bc2a3fd0a2c" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-9d5abd38-0ae1-433f-a108-095dfcae5969">
+<span class="eqno">(1.12)<a class="headerlink" href="#equation-9d5abd38-0ae1-433f-a108-095dfcae5969" title="Permalink to this equation">#</a></span>\[\begin{align}
 \begin{pmatrix} 1 &amp; 1\\ 1 &amp; 1.0001 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 2 \\ 2 \end{pmatrix} 
 \end{align}\]</div>
 <p>Resolviendo el sistema por el método de Gauss, vemos que la solución es <span class="math notranslate nohighlight">\(x= (2, 2)\)</span>. Ahora si perturbamos el sistema con <span class="math notranslate nohighlight">\(\delta b = (0,10^{-4})\)</span>, y volvemos a resolver el sistema, la solución es <span class="math notranslate nohighlight">\(x = (1, 1)^T\)</span>. Comprobando el número de condición, vemos que efectivamente  <span class="math notranslate nohighlight">\(\kappa(A) = 40002 &gt;&gt; 1\)</span>, por lo que A está mal condicionada. El número de condición de la matriz A es excesivamente grande (matriz mal condicionada), lo cual traduce el mal comportamiento del sistema incluso frente a pequeñnas perturbaciones.</p>
@@ -1371,13 +1371,13 @@ El número de condición de la matriz es kappa =  2.0
 <section id="perturbacion-de-a-en-el-sistema-ax-b">
 <h4><span class="section-number">1.6.4.3. </span>Perturbación de <span class="math notranslate nohighlight">\(A\)</span> en el sistema <span class="math notranslate nohighlight">\(Ax = b\)</span><a class="headerlink" href="#perturbacion-de-a-en-el-sistema-ax-b" title="Permalink to this heading">#</a></h4>
 <p>Ahora vamos a perturbar la matriz <span class="math notranslate nohighlight">\(A\)</span> con <span class="math notranslate nohighlight">\(\delta A\)</span>, el sistema perturbado quedaría:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2af2e033-2c8e-4a6d-83aa-8957e4d732ec">
-<span class="eqno">(1.13)<a class="headerlink" href="#equation-2af2e033-2c8e-4a6d-83aa-8957e4d732ec" title="Permalink to this equation">#</a></span>\[\begin{align}    
+<div class="amsmath math notranslate nohighlight" id="equation-c47e6d26-b394-460b-a5ad-e4ef89e931d4">
+<span class="eqno">(1.13)<a class="headerlink" href="#equation-c47e6d26-b394-460b-a5ad-e4ef89e931d4" title="Permalink to this equation">#</a></span>\[\begin{align}    
 (A +\delta A)x = b 
 \end{align}\]</div>
 <p>Si denominamos <span class="math notranslate nohighlight">\(x_0\)</span> a la única solución del sistema inicial ( con <span class="math notranslate nohighlight">\(x_0\neq0\)</span>), la solución del sistema perturbado será <span class="math notranslate nohighlight">\(x_0 + \delta x0\)</span>, entonces de manera similar al desarrollo de la perturbación en <span class="math notranslate nohighlight">\(b\)</span> se puede llegar a la siguiente expresión:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b9939f44-96bf-45d4-a432-ad58bc733a0a">
-<span class="eqno">(1.14)<a class="headerlink" href="#equation-b9939f44-96bf-45d4-a432-ad58bc733a0a" title="Permalink to this equation">#</a></span>\[\begin{align}    
+<div class="amsmath math notranslate nohighlight" id="equation-9bfce02f-f46c-4333-8813-7cfdb0caaa85">
+<span class="eqno">(1.14)<a class="headerlink" href="#equation-9bfce02f-f46c-4333-8813-7cfdb0caaa85" title="Permalink to this equation">#</a></span>\[\begin{align}    
 \frac{||\delta x_0||}{||x_0 + \delta x_0||} \leq \kappa(A)\frac{||\delta A||}{||A||}
 \end{align}\]</div>
 <div class="cell docutils container">
