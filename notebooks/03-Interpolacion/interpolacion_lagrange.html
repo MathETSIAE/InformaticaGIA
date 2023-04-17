@@ -375,14 +375,14 @@ polinómica que ya vimos en el primer tema usando la matriz de Vandermonde, que 
 <p>Se consideran <span class="math notranslate nohighlight">\(N + 1\)</span> puntos <span class="math notranslate nohighlight">\(\{x_0, x_1, \ldots , x_N\}\)</span> del dominio de definición de una función
 <span class="math notranslate nohighlight">\(f(x)\)</span>, en los que se conocen los valores que toma la función: <span class="math notranslate nohighlight">\(f(x_j) = y_j , \quad j = 0, 1, \ldots , N\)</span>.</p>
 <p>A continuación, se expresa el polinomio <span class="math notranslate nohighlight">\(I_N\)</span> de grado <span class="math notranslate nohighlight">\(\leq N\)</span>, en la forma siguiente:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4fa56fdb-9c11-406e-ba54-eebfd5e549bf">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-4fa56fdb-9c11-406e-ba54-eebfd5e549bf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2a0f9c7b-c470-4035-92ac-b8569685c385">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-2a0f9c7b-c470-4035-92ac-b8569685c385" title="Permalink to this equation">#</a></span>\[\begin{equation}
 	I_N (x) = b_{0} \ \ell_{0} (x) \ + \ b_{1} \ \ell_{1} (x) \ + \  \cdots \ + \ b_{N} \  \ell_{N} (x) ,
 \end{equation}\]</div>
 <p>donde <span class="math notranslate nohighlight">\(\{b_{0}, b_{1}, \ldots , b_{N}\}\)</span> son coeficientes a calcular y <span class="math notranslate nohighlight">\(\ell_j (x)\)</span> son polinomios de grado <span class="math notranslate nohighlight">\(N\)</span>,
 que tienen la expresión siguiente:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bd525c36-394d-4bfb-9b81-3cc23f55efb9">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-bd525c36-394d-4bfb-9b81-3cc23f55efb9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b83c5c8f-970b-4eee-a1f0-dab49e7e2742">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-b83c5c8f-970b-4eee-a1f0-dab49e7e2742" title="Permalink to this equation">#</a></span>\[\begin{equation}
 	\displaystyle
 	\ell_{j} (x) \ = \ \frac{(x - x_0)(x - x_1) \ldots (x - x_{j - 1} )(x - x_{j + 1}) \ldots (x - x_N)}
 	{(x_j - x_0)(x_j - x_1) \ldots (x_j - x_{j - 1} )(x_j - x_{j + 1}) \ldots (x_j - x_N)} \ = \
@@ -408,8 +408,8 @@ I_N (x) \ = \ \sum_{j = 0}^N \ b_j \
 \frac{(x - x_i)}{(x_j - x_i)} . 
 \)</span>$</p>
 <p>Una característica fundamental de los polinomios de Lagrange es que verifican:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-529f39a3-915e-417d-b6f8-7f475c8af562">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-529f39a3-915e-417d-b6f8-7f475c8af562" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ec066bb1-1466-40c8-89f2-5c31a3c027af">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-ec066bb1-1466-40c8-89f2-5c31a3c027af" title="Permalink to this equation">#</a></span>\[\begin{equation}
 	\left\{
 	\begin{array}{l}
 		\ell_j (x) = 1 ,  \qquad x = x_j ,                                                                    \\
@@ -420,8 +420,8 @@ I_N (x) \ = \ \sum_{j = 0}^N \ b_j \
 \end{equation}\]</div>
 <p>Esa propiedad nos va a permitir calcular muy facilmente los coeficientes <span class="math notranslate nohighlight">\(\{b_i\}\)</span>.</p>
 <p>Para cada uno de los puntos de interpolación, se pueden plantear las expresiones siguientes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b5c56fc7-27d6-4ee8-9132-fd0192532ddd">
-<span class="eqno">(3.4)<a class="headerlink" href="#equation-b5c56fc7-27d6-4ee8-9132-fd0192532ddd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-52249317-b3bc-48b5-8414-7851d4af962b">
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-52249317-b3bc-48b5-8414-7851d4af962b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left\{
 \begin{array}{l}
 b_0 \ \ell_0 (x_0) \ + \ b_1 \ \ell_1 (x_0) \ + \ \cdots \ + \ b_N \ \ell_N (x_0) \ = \ f (x_0) ,         \\ 
@@ -442,8 +442,8 @@ b_0 \ = \ f (x_0) , \qquad b_1 \ = \ f (x_1), \qquad \ldots \qquad , b_N \ = \ f
 I_N (x) \ = \ f (x_0) \ \ell_0 (x) \ + \ f (x_1) \ \ell_1 (x) \ + \ \cdots \ + \ f (x_N) \ \ell_N (x) , 
 \]</div>
 <p>y que, en forma compacta, tiene la expresión siguiente:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-42371d2c-e42e-4774-8ba0-15484172aed2">
-<span class="eqno">(3.5)<a class="headerlink" href="#equation-42371d2c-e42e-4774-8ba0-15484172aed2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9cc7ed25-8ac6-42ae-8fad-ba0d0e7c21b4">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-9cc7ed25-8ac6-42ae-8fad-ba0d0e7c21b4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 	\displaystyle
 	I_N (x) \ = \ \sum_{j = 0}^N \ f (x_j) \ \
 	\displaystyle
