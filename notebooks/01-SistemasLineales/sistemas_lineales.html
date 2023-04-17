@@ -1,0 +1,1575 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>1. Sistemas lineales &#8212; Curso de Informática ETSIAE</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/01-SistemasLineales/sistemas_lineales';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2. Métodos para el Cálculo de Autovalores" href="../02-Autovalores/autovalores.html" />
+    <link rel="prev" title="Curso de Informática" href="../../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Curso de Informática
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Sistemas lineales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02-Autovalores/autovalores.html">2. Métodos para el Cálculo de Autovalores</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03-Interpolacion/interpolacion_lagrange.html">3. Interpolación de Lagrange</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03-Interpolacion/practica_minimos_cuadrados.html">3.1. Práctica: método de mínimos cuadrados</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04-DerivacionIntegracion/derivacion_numerica.html">4. Derivación Numérica.</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04-DerivacionIntegracion/practica_pde.html">4.5. Práctica Grupal: Problemas de Contorno</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../05-SistemasNoLineales/Ecuaciones%20y%20sistemas%20de%20ecuaciones%20no%20lineales.html">5. Ecuaciones no lineales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-EDOs/Introducci%C3%B3nEDOs.html">6. Ecuaciones diferenciales ordinarias</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/01-SistemasLineales/sistemas_lineales.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/01-SistemasLineales/sistemas_lineales.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sistemas lineales</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">1.1. Contenido</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-a-los-sistemas-lineales">1.2. Introducción a los sistemas lineales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-directos">1.3. Métodos directos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-a-id-gauss-a">1.3.1. Gauss  <a id="Gauss"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pivotaje">1.3.1.1. Pivotaje</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-jordan-a-id-gaussjordan-a">1.3.2. Gauss-Jordan   <a id="GaussJordan"></a></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factorizacion-lu-a-id-lu-a">1.3.3. Factorización LU <a id="LU"></a></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucion-sistema-lineal">1.3.4. Resolución sistema lineal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-de-redondeo">1.3.5. Error de redondeo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coste-computacional">1.3.6. Coste computacional</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulos-de-algebra-lineal-en-python">1.4. Módulos de Álgebra lineal en Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucion-de-sistemas-lineales">1.4.1. Resolución de sistemas lineales</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#usando-las-funciones-inv-y-dot">1.4.1.1. Usando las funciones inv() y dot():</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#usando-la-funcion-solve">1.4.1.2. Usando la función solve()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-usando-la-funcion-de-factorizacion-lu-de-scipy-scipy-linalg-lu">1.4.1.3. Extra: Usando la función de factorización LU de SciPy: scipy.linalg.lu()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tiempo-de-computacion">1.5. Tiempo de computación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-de-los-metodos-directos">1.6. Aplicaciones de los métodos directos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determinante-de-una-matriz">1.6.1. Determinante de una matriz</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inversa-de-una-matriz">1.6.2. Inversa de una matriz</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aproximacion-polinomica-mediante-el-metodo-algebraico">1.6.3. Aproximación polinómica mediante el método algebráico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perturbacion-de-sistemas-lineales">1.6.4. Perturbación de sistemas lineales</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#norma-matricial">1.6.4.1. Norma matricial</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perturbacion-de-b-en-el-sistema-ax-b">1.6.4.2. Perturbación de <span class="math notranslate nohighlight">\(b\)</span> en el sistema <span class="math notranslate nohighlight">\(Ax = b\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perturbacion-de-a-en-el-sistema-ax-b">1.6.4.3. Perturbación de <span class="math notranslate nohighlight">\(A\)</span> en el sistema <span class="math notranslate nohighlight">\(Ax = b\)</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="sistemas-lineales">
+<h1><span class="section-number">1. </span>Sistemas lineales<a class="headerlink" href="#sistemas-lineales" title="Permalink to this heading">#</a></h1>
+<section id="contenido">
+<h2><span class="section-number">1.1. </span>Contenido<a class="headerlink" href="#contenido" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><span class="xref myst">Semana 1</span>: Métodos directos: Gauss con y sin pivote. Objetivo programar Gauss sin pivote</p></li>
+<li><p><span class="xref myst">Semana 2</span>: Métodos directos: LU con y sin pivote. Resolver a través del módulo de scipy y/o numpy.</p></li>
+<li><p><span class="xref myst">Semana 3</span>: Aplicación de métodos directos: Determinante. Inversa. Interpolacion polinómica a través del método algebráico. Construir la matriz de Vandermonde y resolver el sistema lineal. Coste computacional Gaus vs LU. Perturbación del sistema lineal. Normas matriciales.</p></li>
+<li><p><span class="xref myst">Semana 4</span>: Métodos iterativos: Gradiente conjugado, Gauss y Gauss Seidel.</p></li>
+</ul>
+</section>
+<section id="introduccion-a-los-sistemas-lineales">
+<h2><span class="section-number">1.2. </span>Introducción a los sistemas lineales<a class="headerlink" href="#introduccion-a-los-sistemas-lineales" title="Permalink to this heading">#</a></h2>
+<p>Definimos un sistema lineal como un sistema con <span class="math notranslate nohighlight">\(m\)</span> ecuaciones lineales y <span class="math notranslate nohighlight">\(n\)</span> incógnitas, este puede ser escrito de la siguiente manera:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8755a233-d5fb-4ce5-a1fc-b8c470fa1b86">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-8755a233-d5fb-4ce5-a1fc-b8c470fa1b86" title="Permalink to this equation">#</a></span>\[\begin{align}
+{\left\{{\begin{matrix}a_{11}x_{1}&amp;+a_{12}x_{2}&amp;+\dots &amp;+a_{1n}x_{n}&amp;=b_{1}\\a_{21}x_{1}&amp;+a_{22}x_{2}&amp;+\dots &amp;+a_{2n}x_{n}&amp;=b_{2}\\\dots &amp;\dots &amp;\dots &amp;\dots &amp;\dots \\a_{m1}x_{1}&amp;+a_{m2}x_{2}&amp;+\dots &amp;+a_{mn}x_{n}&amp;=b_{m}\end{matrix}}\right.}
+\end{align}\]</div>
+<p>Donde <span class="math notranslate nohighlight">\({ x_{1},\dots ,x_{n}}\)</span> son las incógnitas y los números <span class="math notranslate nohighlight">\({ a_{ij}\in \mathbb {K} }\)</span> son los coeficientes del sistema sobre el cuerpo <span class="math notranslate nohighlight">\({ \mathbb {K} \ [=\mathbb {R} ,\mathbb {C} ,\dots ]}\)</span> <span class="math notranslate nohighlight">\({ \mathbb {K} \ [=\mathbb {R} ,\mathbb {C} ,\dots ]}\)</span>. El sistema se puede escribir con notación matricial:
+<br><br></p>
+<div class="amsmath math notranslate nohighlight" id="equation-19cfc035-4876-4647-87b6-7a0f663db683">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-19cfc035-4876-4647-87b6-7a0f663db683" title="Permalink to this equation">#</a></span>\[\begin{align}
+{ {\begin{pmatrix}a_{11}&amp;a_{12}&amp;\cdots &amp;a_{1n}\\a_{21}&amp;a_{22}&amp;\cdots &amp;a_{2n}\\\vdots &amp;\vdots &amp;\ddots &amp;\vdots \\a_{m1}&amp;a_{m2}&amp;\cdots &amp;a_{mn}\end{pmatrix}}{\begin{pmatrix}x_{1}\\x_{2}\\\vdots \\x_{n}\end{pmatrix}}={\begin{pmatrix}b_{1}\\b_{2}\\\vdots \\b_{m}\end{pmatrix}}}
+\end{align}\]</div>
+<p><br><br>
+Si representamos con notación matricial compacta:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4201eac5-82e6-4ea2-8f61-fcc54acfe557">
+<span class="eqno">(1.3)<a class="headerlink" href="#equation-4201eac5-82e6-4ea2-8f61-fcc54acfe557" title="Permalink to this equation">#</a></span>\[\begin{align}
+\mathbf {Ax} =\mathbf {b}
+\end{align}\]</div>
+<p><br><br>
+Donde <span class="math notranslate nohighlight">\(A\)</span> es una matriz <span class="math notranslate nohighlight">\(m\)</span> por <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(x\)</span> es un vector columna de longitud <span class="math notranslate nohighlight">\(n\)</span> y <span class="math notranslate nohighlight">\(b\)</span> es otro vector columna de longitud <span class="math notranslate nohighlight">\(m\)</span>. La matriz A se llama matriz de coeficientes de este sistema lineal. A <span class="math notranslate nohighlight">\(b\)</span> se le llama vector de términos independientes del sistema y a <span class="math notranslate nohighlight">\(x\)</span> se le llama vector de incógnitas o solución.</p>
+<p>A continuación definimos la matriz, <span class="math notranslate nohighlight">\(A\)</span> y el vector <span class="math notranslate nohighlight">\(b\)</span> del sistema lineal e inicializamos el vector de incógnitas, <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+
+<span class="c1">#Define el sistema compuesto por la matriz A y el vector b</span>
+    <span class="c1"># 1: Sistema para resolver sin Pivote - Solución: x= [-2.  2. -3.  3.]</span>
+    <span class="c1"># 2: Sistema para resolver con Pivote - Solución: x= [1. 1. 1. 1.]</span>
+    <span class="c1"># 3: Sistema para resolver con Pivote - Solución: x= [ 1.  2. -1.  1.]</span>
+    <span class="c1"># 4: Sistema para comparar tiempos computaciones</span>
+<span class="n">sistema</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">if</span> <span class="n">sistema</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">,</span> <span class="mf">19.0</span><span class="p">,</span> <span class="mf">23.0</span><span class="p">],[</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">42.0</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">],[</span><span class="mf">12.0</span><span class="p">,</span> <span class="mf">60.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">17.0</span><span class="p">]])</span> 
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="mf">98.0</span><span class="p">,</span> <span class="mf">144.0</span><span class="p">])</span>
+<span class="k">elif</span> <span class="n">sistema</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>    
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span> <span class="c1">#Sistema para resolver con Pivote</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span> 
+<span class="k">elif</span> <span class="n">sistema</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>    
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">10.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">11.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">],[</span><span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">]])</span> <span class="c1">#Sistema para resolver con Pivote</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">11.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">])</span> <span class="c1">#Sistema para resolver con Pivote</span>
+<span class="k">elif</span> <span class="n">sistema</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="c1">#Dimensión del sistema</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La matriz A del sistema es:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El vector b es:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El sistema tiene una dimension de n =&#39;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La matriz A del sistema es:
+ [[ 1.  1. -1.  0.]
+ [ 1.  1.  0. -1.]
+ [-1.  0.  1.  1.]
+ [ 0. -1.  1.  1.]]
+El vector b es:
+ [1. 1. 1. 1.]
+El sistema tiene una dimension de n = 4
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="metodos-directos">
+<h2><span class="section-number">1.3. </span>Métodos directos<a class="headerlink" href="#metodos-directos" title="Permalink to this heading">#</a></h2>
+<p>Aquellos que por medio de operaciones elementales entre filas, nos permiten transformar al sistema original en otro sistema equivalente, de forma tal de poder despejar facilmente los valores de las incógnitas.</p>
+<p>Son ‘exactos’, no tienen asociado error de truncamiento pero si de redondeo, y son usados cuando la mayoría de los coeficientes de <span class="math notranslate nohighlight">\(A\)</span> son distintos de cero y las matrices no son demasiado grandes. Suelen ser algoritmos complicados de implementar. A continuación listamos algunos de los métodos directos:</p>
+<ul class="simple">
+<li><p><span class="xref myst">Gauss</span>: Se divide en dos etapas, triangulación inferior y sustitución.</p></li>
+<li><p><span class="xref myst">Gauss-Jordan</span>: Similar a Gauss, pero añade una triangulación superior, obteniendo una matriz diagonal dando directamente la solución del sistema.</p></li>
+<li><p><span class="xref myst">Factorización LU</span>: Requiere una factorización de la matriz <span class="math notranslate nohighlight">\(A\)</span> para posteriormente resolver el sistema en dos pasos.</p></li>
+</ul>
+<section id="gauss-a-id-gauss-a">
+<h3><span class="section-number">1.3.1. </span>Gauss  <a id='Gauss'></a><a class="headerlink" href="#gauss-a-id-gauss-a" title="Permalink to this heading">#</a></h3>
+<section id="pivotaje">
+<h4><span class="section-number">1.3.1.1. </span>Pivotaje<a class="headerlink" href="#pivotaje" title="Permalink to this heading">#</a></h4>
+<blockquote>
+<div><p>Hay que tener en cuenta los posibles 0 que nos encontremos en la diagonal a la hora de triangular, por lo que habrá que introducir la <span class="math notranslate nohighlight">\(\textit{Pivotaje}\)</span>. Existen dos tipos de <span class="math notranslate nohighlight">\(\textit{Pivotes}\)</span>:</p>
+</div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\textit{Pivote parcial}\)</span>: Si <span class="math notranslate nohighlight">\(𝑎_{𝑘𝑘}=0\)</span> se intercambia la fila <span class="math notranslate nohighlight">\(𝑘\)</span> por aquella <span class="math notranslate nohighlight">\(𝑖&gt;𝑘\)</span>  que cumple:  <span class="math notranslate nohighlight">\(|𝑎_{𝑖𝑘}|=max_{(𝑘&lt;𝑙\leq 𝑛)}⁡|𝑎_{𝑙𝑘}|\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\textit{Pivote total}\)</span>: Si <span class="math notranslate nohighlight">\(𝑎_{𝑘𝑘}=0\)</span> se busca el elemento <span class="math notranslate nohighlight">\((𝑖,𝑗)\)</span> que cumple: <span class="math notranslate nohighlight">\(|𝑎_{𝑖j}|=max_{(𝑘&lt;𝑠\leq 𝑛)(𝑘&lt;𝑟\leq 𝑛)}⁡|𝑎_{sr}|\)</span> y se intercambia la ecuación (fila) <span class="math notranslate nohighlight">\(𝑖\)</span> por la <span class="math notranslate nohighlight">\(k\)</span> y la variable (columna) <span class="math notranslate nohighlight">\(j\)</span> por la <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p>A continuación se introduce la implementación del método de eliminación de Gauss con Pivote parcial:</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Gauss_pivote</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="c1">#Dimensión del sistema</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="c1">#Matriz ampliada</span>
+    <span class="n">Ab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">]</span> <span class="c1">#Usamos la funcion stack column que permite añadir una columna extra.</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="c1"># print(&#39;La matriz Ab del sistema es:\n&#39;, Ab)</span>
+
+    <span class="c1">#Triangulación</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1">#filas</span>
+        <span class="c1">#################################</span>
+        <span class="c1"># Pivote parcial          </span>
+        <span class="nb">max</span> <span class="o">=</span> <span class="n">k</span>
+        
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">:</span>
+            <span class="c1"># Hallar el índice del máximo valor</span>
+            <span class="c1"># Método 1</span>
+            <span class="nb">max</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">]))</span>
+            <span class="c1"># Método 2</span>
+            <span class="c1"># for l in range(k+1, n):</span>
+            <span class="c1">#     if ( abs(Ab[l,k]) &gt; abs(Ab[max,k]) ):</span>
+            <span class="c1">#         max = l</span>
+                    
+            <span class="k">if</span> <span class="nb">max</span><span class="o">==</span><span class="n">k</span><span class="p">:</span>
+                <span class="k">return</span><span class="p">(</span><span class="s1">&#39;Sistema incompatible&#39;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Interambio de filas</span>
+                <span class="c1"># Método 1:</span>
+                <span class="c1"># v_piv = np.copy(Ab[k,:]) #Importante: si no usamos copy, será un &quot;alias&quot; y no nos servirá</span>
+                <span class="c1"># Ab[k,:] = Ab[max,:]</span>
+                <span class="c1"># Ab[max,:] = v_piv[:]</span>
+
+                <span class="c1"># Método 2</span>
+                <span class="n">Ab</span><span class="p">[[</span><span class="n">k</span><span class="p">,</span><span class="nb">max</span><span class="p">],</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">Ab</span><span class="p">[[</span><span class="nb">max</span><span class="p">,</span><span class="n">k</span><span class="p">],</span> <span class="p">:]</span>
+
+        <span class="c1">##################################</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span> <span class="c1">#filas debajo de i</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="o">-</span><span class="n">Ab</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">/</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+            <span class="c1"># Método 1:</span>
+            <span class="c1"># Ab[i,:] = Ab[i,:] + m*Ab[k,:]</span>
+            <span class="c1"># Método 2</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="c1">#filas debajo de i</span>
+                <span class="n">Ab</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">Ab</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+
+
+    <span class="c1"># print(&#39;\n La matriz ampliada Ab después de ser triangularizada:\n&#39;, Ab)</span>
+
+    <span class="c1">#Sustitución</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">Gauss_pivote</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> El vector solución del sistema, x=&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> El vector solución del sistema, x= [1. 1. 1. 1.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<blockquote>
+<div><p>Parte de la matriz ampliada del sistema <span class="math notranslate nohighlight">\(Ab\)</span> y el algoritmo se divide en dos partes:</p>
+</div></blockquote>
+<blockquote>
+<div><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\textit{Triangulación}\)</span>: Converte la matriz <span class="math notranslate nohighlight">\(A\)</span> en matriz triangular superior a través de la eliminación Gaussiana. Mediante operaciones elementales se busca un sistema equivalente con ceros por debajo de la diagonal principal.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\textit{Sustitución}\)</span>: Resuelve los coefientes del vector solución. Se despeja el valor de cada incógnita empezando en la última ecuación utilizando los previamente calculados.</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p>A continuación se introduce la implementación del método de Gauss:</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Gauss</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="c1">#Dimensión del sistema</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="c1">#Matriz ampliada</span>
+    <span class="n">Ab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">]</span> <span class="c1">#Usamos la funcion stack column </span>
+                    <span class="c1">#que permite añadir una columna extra.</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+                
+
+    <span class="c1"># print(&#39;La matriz Ab del sistema es:\n&#39;, Ab)</span>
+
+    <span class="c1">#Triangulación</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1">#filas</span>
+        
+        <span class="c1">#Warning: cero en la digonal</span>
+        <span class="k">if</span> <span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">:</span> 
+            <span class="k">return</span><span class="p">(</span><span class="s1">&#39;ERROR: El método de Gauss falla por encontrarnos un cero en la diagonal&#39;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span> <span class="c1">#filas debajo de i</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">Ab</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">/</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">Ab</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">Ab</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">-</span> <span class="n">m</span><span class="o">*</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,:]</span>
+
+    <span class="c1"># print(&#39;\n La matriz ampliada Ab despues de ser triangularizada:\n&#39;, Ab)</span>
+
+    <span class="c1">#Sustitución</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">Gauss</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> El vector solución del sistema, x=&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> El vector solución del sistema, x= ERROR: El método de Gauss falla por encontrarnos un cero en la diagonal
+</pre></div>
+</div>
+</div>
+</div>
+<section id="gauss-jordan-a-id-gaussjordan-a">
+<h3><span class="section-number">1.3.2. </span>Gauss-Jordan   <a id='GaussJordan'></a><a class="headerlink" href="#gauss-jordan-a-id-gaussjordan-a" title="Permalink to this heading">#</a></h3>
+<p>Similar a Gauss, pero añade una triangulación superior, obteniendo una matriz diagonal dando directamente la solución del sistema.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Gauss_Jordan_pivote</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="c1">#Dimensión del sistema</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="c1">#Matriz ampliada</span>
+    <span class="n">Ab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">]</span> <span class="c1">#Usamos la funcion stack column que permite añadir una columna extra.</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="c1"># print(&#39;La matriz Ab del sistema es:\n&#39;, Ab)</span>
+
+    <span class="c1">#Triangulación inferior</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1">#filas</span>
+        <span class="c1">#################################</span>
+        <span class="c1"># Pivote parcial          </span>
+        <span class="nb">max</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">:</span>
+            <span class="c1"># Hallar el índice del máximo valor</span>
+            <span class="c1"># Método 1</span>
+            <span class="nb">max</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">]))</span>
+            <span class="c1"># Método 2</span>
+            <span class="c1"># for l in range(k+1, n):</span>
+            <span class="c1">#     if ( abs(Ab[l,k]) &gt; abs(Ab[max,k]) ):</span>
+            <span class="c1">#         max = l</span>
+            <span class="k">if</span> <span class="nb">max</span><span class="o">==</span><span class="n">k</span><span class="p">:</span>
+                <span class="k">return</span><span class="p">(</span><span class="s1">&#39;Sistema incompatible&#39;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Interambio de filas</span>
+                <span class="c1"># Método 1:</span>
+                <span class="n">v_piv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,:])</span> <span class="c1">#Importante: si no usamos copy, será un &quot;alias&quot; y no nos servirá</span>
+                <span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">Ab</span><span class="p">[</span><span class="nb">max</span><span class="p">,:]</span>
+                <span class="n">Ab</span><span class="p">[</span><span class="nb">max</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">v_piv</span><span class="p">[:]</span>
+
+                <span class="c1"># Método 2</span>
+                <span class="c1"># Ab[[k,max], :] = Ab[[max,k], :]</span>
+
+        <span class="c1">##################################</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span> <span class="c1">#filas debajo de k</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="o">-</span><span class="n">Ab</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">/</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">Ab</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">Ab</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,:]</span>
+
+    <span class="c1">#Triangulación superior</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1">#filas</span>
+        <span class="c1">#################################</span>
+        <span class="c1"># Pivote parcial         </span>
+        <span class="nb">max</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">:</span>
+          
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Ab</span><span class="p">[</span><span class="n">l</span><span class="p">,</span><span class="n">k</span><span class="p">])</span> <span class="o">&gt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Ab</span><span class="p">[</span><span class="nb">max</span><span class="p">,</span><span class="n">k</span><span class="p">])</span> <span class="p">):</span>
+                    <span class="nb">max</span> <span class="o">=</span> <span class="n">l</span>
+            <span class="k">if</span> <span class="nb">max</span><span class="o">==</span><span class="n">k</span><span class="p">:</span>
+                <span class="k">return</span><span class="p">(</span><span class="s1">&#39;Sistema incompatible&#39;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Interambio de filas</span>
+                <span class="c1"># Método 1:</span>
+                <span class="n">v_piv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,:])</span> <span class="c1">#Importante: si no usamos copy, será un &quot;alias&quot; y no nos servirá</span>
+                <span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">Ab</span><span class="p">[</span><span class="nb">max</span><span class="p">,:]</span>
+                <span class="n">Ab</span><span class="p">[</span><span class="nb">max</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">v_piv</span><span class="p">[:]</span>
+
+                <span class="c1"># Método 2</span>
+                <span class="c1"># Ab[[k,max], :] = Ab[[max,k], :]</span>
+
+        <span class="c1">##################################</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="c1">#filas encima de k</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="o">-</span><span class="n">Ab</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">/</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">Ab</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">Ab</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,:]</span>
+
+
+    <span class="c1"># print(&#39;\n La matriz ampliada Ab después de ser triangularizada superior e inferiormente:\n&#39;, Ab)</span>
+
+    <span class="c1">#Sustitución directa</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">]</span><span class="o">/</span><span class="n">Ab</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">Gauss_Jordan_pivote</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> El vector solución del sistema, x=&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> El vector solución del sistema, x= [1. 1. 1. 1.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="factorizacion-lu-a-id-lu-a">
+<h3><span class="section-number">1.3.3. </span>Factorización LU <a id='LU'></a><a class="headerlink" href="#factorizacion-lu-a-id-lu-a" title="Permalink to this heading">#</a></h3>
+<p><br><br>
+La factorización LU de la matriz es una descomposición en factores de la matriz <span class="math notranslate nohighlight">\(A\)</span> como el producto de una matriz triangular inferior (Lower) y una superior (Upper): <span class="math notranslate nohighlight">\(A=LU\)</span>
+<br><br></p>
+<div class="amsmath math notranslate nohighlight" id="equation-ae620fb1-1782-43b9-b306-3f7a536d3e72">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-ae620fb1-1782-43b9-b306-3f7a536d3e72" title="Permalink to this equation">#</a></span>\[\begin{align}
+A = \begin{pmatrix}a_{11}&amp;a_{12}&amp;a_{13}\\a_{21}&amp;a_{22}&amp;a_{23}\\a_{31}&amp;a_{32}&amp;a_{33}\\\end{pmatrix}
+=\begin{pmatrix}1&amp;0&amp;0\\l_{21}&amp;1&amp;0\\l_{31}&amp;l_{32}&amp;1\\\end{pmatrix} \begin{pmatrix}u_{11}&amp;u_{12}&amp;u_{13}\\0&amp;u_{22}&amp;u_{23}\\0&amp;0&amp;u_{33}\\\end{pmatrix} = LU .
+\end{align}\]</div>
+<p><br><br>
+Existen diferentes técnicas de factorizar la matriz <span class="math notranslate nohighlight">\(A\)</span>, nos vamos a apoyar en la eliminación gaussiana. Transformamos la matriz <span class="math notranslate nohighlight">\(A\)</span> en una matriz triangular superior <span class="math notranslate nohighlight">\(U\)</span> anulando los elementos debajo de la diagonal. Entonces,
+<br><br></p>
+<div class="amsmath math notranslate nohighlight" id="equation-e1dc6008-affb-4d98-a436-35a1ab2d8c7c">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-e1dc6008-affb-4d98-a436-35a1ab2d8c7c" title="Permalink to this equation">#</a></span>\[\begin{align}
+L_{1}*L_{2}*...*L_{n}*A=U, 
+\end{align}\]</div>
+<br>
+donde $L_{1},L_{2},...,L_{n}$ son matrices elementales, que representan los distintos pasos de la eliminación. Luego recordando que la inversa de una matriz elemental, es otra matriz elemental tenemos que:
+<br><br>
+\begin{align}
+A=L_{n}^{-1}*...*L_{2}^{-1}*L_{1}^{-1}*U.
+\end{align}
+<br><br>
+Por lo que $L=L_{n}^{-1}*...*L_{2}^{-1}*L_{1}^{-1}$ siendo una matriz triangular inferior.
+<br><br>
+Al utilizar el método de eliminación Gaussiana nos podemos encontrar con ceros en la diagonal, por lo que utilizaremos la técnica de $\textit{Pivotaje}$.
+<br><br>
+Esta descomposición se usa para resolver sistemas de ecuaciones o encontrar las matrices inversas, de una manera más eficiente que el método de Gauss.
+<br><br>
+En el caso de que se aplique el $\textit{Pivotaje}$, esta se tendrá en cuenta a la hora de resolver el sistema o calcular la inversa. Se necesita crear la matriz de permutación, $P$, que consiste en efectuar sobre la matriz identidad, las mismas permutaciones de filas que se vayan efectuando sobre la matriz que se está triangulando por Gauss. Al mismo tiempo se efectúan las mismas permutaciones sobre los elementos subdiagonal de la matriz $L$.
+</section>
+<section id="resolucion-sistema-lineal">
+<h3><span class="section-number">1.3.4. </span>Resolución sistema lineal<a class="headerlink" href="#resolucion-sistema-lineal" title="Permalink to this heading">#</a></h3>
+<p>Dada la ecuación matricial <span class="math notranslate nohighlight">\(Ax=LUx=b\)</span>. Los pasos para resolver el sistema son los siguientes:</p>
+<ul class="simple">
+<li><p>Resolvemos <span class="math notranslate nohighlight">\(Ly=Pb\)</span> para <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p>Resolvemos <span class="math notranslate nohighlight">\(Ux=y\)</span> para <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+<p>Los dos sistemas lineales implicados solo requieren una sustitución ya que en ambos casos las matrices del sistema son triangulares.
+Nótese que ya tenemos las matrices <span class="math notranslate nohighlight">\(L\)</span> y <span class="math notranslate nohighlight">\(U\)</span>. La ventaja de este método es que es computacionalmente eficiente, porque podemos elegir el vector <span class="math notranslate nohighlight">\(b\)</span> que nos parezca y no tenemos que volver a hacer la eliminación de Gauss cada vez.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">LU_solver</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+    <span class="c1"># Factorizamos A en LU</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">Factor_LU</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="c1"># Sustitución inferior  </span>
+    <span class="n">baux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>  
+    <span class="n">y</span> <span class="o">=</span> <span class="n">lower_solver</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">baux</span><span class="p">)</span>
+    <span class="c1"># Sustitución superior</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">upper_solver</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="c1"># print(&#39;La matriz L\n&#39;, L)</span>
+    <span class="c1"># print(&#39;La matriz U\n&#39;, U)</span>
+    <span class="c1"># print(&#39;La matriz P\n&#39;, P)</span>
+
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">Factor_LU</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="c1">#Dimensión del sistema</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="c1"># Inicializacion de variables</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
+
+    <span class="c1"># Triangulación</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>  <span class="c1">#filas</span>
+        
+        <span class="c1">#################################</span>
+        <span class="c1"># Pivote parcial       </span>
+        <span class="nb">max</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">eps</span><span class="p">:</span>
+            <span class="c1"># Hallar el índice del máximo valor</span>
+            <span class="c1"># Método 1</span>
+            <span class="nb">max</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span><span class="n">k</span><span class="p">]))</span>
+            <span class="c1"># Método 2</span>
+            <span class="c1"># for l in range(k+1, n):</span>
+            <span class="c1">#     if ( abs(Ab[l,k]) &gt; abs(Ab[max,k]) ):</span>
+            <span class="c1">#         max = l</span>
+
+            <span class="k">if</span> <span class="nb">max</span><span class="o">==</span><span class="n">k</span><span class="p">:</span>
+                <span class="k">return</span><span class="p">(</span><span class="s1">&#39;Sistema incompatible&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Interambio de filas</span>
+                <span class="c1"># Método 1:</span>
+                <span class="c1"># v = np.copy(U[k,:])</span>
+                <span class="c1"># U[k,:] = U[max,:]</span>
+                <span class="c1"># U[max,:] = v</span>
+
+                <span class="c1"># v = np.copy(P[k,:])</span>
+                <span class="c1"># P[k,:] = P[max,:]</span>
+                <span class="c1"># P[max,:] = v</span>
+    
+                <span class="c1"># for i in range(k):</span>
+                <span class="c1">#     v_aux = np.copy(L[k,i])</span>
+                <span class="c1">#     L[k,i] = L[max,i]</span>
+                <span class="c1">#     L[max,i] = v_aux</span>
+
+                <span class="c1"># Método 2:                </span>
+                <span class="n">U</span><span class="p">[[</span><span class="n">k</span><span class="p">,</span><span class="nb">max</span><span class="p">],</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">U</span><span class="p">[[</span><span class="nb">max</span><span class="p">,</span><span class="n">k</span><span class="p">],</span> <span class="p">:]</span>
+                <span class="n">P</span><span class="p">[[</span><span class="n">k</span><span class="p">,</span><span class="nb">max</span><span class="p">],</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">P</span><span class="p">[[</span><span class="nb">max</span><span class="p">,</span><span class="n">k</span><span class="p">],</span> <span class="p">:]</span>
+                <span class="n">L</span><span class="p">[[</span><span class="n">k</span><span class="p">,</span><span class="nb">max</span><span class="p">],</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span><span class="p">[[</span><span class="nb">max</span><span class="p">,</span><span class="n">k</span><span class="p">],</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span>
+
+            
+        <span class="c1"># Creacion de L y U</span>
+        <span class="n">L</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>   <span class="c1">#filas debajo de k</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="o">-</span><span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">/</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">m</span>
+            <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">+</span> <span class="n">m</span><span class="o">*</span><span class="n">U</span><span class="p">[</span><span class="n">k</span><span class="p">,:]</span>
+
+    <span class="k">return</span> <span class="n">L</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">P</span>            
+
+<span class="k">def</span> <span class="nf">lower_solver</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="c1">#Dimensión del sistema</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="c1">#Sustitución hacia abajo</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">upper_solver</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="c1">#Dimensión del sistema</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>    
+    <span class="c1">#Sustitución hacia arriba</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span><span class="o">/</span><span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">x</span>    
+
+<span class="c1"># Llamamos al LU solver</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">LU_solver</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> El vector solución del sistema, x=&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> El vector solución del sistema, x= [1. 1. 1. 1.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="error-de-redondeo">
+<h3><span class="section-number">1.3.5. </span>Error de redondeo<a class="headerlink" href="#error-de-redondeo" title="Permalink to this heading">#</a></h3>
+<p>Con aritmética exacta el método de Gauss devuelve una solución exacta. Sin embargo, al realizar los cálculos mediante un ordenador, la aritmética es finita, por lo que en sentido estricto obtenemos una solución aproximada del sistema de ecuaciones, aunque aquí la aproximación es debida tan sólo a los errores de redondeo y su propagación a lo largo de los cálculos. En algunas ocasiones esto conducirá a errores muy reducidos (manteniéndose el orden de magnitud del error de redondeo) mientras que en otros el redondeo puede originar (debido a la propagación y amplificación de los errores de redondeo) errores enormes. Existen distintas estrategias para evitar este problema:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\textit{Pivote total}\)</span>: evita dividir por un valor pequeño cercano a cero, pero no siempre es efectivo.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\textit{Escalado de filas:}\)</span> se elige dentro de cada fila el elemento con mayor valor absoluto y cada fila se divide por este elemento. A continuación se elige el mayor entre los cocientes y se toma esa fila como fila pivote.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\textit{Equilibrado de filas:}\)</span> se divide cada fila entre el elemento de mayor valor absoluto dentro de cada fila.</p></li>
+</ul>
+</section>
+<section id="coste-computacional">
+<h3><span class="section-number">1.3.6. </span>Coste computacional<a class="headerlink" href="#coste-computacional" title="Permalink to this heading">#</a></h3>
+<p>Siendo <span class="math notranslate nohighlight">\(n\)</span> la dimensión de la matriz <span class="math notranslate nohighlight">\(A\)</span>:</p>
+<ul class="simple">
+<li><p>Gauss: Coste Triangulación + Coste Sustitución regresiva,  <span class="math notranslate nohighlight">\(\frac{2}{3}n^{3} + n^2\)</span></p></li>
+<li><p>LU: Factorización + Sustitución regresiva + Sustitución progresiva <span class="math notranslate nohighlight">\(\frac{2}{3}n^{3} + 2n^2\)</span></p></li>
+</ul>
+<p>Para resolver un sistema ambos métodos tienen un coste computacional similar. La ventaja del LU frente a Gauss, en cuanto a coste computacional, aparece cuando se necesita resolver diferentes sistemas lineales manteniendo la matriz <span class="math notranslate nohighlight">\(A\)</span> y variando el vector <span class="math notranslate nohighlight">\(b\)</span>. Para un sistema de n=100</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span> 
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="c1"># Representaremos un rango de puntos (501) equiespaciodos entre -3 y 3</span>
+<span class="c1"># La variable x es un vector</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="c1">#Tamaño del sistema lineal</span>
+<span class="n">n_sistemas</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1">#Numero de sistemas lineales a resolver</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Num. op. para resolver &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n_sistemas</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; sistemas lineales de tamaño n&#39;</span><span class="p">)</span>
+<span class="c1"># Evaluamos la función seno hiperbólico en esos 501 puntos</span>
+
+<span class="n">c_gauss</span><span class="o">=</span> <span class="n">n_sistemas</span><span class="o">*</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">c_LU</span><span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span> <span class="o">+</span> <span class="n">n_sistemas</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="c1"># Definimos las propiedades de nuestra representación gráfica: color, tipo de línea, ...</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">c_gauss</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Gauss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">c_LU</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;LU&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;n, Tamaño del sistema&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Número de operaciones&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="c1"># Finalmente damos la orden de representar el gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d6d518b17678e95eb44df17d558bdd393b07d911ecc77045e54770c0eacf3967.png" src="../../_images/d6d518b17678e95eb44df17d558bdd393b07d911ecc77045e54770c0eacf3967.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="modulos-de-algebra-lineal-en-python">
+<h2><span class="section-number">1.4. </span>Módulos de Álgebra lineal en Python<a class="headerlink" href="#modulos-de-algebra-lineal-en-python" title="Permalink to this heading">#</a></h2>
+<p>En Python, los módulos más conocidos de Álgebra lineal son los siguientes:</p>
+<ul class="simple">
+<li><p>Scientific Python Linear Algebra: scipy.linalg</p></li>
+<li><p>Numerical Python Linear Algebra: numpy.linalg</p></li>
+</ul>
+<p>Prueba a ejecutar los siguientes comandos para ver las funciones que contiene cada módulo:</p>
+<ul class="simple">
+<li><p>dir(scipy.linalg)</p></li>
+<li><p>dir(numpy.linalg)</p></li>
+</ul>
+<p>Scipy.linalg contiene todas las funciones de numpy.linalg más algunas funciones avanzadas que no están incluidas en numpy.linalg. Esto implica que la eficiencia computacional sea mayor en el módulo de Numpy. Más adelante se muestra con un ejemplo práctico.</p>
+<p>Las funciones del módulo de se compila con soporte para BLAS y LAPACK, que son librerías que incluyen rutinas para realizar operaciones numéricas de forma optimizada programadas en Fortran.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import scipy</span>
+<span class="c1">#import numpy as np</span>
+
+<span class="kn">import</span> <span class="nn">scipy</span>  <span class="c1"># Scientific Python Linear Algebra</span>
+<span class="kn">import</span> <span class="nn">numpy</span>  <span class="c1"># Numerical Python Linear Algebra</span>
+
+<span class="c1"># Prueba a ejecutar los siguientes comandos para ver las funciones que contiene cada módulo:</span>
+    <span class="c1"># dir(scipy.linalg)</span>
+    <span class="c1"># dir(numpy.linalg)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="resolucion-de-sistemas-lineales">
+<h3><span class="section-number">1.4.1. </span>Resolución de sistemas lineales<a class="headerlink" href="#resolucion-de-sistemas-lineales" title="Permalink to this heading">#</a></h3>
+<p>A continuación vamos a ver como resolver un sistema lineal con la librería Numpy.</p>
+<section id="usando-las-funciones-inv-y-dot">
+<h4><span class="section-number">1.4.1.1. </span>Usando las funciones inv() y dot():<a class="headerlink" href="#usando-las-funciones-inv-y-dot" title="Permalink to this heading">#</a></h4>
+<p>Si representamos con notación matricial compacta, <span class="math notranslate nohighlight">\(\mathbf {x} =\mathbf {A^{-1}b}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El vector solución del sistema, x=&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El vector solución del sistema, x= [[1. 1. 1. 1.]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="usando-la-funcion-solve">
+<h4><span class="section-number">1.4.1.2. </span>Usando la función solve()<a class="headerlink" href="#usando-la-funcion-solve" title="Permalink to this heading">#</a></h4>
+<p>La función resuelve un sistema lineal a través del método de Factorización LU con pivote parcial.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El vector solución del sistema, x=&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El vector solución del sistema, x= [1. 1. 1. 1.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="extra-usando-la-funcion-de-factorizacion-lu-de-scipy-scipy-linalg-lu">
+<h4><span class="section-number">1.4.1.3. </span>Extra: Usando la función de factorización LU de SciPy: <a class="reference external" href="http://scipy.linalg.lu">scipy.linalg.lu</a>()<a class="headerlink" href="#extra-usando-la-funcion-de-factorizacion-lu-de-scipy-scipy-linalg-lu" title="Permalink to this heading">#</a></h4>
+<p>Primero usamos la función para factorizar con pivote parcial, la cúal nos devuelve las matrices <span class="math notranslate nohighlight">\(L, U\)</span> y <span class="math notranslate nohighlight">\(P\)</span>. A continuación resolvemos los siguientes pasos:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Resolvemos <span class="math notranslate nohighlight">\(Ly=Pb\)</span> para <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p>Resolvemos <span class="math notranslate nohighlight">\(Ux=y\)</span> para <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ol>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Factorización LU con pivote</span>
+<span class="n">P</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lu</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La matriz L</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La matriz U</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">U</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La matriz P</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+
+<span class="c1"># Resolución del sistema lineal en dos pasos:</span>
+<span class="n">y</span> <span class="o">=</span>  <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve_triangular</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">P</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">),</span><span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span>  <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve_triangular</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">lower</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El vector solución del sistema, x=&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La matriz L
+ [[ 1.  0.  0.  0.]
+ [-1.  1.  0.  0.]
+ [ 1.  0.  1.  0.]
+ [ 0. -1.  1.  1.]]
+La matriz U
+ [[ 1.  1. -1.  0.]
+ [ 0.  1.  0.  1.]
+ [ 0.  0.  1. -1.]
+ [ 0.  0.  0.  3.]]
+La matriz P
+ [[1. 0. 0. 0.]
+ [0. 0. 1. 0.]
+ [0. 1. 0. 0.]
+ [0. 0. 0. 1.]]
+El vector solución del sistema, x= [1. 1. 1. 1.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="tiempo-de-computacion">
+<h2><span class="section-number">1.5. </span>Tiempo de computación<a class="headerlink" href="#tiempo-de-computacion" title="Permalink to this heading">#</a></h2>
+<p>En este apartado vamos a comparar las funciones programadas por nosotros con las funciones de las librerias. Para ello vamos a usar un sistema lineal con un tamaño mayor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modulo para obtener el tiempo</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1">#Definición del sistema</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">An</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">bn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+
+
+<span class="k">def</span> <span class="nf">tiempo_ejecucion_funcion</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">resultado</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">tiempo</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+    <span class="k">return</span> <span class="n">tiempo</span>
+
+<span class="c1">#Gauss</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tiempo de ejecucion de los distintos métodos de resolución de sistemas lineales&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Método de Gauss:&#39;</span><span class="p">,</span><span class="n">tiempo_ejecucion_funcion</span><span class="p">(</span><span class="n">Gauss</span><span class="p">,</span> <span class="n">An</span><span class="p">,</span> <span class="n">bn</span><span class="p">),</span><span class="s1">&#39;seg&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Método de Gauss pivote:&#39;</span><span class="p">,</span><span class="n">tiempo_ejecucion_funcion</span><span class="p">(</span><span class="n">Gauss_pivote</span><span class="p">,</span> <span class="n">An</span><span class="p">,</span> <span class="n">bn</span><span class="p">),</span><span class="s1">&#39;seg&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Método de Gauss-Jordan pivote:&#39;</span><span class="p">,</span><span class="n">tiempo_ejecucion_funcion</span><span class="p">(</span><span class="n">Gauss_Jordan_pivote</span><span class="p">,</span> <span class="n">An</span><span class="p">,</span> <span class="n">bn</span><span class="p">),</span><span class="s1">&#39;seg&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Método de LU pivote:&#39;</span><span class="p">,</span><span class="n">tiempo_ejecucion_funcion</span><span class="p">(</span><span class="n">LU_solver</span><span class="p">,</span> <span class="n">An</span><span class="p">,</span> <span class="n">bn</span><span class="p">),</span><span class="s1">&#39;seg&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Método de LU (Numpy):&#39;</span><span class="p">,</span><span class="n">tiempo_ejecucion_funcion</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">,</span> <span class="n">An</span><span class="p">,</span><span class="n">bn</span><span class="p">),</span><span class="s1">&#39;seg&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Método de LU (Scipy):&#39;</span><span class="p">,</span><span class="n">tiempo_ejecucion_funcion</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">,</span> <span class="n">An</span><span class="p">,</span><span class="n">bn</span><span class="p">),</span><span class="s1">&#39;seg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tiempo de ejecucion de los distintos métodos de resolución de sistemas lineales
+ Método de Gauss: 0.0004038810729980469 seg
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Método de Gauss pivote: 0.2589538097381592 seg
+ Método de Gauss-Jordan pivote: 0.03176522254943848 seg
+ Método de LU pivote: 0.02083277702331543 seg
+ Método de LU (Numpy): 0.0002529621124267578 seg
+ Método de LU (Scipy): 0.0015048980712890625 seg
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="aplicaciones-de-los-metodos-directos">
+<h2><span class="section-number">1.6. </span>Aplicaciones de los métodos directos<a class="headerlink" href="#aplicaciones-de-los-metodos-directos" title="Permalink to this heading">#</a></h2>
+<section id="determinante-de-una-matriz">
+<h3><span class="section-number">1.6.1. </span>Determinante de una matriz<a class="headerlink" href="#determinante-de-una-matriz" title="Permalink to this heading">#</a></h3>
+<p>Las matrices <span class="math notranslate nohighlight">\(L\)</span> y <span class="math notranslate nohighlight">\(U\)</span> pueden ser usadas para calcular el determinante de la matriz <span class="math notranslate nohighlight">\(A\)</span> muy eficientemente porque <span class="math notranslate nohighlight">\(det(A)=det(L)det(U)\)</span> y los determinantes de matrices triangulares son simplemente el producto de los elementos de sus diagonales. En particular, si <span class="math notranslate nohighlight">\(L\)</span> es una matriz triangular en cuya diagonal todos los elementos son uno, entonces:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-813372b2-66ed-4958-b454-aed6aba87c7d">
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-813372b2-66ed-4958-b454-aed6aba87c7d" title="Permalink to this equation">#</a></span>\[\begin{align}    
+\det(A)=\det(L)\det(U)=\det(U)=\prod _{i=1}^{n}u_{ii} 
+\end{align}\]</div>
+<p>La misma aproximación al problema puede ser usada para factorizaciones <span class="math notranslate nohighlight">\(LUP\)</span> en las que aparece matrices de permutación, pues el determinante de una matriz de permutación <span class="math notranslate nohighlight">\(P\)</span> es <span class="math notranslate nohighlight">\((-1)^{S}\)</span>, donde <span class="math notranslate nohighlight">\(S\)</span> es el número de permutaciones de filas en la descomposición.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">det</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">U</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">det</span> <span class="o">=</span> <span class="n">det</span><span class="o">*</span><span class="n">U</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El determinante de U es |U| = &#39;</span><span class="p">,</span><span class="n">det</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>El determinante de U es |U| =  3.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inversa-de-una-matriz">
+<h3><span class="section-number">1.6.2. </span>Inversa de una matriz<a class="headerlink" href="#inversa-de-una-matriz" title="Permalink to this heading">#</a></h3>
+<p>Las matrices <span class="math notranslate nohighlight">\(L\)</span> y <span class="math notranslate nohighlight">\(U\)</span> pueden ser usadas para calcular la matriz inversa sabiendo que <span class="math notranslate nohighlight">\(AA^{-1} = LUA^{-1} = I\)</span>, por lo que podemos obtener la inversa en dos pasos. Aplicando la sustitución inferior y superior n veces con las n columnas de la matriz identidad para obtener las n filas de la inversa de la matriz. El algoritmo quedaria de la siguiente manera:</p>
+<p><span class="math notranslate nohighlight">\(\textit{for i in range(n)}\)</span>:</p>
+<ul class="simple">
+<li><p>Resolvemos por sustitución inferior <span class="math notranslate nohighlight">\(Ly=I[i]\)</span> para <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+<li><p>Resolvemos por sustitución superior <span class="math notranslate nohighlight">\(UA^{-1}[i]=y\)</span> para <span class="math notranslate nohighlight">\(A^{-1}[i]\)</span> que corresponde con las filas de <span class="math notranslate nohighlight">\(A^{-1}\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">Inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve_triangular</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">I</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve_triangular</span><span class="p">(</span><span class="n">U</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">lower</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">Inv</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+
+    
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La matriz A:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La matriz inversa de A:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">Inv</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Comprobación de A·A^-1:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">Inv</span><span class="p">))</span>
+   
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La matriz A:
+ [[ 1.  1. -1.  0.]
+ [ 1.  1.  0. -1.]
+ [-1.  0.  1.  1.]
+ [ 0. -1.  1.  1.]]
+La matriz inversa de A:
+ [[ 0.33333333 -0.33333333  0.33333333  0.66666667]
+ [ 0.33333333  0.66666667  0.33333333 -0.33333333]
+ [-0.33333333  0.33333333  0.66666667  0.33333333]
+ [ 0.66666667  0.33333333 -0.33333333  0.33333333]]
+Comprobación de A·A^-1:
+ [[ 1.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [ 0.00000000e+00  0.00000000e+00  1.00000000e+00  0.00000000e+00]
+ [ 0.00000000e+00  1.00000000e+00  0.00000000e+00  0.00000000e+00]
+ [-1.11022302e-16 -1.11022302e-16  1.11022302e-16  1.00000000e+00]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="aproximacion-polinomica-mediante-el-metodo-algebraico">
+<h3><span class="section-number">1.6.3. </span>Aproximación polinómica mediante el método algebráico<a class="headerlink" href="#aproximacion-polinomica-mediante-el-metodo-algebraico" title="Permalink to this heading">#</a></h3>
+<p>El objetivo es aproximar una función ‘compleja’ por otra más sencilla, en este caso polinómica. Dado un conjunto de puntos, pueden venir con un patrón dado o no,</p>
+<p>Reconstruir una función a partir del valor que toma en ciertos puntos.
+Estos puntos pueden venir dados con un patrón determinado o no</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Puntos para interpolar</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Matriz de Vandermonde</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">j</span><span class="p">)</span> 
+
+<span class="c1"># Obtenemos los coeficientes del polinomio interpolador resolviendo el sistema lineal</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+
+<span class="c1">#Contruccion del polinomio interpolador a partir de los coeficientes a_n</span>
+<span class="n">n_aprox</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">y_aprox</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_aprox</span><span class="p">)</span>
+<span class="n">x_aprox</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">n_aprox</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_aprox</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">y_aprox</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_aprox</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="nb">pow</span><span class="p">(</span><span class="n">x_aprox</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">j</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Representación del polinimio interpolador con &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n_aprox</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; puntos&#39;</span><span class="p">)</span>
+
+<span class="c1"># Representación gráfica</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Puntos iniciales&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_aprox</span><span class="p">,</span> <span class="n">y_aprox</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Polinomio interpolador&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="c1"># Finalmente damos la orden de representar el gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0e02ba0953d69d2b79e9e31b2cc823ead16429aeb7cd0ce4cb4305f220de685c.png" src="../../_images/0e02ba0953d69d2b79e9e31b2cc823ead16429aeb7cd0ce4cb4305f220de685c.png" />
+</div>
+</div>
+</section>
+<section id="perturbacion-de-sistemas-lineales">
+<h3><span class="section-number">1.6.4. </span>Perturbación de sistemas lineales<a class="headerlink" href="#perturbacion-de-sistemas-lineales" title="Permalink to this heading">#</a></h3>
+<p>Vamos a estudiar el comportamiento de un sistema lineal de ecuaciones algebráicas, <span class="math notranslate nohighlight">\(Ax = b\)</span>, a perturbaciones, <span class="math notranslate nohighlight">\(\delta\)</span>, en los datos iniciales del problemas, es decir, en la matriz <span class="math notranslate nohighlight">\(A\)</span> o en el vector <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<section id="norma-matricial">
+<h4><span class="section-number">1.6.4.1. </span>Norma matricial<a class="headerlink" href="#norma-matricial" title="Permalink to this heading">#</a></h4>
+<p>Antes vamos definir el concepto de norma matricial que es una extensión de la norma vectorial. Hay diferentes normas que se denotan p-normas y usualmente se denotan por <span class="math notranslate nohighlight">\(\left\|A\right\|_{p}\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p=1\)</span>, la máxima suma absoluta de las columnas de la matriz:</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight" id="equation-fbddb21d-dd62-4fea-a6d4-dbfb82d0875a">
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-fbddb21d-dd62-4fea-a6d4-dbfb82d0875a" title="Permalink to this equation">#</a></span>\[\begin{align}    
+||A||_1=\max \limits_{1\leq j\leq n}\sum_{i=1}^{n}a_{ij}.
+\end{align}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p=\infty\)</span>, es la máxima suma absoluta de las columnas de la matriz:</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight" id="equation-ed102945-e299-449e-9490-2b0c6434cc2f">
+<span class="eqno">(1.8)<a class="headerlink" href="#equation-ed102945-e299-449e-9490-2b0c6434cc2f" title="Permalink to this equation">#</a></span>\[\begin{align}    
+||A||_{\infty}=\max \limits_{1\leq j\leq n}\sum_{j=1}^{n}a_{ij}.
+\end{align}\]</div>
+</section>
+<section id="perturbacion-de-b-en-el-sistema-ax-b">
+<h4><span class="section-number">1.6.4.2. </span>Perturbación de <span class="math notranslate nohighlight">\(b\)</span> en el sistema <span class="math notranslate nohighlight">\(Ax = b\)</span><a class="headerlink" href="#perturbacion-de-b-en-el-sistema-ax-b" title="Permalink to this heading">#</a></h4>
+<p>Partimos de un sistema lineal <span class="math notranslate nohighlight">\(Ax = b\)</span> y lo perturbamos el vector <span class="math notranslate nohighlight">\(b\)</span> con <span class="math notranslate nohighlight">\(\delta b\)</span>, el sistema perturbado quedaría:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5d0b255d-eaef-49c4-995e-951d5b430917">
+<span class="eqno">(1.9)<a class="headerlink" href="#equation-5d0b255d-eaef-49c4-995e-951d5b430917" title="Permalink to this equation">#</a></span>\[\begin{align}    
+Ax = b + \delta b
+\end{align}\]</div>
+<p>Si denominamos <span class="math notranslate nohighlight">\(x_0\)</span> a la única solución del sistema inicial ( con <span class="math notranslate nohighlight">\(x_0\neq 0\)</span>), la solución del sistema perturbado sería <span class="math notranslate nohighlight">\(x_0 + \delta x0\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-953205e4-b9a5-43b3-82f2-61d0c91116b7">
+<span class="eqno">(1.10)<a class="headerlink" href="#equation-953205e4-b9a5-43b3-82f2-61d0c91116b7" title="Permalink to this equation">#</a></span>\[\begin{align}    
+A(x + \delta x_0) = b + \delta b \rightarrow Ax + A\delta x_0 = b + \delta b \rightarrow A\delta x_0 = \delta b \rightarrow \delta x_0 = A^{-1}\delta b  
+\end{align}\]</div>
+<p>Aplicando normas de matrices, <span class="math notranslate nohighlight">\(||\,\,||\)</span>, se deduce que  <span class="math notranslate nohighlight">\(||\delta x_0|| = ||A^{-1}\delta b|| \rightarrow ||\delta x_0|| \leq ||A^{-1}||\,||\delta b||\)</span>. Y que multiplicando y dividiendo por <span class="math notranslate nohighlight">\(||A||\)</span>, <span class="math notranslate nohighlight">\(||\delta x_0|| \leq ||A^{-1}||\,\frac{||A||}{||A||}||\delta b||,\)</span> llegamos a la siguiente expresión:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a79a3ccf-b1db-4704-9dcb-61ecf48e8230">
+<span class="eqno">(1.11)<a class="headerlink" href="#equation-a79a3ccf-b1db-4704-9dcb-61ecf48e8230" title="Permalink to this equation">#</a></span>\[\begin{align}    
+\frac{||\delta x_0||}{||x_0||} \leq ||A^{-1}||\,||A||\frac{||\delta b||}{||b||}
+\end{align}\]</div>
+<p>donde ||A^{-1}||,||A|| es el número de condición de la matriz A y se indica como <span class="math notranslate nohighlight">\(\kappa(A)\)</span>.</p>
+<ul class="simple">
+<li><p>Si <span class="math notranslate nohighlight">\(\kappa(A)\approx 1\)</span>, el sistema no es sensible a perturbaciones y se dice que la matriz está bien condicionada.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(\kappa(A) &gt;&gt; 1\)</span>, el sistema es sensible a perturbaciones y se dice que la matriz está mal condicionada.</p></li>
+</ul>
+<p>Vamos a ver con un ejemplo como afecta a la solución del sistema el condicionamiento de la matriz cuando se perturba el vector b:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-07b84ca2-7731-4db6-aabf-598c0f3f9229">
+<span class="eqno">(1.12)<a class="headerlink" href="#equation-07b84ca2-7731-4db6-aabf-598c0f3f9229" title="Permalink to this equation">#</a></span>\[\begin{align}
+\begin{pmatrix} 1 &amp; 1\\ 1 &amp; 1.0001 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 2 \\ 2 \end{pmatrix} 
+\end{align}\]</div>
+<p>Resolviendo el sistema por el método de Gauss, vemos que la solución es <span class="math notranslate nohighlight">\(x= (2, 2)\)</span>. Ahora si perturbamos el sistema con <span class="math notranslate nohighlight">\(\delta b = (0,10^{-4})\)</span>, y volvemos a resolver el sistema, la solución es <span class="math notranslate nohighlight">\(x = (1, 1)^T\)</span>. Comprobando el número de condición, vemos que efectivamente  <span class="math notranslate nohighlight">\(\kappa(A) = 40002 &gt;&gt; 1\)</span>, por lo que A está mal condicionada. El número de condición de la matriz A es excesivamente grande (matriz mal condicionada), lo cual traduce el mal comportamiento del sistema incluso frente a pequeñnas perturbaciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Ejemplo sistema mal condicionado</span>
+
+<span class="c1"># Definimos el sistema</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0001</span><span class="p">,]])</span> 
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+
+<span class="c1"># Resolvemos el sistema</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La solución del sistema es x=&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Perturbamos un elemento de la matriz A</span>
+<span class="n">b</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La solución del sistema perturbado en b es x=&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Comprobamos el número de condición</span>
+<span class="n">kappa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El número de condición de la matriz es kappa = &#39;</span><span class="p">,</span> <span class="n">kappa</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La solución del sistema es x= [2. 0.]
+La solución del sistema perturbado en b es x= [1. 1.]
+El número de condición de la matriz es kappa =  40002.00010000441
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ahora vamos a resolver otro sistema donde la solución es <span class="math notranslate nohighlight">\(x= (0.9, -1)^T\)</span>. Ahora si perturbamos el sistema con <span class="math notranslate nohighlight">\(\delta b = (0.1,0.1)^T\)</span>, y volvemos a resolver el sistema, la solución es <span class="math notranslate nohighlight">\(x = (1, -1)^T\)</span>. Comprobando el número de condición, vemos que efectivamente  <span class="math notranslate nohighlight">\(\kappa(A) = 2 \approx 1\)</span>, por lo que A está bien condicionada, lo cual traduce un
+comportamiento no esencialmente distinto del paso de la solución <span class="math notranslate nohighlight">\(x= (0.9, -1)^T\)</span> a la <span class="math notranslate nohighlight">\(x = (1, -1)^T\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Ejemplo sistema bien condicionado</span>
+
+<span class="c1"># Definimos el sistema</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,]])</span> 
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">])</span>
+
+<span class="c1"># Resolvemos el sistema</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La solución del sistema es x=&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Perturbamos un elemento de la matriz A</span>
+<span class="n">b</span> <span class="o">+=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La solución del sistema perturbado en b es x=&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Comprobamos el número de condición</span>
+<span class="n">kappa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El número de condición de la matriz es kappa = &#39;</span><span class="p">,</span> <span class="n">kappa</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La solución del sistema es x= [ 0.9 -1. ]
+La solución del sistema perturbado en b es x= [ 1. -1.]
+El número de condición de la matriz es kappa =  2.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="perturbacion-de-a-en-el-sistema-ax-b">
+<h4><span class="section-number">1.6.4.3. </span>Perturbación de <span class="math notranslate nohighlight">\(A\)</span> en el sistema <span class="math notranslate nohighlight">\(Ax = b\)</span><a class="headerlink" href="#perturbacion-de-a-en-el-sistema-ax-b" title="Permalink to this heading">#</a></h4>
+<p>Ahora vamos a perturbar la matriz <span class="math notranslate nohighlight">\(A\)</span> con <span class="math notranslate nohighlight">\(\delta A\)</span>, el sistema perturbado quedaría:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2ede858c-17d8-4f7f-99da-6ce4bf22be02">
+<span class="eqno">(1.13)<a class="headerlink" href="#equation-2ede858c-17d8-4f7f-99da-6ce4bf22be02" title="Permalink to this equation">#</a></span>\[\begin{align}    
+(A +\delta A)x = b 
+\end{align}\]</div>
+<p>Si denominamos <span class="math notranslate nohighlight">\(x_0\)</span> a la única solución del sistema inicial ( con <span class="math notranslate nohighlight">\(x_0\neq0\)</span>), la solución del sistema perturbado será <span class="math notranslate nohighlight">\(x_0 + \delta x0\)</span>, entonces de manera similar al desarrollo de la perturbación en <span class="math notranslate nohighlight">\(b\)</span> se puede llegar a la siguiente expresión:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f82f165b-86d8-43df-80f0-c624a2f4e564">
+<span class="eqno">(1.14)<a class="headerlink" href="#equation-f82f165b-86d8-43df-80f0-c624a2f4e564" title="Permalink to this equation">#</a></span>\[\begin{align}    
+\frac{||\delta x_0||}{||x_0 + \delta x_0||} \leq \kappa(A)\frac{||\delta A||}{||A||}
+\end{align}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Ejemplo sistema mal condicionado</span>
+
+<span class="c1"># Definimos el sistema</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.0001</span><span class="p">,]])</span> 
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+
+<span class="c1"># Resolvemos el sistema</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La solución del sistema es x=&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Perturbamos un elemento de la matriz A</span>
+<span class="n">A</span> <span class="o">+=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">]]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;La solución del sistema perturbado en b es x=&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Comprobamos el número de condición</span>
+<span class="n">kappa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;El número de condición de la matriz es kappa = &#39;</span><span class="p">,</span> <span class="n">kappa</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La solución del sistema es x= [2. 0.]
+La solución del sistema perturbado en b es x= [2. 0.]
+El número de condición de la matriz es kappa =  40006.00050000441
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/01-SistemasLineales"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Curso de Informática</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../02-Autovalores/autovalores.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Métodos para el Cálculo de Autovalores</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">1.1. Contenido</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-a-los-sistemas-lineales">1.2. Introducción a los sistemas lineales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-directos">1.3. Métodos directos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-a-id-gauss-a">1.3.1. Gauss  <a id="Gauss"></a></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pivotaje">1.3.1.1. Pivotaje</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-jordan-a-id-gaussjordan-a">1.3.2. Gauss-Jordan   <a id="GaussJordan"></a></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factorizacion-lu-a-id-lu-a">1.3.3. Factorización LU <a id="LU"></a></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucion-sistema-lineal">1.3.4. Resolución sistema lineal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-de-redondeo">1.3.5. Error de redondeo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coste-computacional">1.3.6. Coste computacional</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modulos-de-algebra-lineal-en-python">1.4. Módulos de Álgebra lineal en Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucion-de-sistemas-lineales">1.4.1. Resolución de sistemas lineales</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#usando-las-funciones-inv-y-dot">1.4.1.1. Usando las funciones inv() y dot():</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#usando-la-funcion-solve">1.4.1.2. Usando la función solve()</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-usando-la-funcion-de-factorizacion-lu-de-scipy-scipy-linalg-lu">1.4.1.3. Extra: Usando la función de factorización LU de SciPy: scipy.linalg.lu()</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tiempo-de-computacion">1.5. Tiempo de computación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-de-los-metodos-directos">1.6. Aplicaciones de los métodos directos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determinante-de-una-matriz">1.6.1. Determinante de una matriz</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inversa-de-una-matriz">1.6.2. Inversa de una matriz</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aproximacion-polinomica-mediante-el-metodo-algebraico">1.6.3. Aproximación polinómica mediante el método algebráico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perturbacion-de-sistemas-lineales">1.6.4. Perturbación de sistemas lineales</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#norma-matricial">1.6.4.1. Norma matricial</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perturbacion-de-b-en-el-sistema-ax-b">1.6.4.2. Perturbación de <span class="math notranslate nohighlight">\(b\)</span> en el sistema <span class="math notranslate nohighlight">\(Ax = b\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perturbacion-de-a-en-el-sistema-ax-b">1.6.4.3. Perturbación de <span class="math notranslate nohighlight">\(A\)</span> en el sistema <span class="math notranslate nohighlight">\(Ax = b\)</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Universidad Politécnica de Madrid
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

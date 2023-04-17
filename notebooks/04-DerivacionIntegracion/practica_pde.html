@@ -1,0 +1,770 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>4.5. Práctica Grupal: Problemas de Contorno &#8212; Curso de Informática ETSIAE</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/04-DerivacionIntegracion/practica_pde';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5. Ecuaciones no lineales" href="../05-SistemasNoLineales/Ecuaciones%20y%20sistemas%20de%20ecuaciones%20no%20lineales.html" />
+    <link rel="prev" title="4. Derivación Numérica." href="derivacion_numerica.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Curso de Informática
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01-SistemasLineales/sistemas_lineales.html">1. Sistemas lineales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02-Autovalores/autovalores.html">2. Métodos para el Cálculo de Autovalores</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03-Interpolacion/interpolacion_lagrange.html">3. Interpolación de Lagrange</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03-Interpolacion/practica_minimos_cuadrados.html">3.1. Práctica: método de mínimos cuadrados</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="derivacion_numerica.html">4. Derivación Numérica.</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4.5. Práctica Grupal: Problemas de Contorno</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../05-SistemasNoLineales/Ecuaciones%20y%20sistemas%20de%20ecuaciones%20no%20lineales.html">5. Ecuaciones no lineales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-EDOs/Introducci%C3%B3nEDOs.html">6. Ecuaciones diferenciales ordinarias</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/04-DerivacionIntegracion/practica_pde.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/04-DerivacionIntegracion/practica_pde.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Práctica Grupal: Problemas de Contorno</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucion-numerica-operador-diferencial">4.5.1. Resolución Numérica. Operador diferencial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucion-numerica-condiciones-de-contorno">4.5.2. Resolución Numérica. Condiciones de Contorno.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practica-1">4.5.2.1. Practica 1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practica-2">4.5.2.2. Práctica 2.</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="practica-grupal-problemas-de-contorno">
+<h1><span class="section-number">4.5. </span>Práctica Grupal: Problemas de Contorno<a class="headerlink" href="#practica-grupal-problemas-de-contorno" title="Permalink to this heading">#</a></h1>
+<p>Un problema de contorno es una ecuación diferencial donde se imponen unos valores que debe verificar la función solución en puntos situados en la frontera (contorno) del intervalo de definición de la solución.</p>
+<p>Por ejemplo: Determinar que función de una variable <span class="math notranslate nohighlight">\(U(x)\)</span> verifica que su derivada segunda más la propia función vale cero, dentro del intervalo <span class="math notranslate nohighlight">\([0, \frac{3\pi}{2}]\)</span>.</p>
+<p>Es decir, estamos buscando  <span class="math notranslate nohighlight">\(U(x)\)</span> tal que <span class="math notranslate nohighlight">\(U''(x) + U(x) = 0\)</span> o lo que es lo mismo <span class="math notranslate nohighlight">\(U''(x) = -U(x)\)</span> en <span class="math notranslate nohighlight">\([0, \frac{3\pi}{2}]\)</span>.</p>
+<p>¿Se os ocurre alguna función que cumpla lo anterior?</p>
+<p>Por ejemplo <span class="math notranslate nohighlight">\(U(x) = cos(x)\)</span> ó <span class="math notranslate nohighlight">\(U(x) = sin(x)\)</span>, <span class="math notranslate nohighlight">\(U(x) = cos(x) + sin(x) \)</span>… hay infinitas soluciones.
+Si añadimos las condiciones de contorno <span class="math notranslate nohighlight">\(U(0) = 2\)</span>; <span class="math notranslate nohighlight">\(U(\frac{3\pi}{2})= 2\)</span>, tenemos el siguiente problema de contorno:</p>
+<p>Hallar <span class="math notranslate nohighlight">\(U(x) \in \mathcal{C^2[0, \frac{3\pi}{2}]}\)</span> tal que:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ec6b5a1f-ed67-439c-86a0-331bf3242441">
+<span class="eqno">(4.25)<a class="headerlink" href="#equation-ec6b5a1f-ed67-439c-86a0-331bf3242441" title="Permalink to this equation">#</a></span>\[\begin{align}
+&amp;U''(x) + U(x) = 0  \text{ con }\\
+&amp;U(0) = 2 \\
+&amp;U(\dfrac{3\pi}{2})= 2
+\end{align}\]</div>
+<p>Este problema tiene solución única que es: <span class="math notranslate nohighlight">\(U(x) = 2cos(x)-2sin(x)\)</span></p>
+<section id="resolucion-numerica-operador-diferencial">
+<h2><span class="section-number">4.5.1. </span>Resolución Numérica. Operador diferencial<a class="headerlink" href="#resolucion-numerica-operador-diferencial" title="Permalink to this heading">#</a></h2>
+<p>Hemos visto que, a partir de los valores de una función en unos puntos <span class="math notranslate nohighlight">\(\left[ a=x_0, x_1, x_2,...,x_N = b \right]\)</span>, podemos calcular el valor de la derivada de dicha función en esos puntos multiplicando por una matriz de derivación. En forma vectorial lo hemos escrito como: <span class="math notranslate nohighlight">\(U' = DU\)</span> siendo <span class="math notranslate nohighlight">\(U\)</span> un vector que contiene el valor de <span class="math notranslate nohighlight">\(U(x)\)</span> en el conjunto de puntos equiespaciados del intervalo <span class="math notranslate nohighlight">\(\left[ a,b \right]\)</span> y <span class="math notranslate nohighlight">\(U'\)</span> el vector de las derivadas en esos mismos puntos.</p>
+<p>Si quisieramos hallar el valor de <span class="math notranslate nohighlight">\(U''(x) + U(x)\)</span> en los puntos de discretización podriamos construir el operador <span class="math notranslate nohighlight">\(M = DD + I\)</span>, con <span class="math notranslate nohighlight">\(I\)</span> la matriz identidad, de manera que al calcular <span class="math notranslate nohighlight">\(MU\)</span> tendríamos:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-42d035fa-355f-43cb-a2bc-548c8da13c8c">
+<span class="eqno">(4.26)<a class="headerlink" href="#equation-42d035fa-355f-43cb-a2bc-548c8da13c8c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+MU = (DD+I)U = DDU + IU = U'' + U
+\end{equation}\]</div>
+<p>Pero este no es el caso que queremos resolver. En nuestro ejemplo <strong>no</strong> conocemos el valor de <span class="math notranslate nohighlight">\(U(x)\)</span>, de hecho es precisamente eso lo que buscamos, una función que cumpla <span class="math notranslate nohighlight">\(U''(x) + U(x)= 0\)</span>.</p>
+<p>Vamos a plantear el problema de manera que las incógnitas sean los valores de la función en <span class="math notranslate nohighlight">\(\left[ x_0, x_1, x_2,...,x_N \right]\)</span>, es decir el vector de incognitas será:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2c3e4f2a-7d2b-4582-92cc-d69f24352cfd">
+<span class="eqno">(4.27)<a class="headerlink" href="#equation-2c3e4f2a-7d2b-4582-92cc-d69f24352cfd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+U = \begin{pmatrix}
+U(x_0)\\
+U(x_1)\\
+U(x_2)\\
+\vdots \\
+U(x_N)
+\end{pmatrix}
+\end{equation}\]</div>
+<p>y la información que tenemos es que <span class="math notranslate nohighlight">\(U''(x) + U(x)= 0\)</span> que en forma matricial podemos escribir como:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-dd70d271-f396-4c53-a83d-bf0a962dc163">
+<span class="eqno">(4.28)<a class="headerlink" href="#equation-dd70d271-f396-4c53-a83d-bf0a962dc163" title="Permalink to this equation">#</a></span>\[\begin{align}
+\begin{pmatrix}
+ &amp;   &amp;  \\
+  &amp; D &amp;  \\
+  &amp;   &amp;  
+\end{pmatrix}
+\begin{pmatrix}
+ &amp;   &amp;  \\
+  &amp; D &amp;  \\
+  &amp;   &amp;  
+\end{pmatrix}
+\begin{pmatrix}
+    \\
+  U  \\
+  \quad
+\end{pmatrix} +
+\begin{pmatrix}
+ &amp;   &amp;  \\
+  &amp; I &amp;  \\
+  &amp;   &amp;  
+\end{pmatrix}
+\begin{pmatrix}
+    \\
+  U  \\
+  \quad
+\end{pmatrix}= 
+\begin{pmatrix}
+    \\
+  0  \\
+  \quad
+\end{pmatrix}
+\end{align}\]</div>
+<p>O</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a7d1e8d8-cf3c-4e32-864a-c51f5f5979b6">
+<span class="eqno">(4.29)<a class="headerlink" href="#equation-a7d1e8d8-cf3c-4e32-864a-c51f5f5979b6" title="Permalink to this equation">#</a></span>\[\begin{align}
+\begin{pmatrix}
+ &amp;   &amp;  \\
+  &amp; M &amp;  \\
+  &amp;   &amp;  
+\end{pmatrix}
+\begin{pmatrix}
+    \\
+  U  \\
+  \quad
+\end{pmatrix} = 
+\begin{pmatrix}
+    \\
+  0  \\
+  \quad
+\end{pmatrix}
+\end{align}\]</div>
+<p>siendo:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7ab5cc23-e57d-4079-9c54-0556e993dba2">
+<span class="eqno">(4.30)<a class="headerlink" href="#equation-7ab5cc23-e57d-4079-9c54-0556e993dba2" title="Permalink to this equation">#</a></span>\[\begin{align}
+\begin{pmatrix}
+ &amp;   &amp;  \\
+  &amp; M &amp;  \\
+  &amp;   &amp;  
+\end{pmatrix} = 
+\begin{pmatrix}
+ &amp;   &amp;  \\
+  &amp; D &amp;  \\
+  &amp;   &amp;  
+\end{pmatrix}
+\begin{pmatrix}
+ &amp;   &amp;  \\
+  &amp; D &amp;  \\
+  &amp;   &amp;  
+\end{pmatrix} +
+\begin{pmatrix}
+ &amp;   &amp;  \\
+  &amp; I &amp;  \\
+  &amp;   &amp;  
+\end{pmatrix}
+\end{align}\]</div>
+<p>Es decir, resolver la ecuación diferencial se convierte en resolver un sistema lineal donde la matriz del sistema es el operador diferencial asociado a la ecuación.
+Ahora solo falta por ver como imponer las condiciones de contorno.</p>
+</section>
+<section id="resolucion-numerica-condiciones-de-contorno">
+<h2><span class="section-number">4.5.2. </span>Resolución Numérica. Condiciones de Contorno.<a class="headerlink" href="#resolucion-numerica-condiciones-de-contorno" title="Permalink to this heading">#</a></h2>
+<p>En el ejemplo inicial hemos visto que existen infinitas funciones que cumplen <span class="math notranslate nohighlight">\(U''(x) = -U(x)\)</span> en <span class="math notranslate nohighlight">\([0, \frac{3\pi}{2}]\)</span>.
+En terminos del problema matricial <span class="math notranslate nohighlight">\(Ax = b\)</span> que hemos planteado para resolverlo diríamos que el problema no tiene solución única (Teorema de Rouche-Frobenius). Necesitamos incluir las condiciones de contorno para que el sistema lineal sea compatible determinado y tenga, por tanto, solución única.</p>
+<p>De momento el sistema se puede escribir como:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c7f32616-d174-4146-b152-60fbdd33fa96">
+<span class="eqno">(4.31)<a class="headerlink" href="#equation-c7f32616-d174-4146-b152-60fbdd33fa96" title="Permalink to this equation">#</a></span>\[\begin{align}
+\begin{pmatrix}
+M_{00} &amp; M_{01} &amp; \dots   &amp; M_{0N} \\
+M_{10} &amp; M_{11} &amp; \dots   &amp; M_{1N} \\
+\vdots &amp;    &amp; \ddots  &amp; \vdots \\
+M_{N0} &amp; M_{N1} &amp; \dots   &amp; M_{NN}   
+\end{pmatrix}
+\begin{pmatrix}
+U(x_0)\\
+U(x_1)\\
+\vdots \\
+U(x_N)
+\end{pmatrix} = 
+\begin{pmatrix}
+   \\
+  0  \\
+  \vdots \\
+  0     
+\end{pmatrix}
+\end{align}\]</div>
+<p>Las condiciones de contorno dicen que <span class="math notranslate nohighlight">\(U(0) = U(x_0) = 2\)</span> y que  <span class="math notranslate nohighlight">\(U(\frac{3\pi}{2})= U(x_N) = 2\)</span>. Vamos a forzar al sistema linbeal <span class="math notranslate nohighlight">\(Ax = b\)</span> para que verifique esas ecuaciones. El modo de hacerlo va a ser sustituir la primera y la última ecuación, -la primera y la última fila de la matriz <span class="math notranslate nohighlight">\(M\)</span> y del vector <span class="math notranslate nohighlight">\(b\)</span>-, para imponer las condiciones de contorno:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-04fc1580-83b8-4731-a72e-803498a4fb24">
+<span class="eqno">(4.32)<a class="headerlink" href="#equation-04fc1580-83b8-4731-a72e-803498a4fb24" title="Permalink to this equation">#</a></span>\[\begin{align}
+\begin{pmatrix}
+{\color{red} 1 }&amp; {\color{red} 0 } &amp; \color{red} {\dots} &amp; {\color{red} 0 } &amp; {\color{red} 0}  \\
+M_{10} &amp; M_{11} &amp; \dots &amp; M_{1N{\tiny -1}}   &amp; M_{1N} \\
+\vdots &amp;    &amp; \ddots  &amp; &amp; \vdots \\
+M_{N{\tiny -1} 0} &amp; M_{N{\tiny -1}1} &amp; \dots &amp; M_{N{\tiny -1}N{\tiny -1}}  &amp; M_{N{\tiny -1}N} \\
+\color{green}{ 0} &amp; \color{green}{0 }&amp; \color{green}{\dots}  &amp; \color{green}{0} &amp; \color{green}{1 }
+\end{pmatrix}
+\begin{pmatrix}
+\color{red} {U(x_0) }\\
+U(x_1)\\
+\vdots \\
+U(x_{N-1}) \\
+\color{green}{U(x_N)}
+\end{pmatrix} = 
+\begin{pmatrix}
+ {\color{red} 2 }\\
+  0  \\
+  \vdots \\
+  0  \\
+  \color{green}{2}
+\end{pmatrix}
+\end{align}\]</div>
+<section id="practica-1">
+<h3><span class="section-number">4.5.2.1. </span>Practica 1.<a class="headerlink" href="#practica-1" title="Permalink to this heading">#</a></h3>
+<p>Resolver el problema de contorno:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-edcc8335-bd57-4f49-b87d-def36099fa5a">
+<span class="eqno">(4.33)<a class="headerlink" href="#equation-edcc8335-bd57-4f49-b87d-def36099fa5a" title="Permalink to this equation">#</a></span>\[\begin{align}
+&amp;U''(x) + U(x) = 0  \text{ con }\\
+&amp;U(0) = 2 \\
+&amp;U(\frac{3\pi}{2})= 2
+\end{align}\]</div>
+<p>Y comparar graficamente la solución numérica obtenida con la verdadera <span class="math notranslate nohighlight">\(U(x) = 2cos(x)-2sin(x)\)</span>.</p>
+</section>
+<section id="practica-2">
+<h3><span class="section-number">4.5.2.2. </span>Práctica 2.<a class="headerlink" href="#practica-2" title="Permalink to this heading">#</a></h3>
+<p>Resolver el problema de contorno:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d6293eca-1ef2-4e10-954e-d0dc9f2716da">
+<span class="eqno">(4.34)<a class="headerlink" href="#equation-d6293eca-1ef2-4e10-954e-d0dc9f2716da" title="Permalink to this equation">#</a></span>\[\begin{align}
+&amp;U''(x) + 9U(x) = cos(x)  \text{ con }\\
+&amp;U'(0) = 5 \\
+&amp;U(\pi)= \frac{-9}{8}
+\end{align}\]</div>
+<p>Fijaos que una de las condiciones de contorno está puesta en la derivada de la función. ¿Cómo cambia eso la manera de implementarla?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Práctica 1 </span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">81</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">3.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">2.</span>
+<span class="n">x_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Defino la matriz de derivación D</span>
+
+
+
+
+
+<span class="c1"># Condiciones de contorno</span>
+
+
+
+
+<span class="c1">### Representación gráfica</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">81</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">a</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">3.</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">2.</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">x_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;np&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Práctica 1 </span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">81</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">0.</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">x_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Defino la matriz de derivación D</span>
+
+
+
+
+
+<span class="c1"># Condiciones de contorno</span>
+
+
+
+
+<span class="c1">### Representación gráfica</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/04-DerivacionIntegracion"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="derivacion_numerica.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Derivación Numérica.</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../05-SistemasNoLineales/Ecuaciones%20y%20sistemas%20de%20ecuaciones%20no%20lineales.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Ecuaciones no lineales</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucion-numerica-operador-diferencial">4.5.1. Resolución Numérica. Operador diferencial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resolucion-numerica-condiciones-de-contorno">4.5.2. Resolución Numérica. Condiciones de Contorno.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practica-1">4.5.2.1. Practica 1.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practica-2">4.5.2.2. Práctica 2.</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Universidad Politécnica de Madrid
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1016 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>4. Derivación Numérica. &#8212; Curso de Informática ETSIAE</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/04-DerivacionIntegracion/derivacion_numerica';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4.5. Práctica Grupal: Problemas de Contorno" href="practica_pde.html" />
+    <link rel="prev" title="3.1. Práctica: método de mínimos cuadrados" href="../03-Interpolacion/practica_minimos_cuadrados.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Curso de Informática
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01-SistemasLineales/sistemas_lineales.html">1. Sistemas lineales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02-Autovalores/autovalores.html">2. Métodos para el Cálculo de Autovalores</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03-Interpolacion/interpolacion_lagrange.html">3. Interpolación de Lagrange</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03-Interpolacion/practica_minimos_cuadrados.html">3.1. Práctica: método de mínimos cuadrados</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">4. Derivación Numérica.</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="practica_pde.html">4.5. Práctica Grupal: Problemas de Contorno</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../05-SistemasNoLineales/Ecuaciones%20y%20sistemas%20de%20ecuaciones%20no%20lineales.html">5. Ecuaciones no lineales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-EDOs/Introducci%C3%B3nEDOs.html">6. Ecuaciones diferenciales ordinarias</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/04-DerivacionIntegracion/derivacion_numerica.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/04-DerivacionIntegracion/derivacion_numerica.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Derivación Numérica.</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulas-de-derivacion-con-2-puntos">4.1. Fórmulas de derivación con 2 puntos.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivada-primera">4.1.1. Derivada primera.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulas-de-derivacion-con-3-puntos">4.2. Fórmulas de derivación con 3 puntos.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.2.1. Derivada primera.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivada-segunda">4.2.2. Derivada segunda.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-en-python">4.3. Implementación en Python.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-derivacion">4.4. Matrices de derivación.</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="derivacion-numerica">
+<h1><span class="section-number">4. </span>Derivación Numérica.<a class="headerlink" href="#derivacion-numerica" title="Permalink to this heading">#</a></h1>
+<p>Partiremos del polinomio interpolador de Lagrange en <span class="math notranslate nohighlight">\(N+1\)</span> puntos de interpolación equiespaciados <span class="math notranslate nohighlight">\(\{x_i\} \text{ con } i= 0,...,N \)</span> y de los valores de la función a aproximar en dichos puntos <span class="math notranslate nohighlight">\(\{f(x_i)\} \text{ con } i= 0,...,N \)</span>.
+Vimos que dados <span class="math notranslate nohighlight">\(N+1\)</span> puntos <span class="math notranslate nohighlight">\(\{(x_0,f(x_0)), (x_1,f(x_1)), ..., (x_N, f(x_N))\}\)</span> podemos construir una aproximación polinómica a la funciín <span class="math notranslate nohighlight">\(f(x)\)</span> utilizando los polinomios de Lagrange:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-68f0cf3e-6cf6-42b5-afc7-b527ebf36172">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-68f0cf3e-6cf6-42b5-afc7-b527ebf36172" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	f(x) \approx I_{N} (x) = b_{0} \ \ell_{0} (x) \ + \ b_{1} \ \ell_{1} (x) \ + \  \cdots \ + \ b_{N} \  \ell_{N} (x) = \ \sum_{j = 0}^{N} \ b_j \ell_{j} (x)
+\end{equation}\]</div>
+<p>La forma <span class="math notranslate nohighlight">\(I_{N} (x)\)</span> se conoce como interpolante de Lagrange, los polinomios <span class="math notranslate nohighlight">\(\ell_{j} (x)\)</span> son los polinomios de Lagrange que tienen la expresión siguiente:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-13c46bc7-641c-4ad8-b408-ab5b5794ae9d">
+<span class="eqno">(4.2)<a class="headerlink" href="#equation-13c46bc7-641c-4ad8-b408-ab5b5794ae9d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	\displaystyle
+	\ell_{j} (x) \  = \
+	\displaystyle
+	\overset{N}{\underset{\begin{subarray}{l}
+				i = 0                                                            \\ 
+				i \neq j
+			\end{subarray}                                           
+		}{\prod}} \
+	\frac{(x - x_i)}{(x_j - x_i)} .                                                                   
+\end{equation}\]</div>
+<p>y los coeficientes <span class="math notranslate nohighlight">\(b_j\)</span> verifican:</p>
+<div class="math notranslate nohighlight">
+\[                                             
+b_j \ = \ f (x_j) ,
+\]</div>
+<p>con lo que, el polinomio interpolante, resulta ser:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8964780b-78bc-4c76-ab55-9fdd4d45b159">
+<span class="eqno">(4.3)<a class="headerlink" href="#equation-8964780b-78bc-4c76-ab55-9fdd4d45b159" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	\displaystyle
+	I_{N} (x) \ = \ \sum_{j = 0}^{N} \ f (x_j) \ \
+	\displaystyle
+	\overset{N}{\underset{\begin{subarray}{l}
+				i = 0                                                            \\ 
+				i \neq j
+			\end{subarray}                                           
+		}{\prod}} \
+	\frac{(x - x_i)}{(x_j - x_i)} .                                                                                                
+\end{equation}\]</div>
+<p>Si queremos utilizar el polinomio interpolante para aproximar la derivada basta derivar a ambos lados de la igualdad:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e941f172-a830-4d2e-b772-2656bc2e5945">
+<span class="eqno">(4.4)<a class="headerlink" href="#equation-e941f172-a830-4d2e-b772-2656bc2e5945" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	f'(x) \approx I'_{N} (x) =\ \sum_{j = 0}^{N} \ f (x_j) \ell'_{j} (x)
+\end{equation}\]</div>
+<p>y lo mismo para aproximar la derivada segunda:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-72e8cd95-4baa-44db-979a-9df16684d508">
+<span class="eqno">(4.5)<a class="headerlink" href="#equation-72e8cd95-4baa-44db-979a-9df16684d508" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	f''(x) \approx I''_{N} (x) =\ \sum_{j = 0}^{N} \ f (x_j) \ell''_{j} (x)
+\end{equation}\]</div>
+<p>Estas derivadas se pueden evaluar para cualquier valor de <span class="math notranslate nohighlight">\(x\)</span> del dominio de definición
+de <span class="math notranslate nohighlight">\(f\)</span> aunque, en la práctica, se presentan evaluadas en los puntos de interpolación.
+Si <span class="math notranslate nohighlight">\(x_k\)</span> es un punto de interpolación, las expresiones anteriores para las derivadas primera y segunda resultan como:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7754c075-9ee8-4689-ab0a-5ffefae7d622">
+<span class="eqno">(4.6)<a class="headerlink" href="#equation-7754c075-9ee8-4689-ab0a-5ffefae7d622" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\displaystyle
+f'(x_k) \ \approx \ I_N' (x_k) \ = \ \sum_{j = 0}^N \ f (x_j) \ \ell_j' (x_k) ,
+\label{aproximacion_derivada_primera_x_k}                                                                                                   
+\end{equation}\]</div>
+<p>y</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2295cbb2-9602-49a2-b97a-fdf381935fc8">
+<span class="eqno">(4.7)<a class="headerlink" href="#equation-2295cbb2-9602-49a2-b97a-fdf381935fc8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\displaystyle
+f''(x_k) \ \approx \ I_N'' (x_k) \ = \ \sum_{j = 0}^N \ f (x_j) \ \ell_j'' (x_k) .
+\label{aproximacion_derivada_segunda_x_k}                                                                                                   
+\end{equation}\]</div>
+<p>En las expresiones anteriores se observa para obtener las fórmulas de derivación
+propuestas, es necesario derivar los polinomios de Lagrange y evaluarlos en
+los puntos de interpolación.
+Otro aspecto a tener en cuenta en la obtención de estas fórmulas es que
+se suelen elegir números pequeños de puntos de interpolación alrededor
+de los puntos <span class="math notranslate nohighlight">\(x_k\)</span>.</p>
+<p>Vamos a empezar con las fórmulas de derivada primera numérica a partir del polinomio interpolador a través de dos puntos.</p>
+<section id="formulas-de-derivacion-con-2-puntos">
+<h2><span class="section-number">4.1. </span>Fórmulas de derivación con 2 puntos.<a class="headerlink" href="#formulas-de-derivacion-con-2-puntos" title="Permalink to this heading">#</a></h2>
+<p>Dados dos puntos <span class="math notranslate nohighlight">\(\{(x_0,f(x_0)), (x_1,f(x_1))\}\)</span> el polinomio interpolador va a ser, desde un punto de vista geométrico, la recta que pasa por ambos.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b5b0c744-cc2f-44cc-acf8-890e93541327">
+<span class="eqno">(4.8)<a class="headerlink" href="#equation-b5b0c744-cc2f-44cc-acf8-890e93541327" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	I_{1} (x) = f(x_0) \dfrac{(x-x_1)}{(x_0-x_1)} + \ f(x_1) \dfrac{(x-x_0)}{(x_1-x_0)} 
+\end{equation}\]</div>
+<p>Definimos <span class="math notranslate nohighlight">\( x_1 - x_0 =  \Delta x\)</span>, así, la fórmula se puede reescribir como:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-fa61485c-2384-49d1-a910-6dbc51ee801d">
+<span class="eqno">(4.9)<a class="headerlink" href="#equation-fa61485c-2384-49d1-a910-6dbc51ee801d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	I_{1} (x) = f(x_0) \dfrac{(x-x_1)}{(-\Delta x)} + \ f(x_1) \dfrac{(x-x_0)}{(\Delta x)} 
+\end{equation}\]</div>
+<section id="derivada-primera">
+<h3><span class="section-number">4.1.1. </span>Derivada primera.<a class="headerlink" href="#derivada-primera" title="Permalink to this heading">#</a></h3>
+<p>Derivamos la expresión:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c517813f-41ee-438d-9d60-3af3f6413910">
+<span class="eqno">(4.10)<a class="headerlink" href="#equation-c517813f-41ee-438d-9d60-3af3f6413910" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	I'_{1} (x) =  -\dfrac{f(x_0)}{\Delta x}  + \  \dfrac{f(x_1)}{\Delta x} 
+\end{equation}\]</div>
+<p>Al ser un polinomio de grado 1, una recta, la derivada toma un valor constante, de modo que podemos escribir:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f'(x_0) = f'(x_1)  \approx  &amp;   \dfrac{f(x_1)}{\Delta x} - \  \dfrac{f(x_0)}{\Delta x}  
+\end{align*}\]</div>
+<p>Esta expresión debe resultarnos familiar, si escribimos <span class="math notranslate nohighlight">\(h = \Delta x\)</span> y por tanto <span class="math notranslate nohighlight">\(x_1 = x_0 + h\)</span>, resulta:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f'(x_0)   \approx  &amp;   \dfrac{f(x_0 + h)- f(x_0)}{h}  
+\end{align*}\]</div>
+<p>En este caso no podemos seguir derivando porque al haber aproximado con una recta, la derivada primera es una constante y la segunda se anula.</p>
+</section>
+</section>
+<section id="formulas-de-derivacion-con-3-puntos">
+<h2><span class="section-number">4.2. </span>Fórmulas de derivación con 3 puntos.<a class="headerlink" href="#formulas-de-derivacion-con-3-puntos" title="Permalink to this heading">#</a></h2>
+<p>Partimos del polinomio interpolador con tres puntos <span class="math notranslate nohighlight">\(\{(x_0,f(x_0)), (x_1,f(x_1)), (x_2,f(x_2))\}\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d4867a86-b026-4111-b66c-982d92775c76">
+<span class="eqno">(4.11)<a class="headerlink" href="#equation-d4867a86-b026-4111-b66c-982d92775c76" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	I_{2} (x) = f(x_0) l_0(x) + \ f(x_1) l_1(x) + f(x_2) l_2(x)
+\end{equation}\]</div>
+<p>desarrollando los polinomios de Lagrange:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3655b912-c867-424c-a92d-aa18154677c9">
+<span class="eqno">(4.12)<a class="headerlink" href="#equation-3655b912-c867-424c-a92d-aa18154677c9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	I_{2} (x) = f(x_0) \dfrac{(x-x_1)(x-x_2)}{(x_0-x_1)(x_0-x_2)} + \ f(x_1) \dfrac{(x-x_0)(x-x_2)}{(x_1-x_0)(x_1-x_2)} + f(x_2) \dfrac{(x-x_0)(x-x_1)}{(x_2-x_0)(x_2-x_1)}
+\end{equation}\]</div>
+<p>Como hemos escogido puntos equiespaciados: <span class="math notranslate nohighlight">\( \{x_0, x_1, x_2 \}\)</span> con <span class="math notranslate nohighlight">\( x_1 - x_0 = x_2 - x_1 = \Delta x\)</span>, la fórmula se puede reescribir como:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-50d5d471-22d2-4e22-8b5b-97d12d56f2da">
+<span class="eqno">(4.13)<a class="headerlink" href="#equation-50d5d471-22d2-4e22-8b5b-97d12d56f2da" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	I_{2} (x) = f(x_0) \dfrac{(x-x_1)(x-x_2)}{(-\Delta x)(-2\Delta x)} + \ f(x_1) \dfrac{(x-x_0)(x-x_2)}{(\Delta x)(-\Delta x)} + f(x_2) \dfrac{(x-x_0)(x-x_1)}{(2\Delta x)(\Delta x)}
+\end{equation}\]</div>
+<section id="id1">
+<h3><span class="section-number">4.2.1. </span>Derivada primera.<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>Derivamos la expresión:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2ed75e77-429b-438b-ba25-ca419bb29c0f">
+<span class="eqno">(4.14)<a class="headerlink" href="#equation-2ed75e77-429b-438b-ba25-ca419bb29c0f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	I'_{2} (x) =  \dfrac{f(x_0)}{2(\Delta x)^2} [(x-x_1)+(x-x_2)] - \  \dfrac{f(x_1)}{(\Delta x)^2} [(x-x_0)+(x-x_2)]+  \dfrac{f(x_2)}{2(\Delta x)^2} [(x-x_0)+(x-x_1)]
+\end{equation}\]</div>
+<p>Evaluamos en los puntos:</p>
+<ul class="simple">
+<li><p>Cuando la derivada se particulariza en en el punto de interpolación <span class="math notranslate nohighlight">\(x_k = x_0\)</span> se obtiene la fórmula de derivada primera descentrada adelantada:</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f'(x_0)  \approx I'_{2} (x_0) &amp; = \dfrac{f(x_0)}{2(\Delta x)^2} [(x_0-x_1)+(x_0-x_2)] - \  \dfrac{f(x_1)}{(\Delta x)^2} (x_0-x_2)+  \dfrac{f(x_2)}{2(\Delta x)^2} (x_0-x_1) = \\
+ &amp;= \dfrac{f(x_0)}{2(\Delta x)^2} [(-\Delta x)+(-2\Delta x)] - \  \dfrac{f(x_1)}{(\Delta x)^2} (-2\Delta x)+  \dfrac{f(x_2)}{2(\Delta x)^2} (-\Delta x) = \\
+ &amp;= -\dfrac{3f(x_0)}{2\Delta x} + \  \dfrac{2f(x_1)}{\Delta x} -  \dfrac{f(x_2)}{2\Delta x}  
+\end{align*}\]</div>
+<ul class="simple">
+<li><p>Cuando la derivada se particulariza en en el punto de interpolación <span class="math notranslate nohighlight">\(x_k = x_1\)</span> se obtiene la fórmula de derivada primera centrada:</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f'(x_1)  \approx I'_{2} (x_1) &amp; = \dfrac{f(x_0)}{2(\Delta x)^2} (x_1-x_2) - \  \dfrac{f(x_1)}{(\Delta x)^2} [(x_1-x_0)+(x_1-x_2)]+  \dfrac{f(x_2)}{2(\Delta x)^2} (x_1-x_0) = \\
+ &amp;= \dfrac{f(x_0)}{2(\Delta x)^2} (-\Delta x) - \  \dfrac{f(x_1)}{(\Delta x)^2} (\Delta x-\Delta x)+  \dfrac{f(x_2)}{2(\Delta x)^2} (\Delta x) = \\
+ &amp;= -\dfrac{f(x_0)}{2\Delta x} + \   \dfrac{f(x_2)}{2\Delta x}  
+\end{align*}\]</div>
+<ul class="simple">
+<li><p>Por último cuando la derivada se particulariza en en el punto de interpolación <span class="math notranslate nohighlight">\(x_k = x_2\)</span> se obtiene la fórmula de derivada primera descentrada atrasada:</p></li>
+</ul>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+f'(x_2)  \approx I'_{2} (x_2) &amp; = \dfrac{f(x_0)}{2(\Delta x)^2} (x_2-x_1) - \  \dfrac{f(x_1)}{(\Delta x)^2} (x_2-x_0)+  \dfrac{f(x_2)}{2(\Delta x)^2} [(x_2-x_0)+(x_2-x_1)] = \\
+ &amp;= \dfrac{f(x_0)}{2(\Delta x)^2} (\Delta x) - \  \dfrac{f(x_1)}{(\Delta x)^2} (2\Delta x)+  \dfrac{f(x_2)}{2(\Delta x)^2} (2\Delta x + \Delta x) = \\
+ &amp;= \dfrac{f(x_0)}{2\Delta x} - \  \dfrac{2f(x_1)}{\Delta x} +  \dfrac{3f(x_2)}{2\Delta x}  
+\end{align*}\]</div>
+</section>
+<section id="derivada-segunda">
+<h3><span class="section-number">4.2.2. </span>Derivada segunda.<a class="headerlink" href="#derivada-segunda" title="Permalink to this heading">#</a></h3>
+<p>En esta ocasión si podemos calcular una aproximación de la derivada segunda a partir del polinomio interpolador de Lagrange de segundo orden.</p>
+<p>Si volvemos a derivar <span class="math notranslate nohighlight">\(I'_{2} (x)\)</span> con respecto a x obtenemos:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-55575b40-f595-489a-a411-b78aec947773">
+<span class="eqno">(4.15)<a class="headerlink" href="#equation-55575b40-f595-489a-a411-b78aec947773" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	I''_{2} (x) =  \dfrac{f(x_0)}{(\Delta x)^2}  - \  \dfrac{2 f(x_1)}{(\Delta x)^2} +  \dfrac{f(x_2)}{(\Delta x)^2} 
+\end{equation}\]</div>
+<p>El valor aproxiomado es constante e independiente del punto en qué se aplique.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a8983f69-f07f-406e-937b-86bc44cb3c49">
+<span class="eqno">(4.16)<a class="headerlink" href="#equation-a8983f69-f07f-406e-937b-86bc44cb3c49" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    f''(x_0) =  f''(x_1) =   f''(x_2)  \approx  \dfrac{1}{(\Delta x)^2} \left(f(x_0) -2 f(x_1) + f(x_2)\right) 
+\end{equation}\]</div>
+</section>
+</section>
+<section id="implementacion-en-python">
+<h2><span class="section-number">4.3. </span>Implementación en Python.<a class="headerlink" href="#implementacion-en-python" title="Permalink to this heading">#</a></h2>
+<p>Vamos a empezar con un primer ejemplo en una función sencilla:</p>
+<div class="math notranslate nohighlight">
+\[
+f_1 (x) \ = sin(x),
+\]</div>
+<p>supongamos que tenemos 9 puntos de interpolación equiespaciados en el intervalo <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span> y a través de ellos vamos a aproximar el valor de la derivada en dichos puntos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importamos los módulos necesarios</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span> 
+<span class="n">n</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">x_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">y_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_i</span><span class="p">)</span>
+<span class="n">z_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x_i</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">x_i</span><span class="p">)</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">x_i</span><span class="p">)</span><span class="o">+</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+
+<span class="c1">### Representación gráfica</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="n">y_i</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/333ebb14190c5023293162160cac6a5dad01b50723ffe70350cda8faeab09cfb.png" src="../../_images/333ebb14190c5023293162160cac6a5dad01b50723ffe70350cda8faeab09cfb.png" />
+</div>
+</div>
+<p>Lo primero que vamos a probar va a ser la aproximación de la derivada usando el conjunto de puntos de interpolación a través de la fórmula:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1fffdf9f-2c9d-4821-b33d-51b643fa56a9">
+<span class="eqno">(4.17)<a class="headerlink" href="#equation-1fffdf9f-2c9d-4821-b33d-51b643fa56a9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	f'(x) \approx I'_{N} (x) =\ \sum_{j = 0}^{N} \ f (x_j) \ell'_{j} (x)
+\end{equation}\]</div>
+<p>Necesitamos calcular <span class="math notranslate nohighlight">\(\ell'_{j} (x)\)</span>. Teniendo en cuenta que:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9a899d7d-de97-40d8-80a5-a3d1d34c41ed">
+<span class="eqno">(4.18)<a class="headerlink" href="#equation-9a899d7d-de97-40d8-80a5-a3d1d34c41ed" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	\displaystyle
+	\ell_{j} (x) \ =  \
+	\displaystyle
+	\overset{N}{\underset{\begin{subarray}{l}
+				i = 0                                                            \\ 
+				i \neq j
+			\end{subarray}                                           
+		}{\prod}} \
+	\frac{(x - x_i)}{(x_j - x_i)} .                                                                   
+\end{equation}\]</div>
+<p>podemos derivar para obtener:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-554937f4-5409-4b7d-8a98-e5ed60709fe0">
+<span class="eqno">(4.19)<a class="headerlink" href="#equation-554937f4-5409-4b7d-8a98-e5ed60709fe0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+	\displaystyle
+	\ell'_{j} (x) \ =  \
+	\displaystyle
+	\overset{N}{\underset{\begin{subarray}{l}
+				i = 0                                                            \\ 
+				i \neq j
+			\end{subarray}                                           
+		}{\sum}} \frac{1}{(x_j - x_i)}
+        \overset{N}{\underset{\begin{subarray}{l}
+				k = 0                                                            \\ 
+				k \neq j                                                         \\
+                k \neq i
+			\end{subarray}                                           
+		}{\prod}} \
+	\frac{(x - x_k)}{(x_j - x_k)} .                                                                   
+\end{equation}\]</div>
+<p>que podemos implementar en Python prestando atención a los índices del productorio anidado al sumatorio</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"># Polinomio de Lagrange L_j(x)</span>
+<span class="sd">def L_j(j, x_i, x):</span>
+<span class="sd">    n = np.size(x_i)</span>
+<span class="sd">    Lj = 1.</span>
+<span class="sd">    for i in range(n):</span>
+<span class="sd">        if i!=j: Lj *= (x-x_i[i])/(x_i[j]-x_i[i]) </span>
+<span class="sd">    return Lj</span>
+
+<span class="sd">def I_N(x, x_i, y_i):</span>
+<span class="sd">    n = np.size(x_i)</span>
+<span class="sd">    S = 0.</span>
+<span class="sd">    for i in range(n):</span>
+<span class="sd">        S += y_i[i]*L_j(i, x_i, x)</span>
+<span class="sd">    return S</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1"># Derivada primera del polinomio de Lagrange L&#39;_j(x)</span>
+<span class="k">def</span> <span class="nf">L_der_j</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">x_i</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x_i</span><span class="p">)</span>
+    <span class="n">Lj</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">prod</span> <span class="o">=</span> <span class="mf">1.</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">k</span><span class="o">!=</span><span class="n">j</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">k</span><span class="o">!=</span><span class="n">i</span><span class="p">):</span>
+                <span class="n">prod</span> <span class="o">*=</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_i</span><span class="p">[</span><span class="n">k</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">x_i</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">x_i</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> 
+        <span class="k">if</span> <span class="n">i</span><span class="o">!=</span><span class="n">j</span><span class="p">:</span> <span class="n">Lj</span> <span class="o">+=</span> <span class="n">prod</span><span class="o">/</span><span class="p">(</span><span class="n">x_i</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">x_i</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+    <span class="k">return</span> <span class="n">Lj</span>
+
+<span class="k">def</span> <span class="nf">I_der_N</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x_i</span><span class="p">)</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">S</span> <span class="o">+=</span> <span class="n">y_i</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">L_der_j</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x_i</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">S</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Para ver si la implementación es correcta comparamos la aproximación de la derivada a partir de los puntos de la función <span class="math notranslate nohighlight">\(f(x) = sin(x)\)</span> con el valor del <span class="math notranslate nohighlight">\(cos(x)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Representación gráfica</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="n">z_i</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">I_der_N</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_i</span><span class="p">,</span> <span class="n">y_i</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$I&#39;(x)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/965085772be3cdccf7a75c878b0ee27ad36cbf78e449113c3bdf027656715dbb.png" src="../../_images/965085772be3cdccf7a75c878b0ee27ad36cbf78e449113c3bdf027656715dbb.png" />
+</div>
+</div>
+<p>Esta forma de derivar no deja de ser un ejercicio interesante. Normalmente el problema numérico que vamos a resolver es el cáculo de la derivada de una función en un punto a partir del valor de la función en puntos próximos. Es decir la implementación de estas aproximaciones en funciones de Python cuando los argumentos son la función <span class="math notranslate nohighlight">\(f(x)\)</span> y un punto de evaluación <span class="math notranslate nohighlight">\(x_j\)</span>.</p>
+<p>Vamos a resumir las fórmulas de las derivadas numéricas para una función
+<span class="math notranslate nohighlight">\(f:\mathbb{R} \rightarrow \mathbb{R}\)</span> en un punto <span class="math notranslate nohighlight">\(x_j\)</span>, obtenidas a partir de tres puntos de interpolación de una partición equiespaciada.</p>
+<ul>
+  <li>Derivada primera centrada:</li>
+</ul> 
+	\begin{equation}
+	f' (x_j) \approx \frac{1}{2 \Delta x} \left( f (x_j + \Delta x) -  f (x_j - \Delta x)  \right) .
+	\end{equation}
+<ul>
+  <li>Derivada primera descentrada adelantada:</li>
+</ul> 
+	\begin{equation}
+	f' (x_j) \approx \frac{1}{2 \Delta x} \left( - 3 f (x_j) + 4 f (x_j + \Delta x) -  f (x_j + 2 \Delta x)  \right) .
+	\end{equation}
+<ul>
+  <li>Derivada primera descentrada atrasada:</li>
+</ul> 
+	\begin{equation}
+	f' (x_j) \approx \frac{1}{2 \Delta x} \left(  3 f (x_j) - 4 f (x_j - \Delta x) +  f (x_j - 2 \Delta x)  \right) .
+	\end{equation}
+<ul>
+  <li>Derivada segunda centrada:</li>
+</ul> 
+	\begin{equation}
+	f'' (x_j) \approx \frac{1}{(\Delta x)^2} \left( f (x_j + \Delta x) -  2f (x_j) + f (x_j - \Delta x)  \right) .
+	\end{equation}			
+<p>Podemos implementar cada una de ellas en una función diferente:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_prima_centrada_3_puntos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+    <span class="n">derivada</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">dx</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">dx</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">dx</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">derivada</span>
+
+<span class="k">def</span> <span class="nf">f_prima_adelantada_3_puntos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+    <span class="n">derivada</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">3.</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mf">4.</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">dx</span><span class="p">)</span><span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">dx</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">dx</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">derivada</span>
+
+<span class="k">def</span> <span class="nf">f_prima_atrasada_3_puntos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+    <span class="n">derivada</span> <span class="o">=</span> <span class="p">(</span><span class="mf">3.</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mf">4.</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">dx</span><span class="p">)</span><span class="o">+</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">dx</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">dx</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">derivada</span>
+
+<span class="k">def</span> <span class="nf">f_prima_segunda_3_puntos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+    <span class="n">derivada</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">dx</span><span class="p">)</span><span class="o">-</span><span class="mf">2.</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">dx</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">derivada</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_seno</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1">### Representación gráfica</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="n">z_i</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;$cos(x_i)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f_prima_centrada_3_puntos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">f_seno</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Centrada dx = 0.5&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f_prima_adelantada_3_puntos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">f_seno</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Adelantada dx = 0.3&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">f_prima_atrasada_3_puntos</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">f_seno</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Retrasada dx = 0.2&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/e9090a4fefa58f7bbd83b4f31806fc27bda99cd186a4f2afe0db72bc26f5de4d.png" src="../../_images/e9090a4fefa58f7bbd83b4f31806fc27bda99cd186a4f2afe0db72bc26f5de4d.png" />
+</div>
+</div>
+</section>
+<section id="matrices-de-derivacion">
+<h2><span class="section-number">4.4. </span>Matrices de derivación.<a class="headerlink" href="#matrices-de-derivacion" title="Permalink to this heading">#</a></h2>
+<p>Vamos a suponer ahora que queremos calcular la derivada numerica de una función <span class="math notranslate nohighlight">\(f(x)\)</span> en un intervalo <span class="math notranslate nohighlight">\(\left[ a, b \right]\)</span>. El proceso que seguiremos será discretizar el intervalo en un conjunto de puntos equiespaciados <span class="math notranslate nohighlight">\(\left[ a=x_0, x_1, x_2,...,x_N = b \right]\)</span> con <span class="math notranslate nohighlight">\(\Delta x = x_{j+1}-x_j \)</span> y en cada uno de los puntos calcularemos su derivada numérica con las fórmulas ya vistas.</p>
+<p>Si pensamos en forma vectorial-matricial tenemos por una parte el vector de puntos equiespaciados en que hemos discretizado <span class="math notranslate nohighlight">\(\left[ a, b \right]\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b815410f-7729-46a1-a017-7f298ca1d7ec">
+<span class="eqno">(4.20)<a class="headerlink" href="#equation-b815410f-7729-46a1-a017-7f298ca1d7ec" title="Permalink to this equation">#</a></span>\[\begin{equation}
+X = \begin{pmatrix}
+x_0\\
+x_1\\
+x_2\\
+\vdots \\
+x_N
+\end{pmatrix}
+\end{equation}\]</div>
+<p>el vector <span class="math notranslate nohighlight">\(F\)</span> donde guardamos el valor de la funcion <span class="math notranslate nohighlight">\(f(x)\)</span> en los puntos de <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d3614d8b-487d-4979-bd92-8c4058139aef">
+<span class="eqno">(4.21)<a class="headerlink" href="#equation-d3614d8b-487d-4979-bd92-8c4058139aef" title="Permalink to this equation">#</a></span>\[\begin{equation}
+F = \begin{pmatrix}
+f(x_0)\\
+f(x_1)\\
+f(x_2)\\
+\vdots \\
+f(x_N)
+\end{pmatrix}
+\end{equation}\]</div>
+<p>y queremos construir el vector <span class="math notranslate nohighlight">\(dF\)</span> con las aproximaciones de la derivada <span class="math notranslate nohighlight">\(f'(x)\)</span> en los puntos de <span class="math notranslate nohighlight">\(X\)</span> a partir de las fórmulas ya vistas. Supongamos, por ejemplo, que voy a emplear la fórmula de derivada centrada con tres puntos para aproximar la derivada en cada punto. Es decir que:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-412e6a79-5dda-41dc-8936-330351e448bd">
+<span class="eqno">(4.22)<a class="headerlink" href="#equation-412e6a79-5dda-41dc-8936-330351e448bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+dF(i) = f'(x_i) \approx \frac{1}{2 \Delta x} \left( f (x_{i+1}) -  f (x_{i-1})  \right)
+\end{equation}\]</div>
+<p>Esta fórmula será válida para todos los puntos ‘interiores’ del vector <span class="math notranslate nohighlight">\(i = 1,...,N-1\)</span> ya que para <span class="math notranslate nohighlight">\(x_0\)</span> no existe <span class="math notranslate nohighlight">\(x_{i-1}\)</span> y para <span class="math notranslate nohighlight">\(x_N\)</span> no existe <span class="math notranslate nohighlight">\(x_{i+1}\)</span>. En los extremos tendremos que ‘descentrar el esquema’ y utilizar derivada adelantada en <span class="math notranslate nohighlight">\(x_0\)</span> y derivada atrasada en <span class="math notranslate nohighlight">\(x_N\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b36e21f0-33ca-4a41-81a4-192d28008e5d">
+<span class="eqno">(4.23)<a class="headerlink" href="#equation-b36e21f0-33ca-4a41-81a4-192d28008e5d" title="Permalink to this equation">#</a></span>\[\begin{align}
+dF(0) = f'(x_0) &amp; \approx \frac{1}{2 \Delta x} \left( - 3 f (x_0) + 4 f (x_1) -  f (x_2)  \right)    \\
+dF(N) = f'(x_N) &amp; \approx \frac{1}{2 \Delta x} \left( 3 f (x_N) - 4 f (x_{N-1}) +  f (x_{N-2})  \right)
+\end{align}\]</div>
+<p>Si escribimos en forma matricial las ecuaciones anteriores tendremos:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e496b968-f26a-43fb-80d6-0ac4397c8cff">
+<span class="eqno">(4.24)<a class="headerlink" href="#equation-e496b968-f26a-43fb-80d6-0ac4397c8cff" title="Permalink to this equation">#</a></span>\[\begin{align}
+\frac{1}{2 \Delta x}
+\begin{pmatrix}
+-3 &amp; 4 &amp; -1 &amp; 0 &amp; \dots &amp; 0\\
+ -1 &amp; 0 &amp; 1 &amp; 0 &amp; \dots &amp;  0\\
+0 &amp; -1 &amp; 0 &amp; 1 &amp; \dots &amp; 0\\
+\vdots &amp;    &amp; \ddots &amp;\ddots &amp;  &amp; \vdots  \\ 
+0 &amp;\dots &amp; -1 &amp; 0 &amp; 1 &amp;  0\\
+0 &amp;\dots &amp; 0 &amp; -1 &amp; 0 &amp;  1\\
+0 &amp;\dots &amp; 0 &amp; 1 &amp; -4 &amp;  3
+\end{pmatrix}
+\begin{pmatrix}
+f(x_0)\\
+f(x_1)\\
+f(x_2)\\
+\vdots \\
+f(x_{N-2})\\
+f(x_{N-1})\\
+f(x_N)
+\end{pmatrix} = 
+\begin{pmatrix}
+dF(0)\\
+dF(1)\\
+dF(2)\\
+\vdots \\
+dF(N-2)\\
+dF(N-1)\\
+dF(N)
+\end{pmatrix}
+\end{align}\]</div>
+<p>Vamos a probar su funcionamiento derivando la función:</p>
+<div class="math notranslate nohighlight">
+\[
+f_1 (x) \ = cos(x),
+\]</div>
+<p>en el intervalo <span class="math notranslate nohighlight">\([0, \pi]\)</span> utilizando 21 puntos para discretizar dicho intervalo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">x_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Defino la matriz de derivación D</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span><span class="n">n</span><span class="p">),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">float</span><span class="p">)</span>
+<span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">3.</span><span class="p">,</span><span class="mf">4.</span><span class="p">,</span><span class="o">-</span><span class="mf">1.</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span>
+    <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">D</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">3</span><span class="p">:</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span><span class="o">-</span><span class="mf">4.</span><span class="p">,</span><span class="mf">3.</span><span class="p">])</span>    
+<span class="n">D</span> <span class="o">/=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">dx</span><span class="p">)</span>
+
+<span class="n">f_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x_i</span><span class="p">)</span>
+<span class="n">dF_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">f_i</span><span class="p">)</span>
+
+<span class="c1">### Representación gráfica</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="n">f_i</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;$cos(x_i)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="n">dF_i</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$I&#39;(x_i) \sim cos&#39;(x_i)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_i</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;$cos&#39;(x_i)=-sin(x_i)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="../../_images/c9da8d007fd3ce8708cf5bde3c5b4cd5a03dbe960cb71d8272b8d5543c92e167.png" src="../../_images/c9da8d007fd3ce8708cf5bde3c5b4cd5a03dbe960cb71d8272b8d5543c92e167.png" />
+</div>
+</div>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/04-DerivacionIntegracion"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../03-Interpolacion/practica_minimos_cuadrados.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3.1. </span>Práctica: método de mínimos cuadrados</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="practica_pde.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4.5. </span>Práctica Grupal: Problemas de Contorno</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulas-de-derivacion-con-2-puntos">4.1. Fórmulas de derivación con 2 puntos.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivada-primera">4.1.1. Derivada primera.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulas-de-derivacion-con-3-puntos">4.2. Fórmulas de derivación con 3 puntos.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.2.1. Derivada primera.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivada-segunda">4.2.2. Derivada segunda.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion-en-python">4.3. Implementación en Python.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices-de-derivacion">4.4. Matrices de derivación.</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Universidad Politécnica de Madrid
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

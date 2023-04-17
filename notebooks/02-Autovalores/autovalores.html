@@ -1,0 +1,1652 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>2. Métodos para el Cálculo de Autovalores &#8212; Curso de Informática ETSIAE</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/02-Autovalores/autovalores';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Interpolación de Lagrange" href="../03-Interpolacion/interpolacion_lagrange.html" />
+    <link rel="prev" title="1. Sistemas lineales" href="../01-SistemasLineales/sistemas_lineales.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Curso de Informática
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01-SistemasLineales/sistemas_lineales.html">1. Sistemas lineales</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Métodos para el Cálculo de Autovalores</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03-Interpolacion/interpolacion_lagrange.html">3. Interpolación de Lagrange</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03-Interpolacion/practica_minimos_cuadrados.html">3.1. Práctica: método de mínimos cuadrados</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04-DerivacionIntegracion/derivacion_numerica.html">4. Derivación Numérica.</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04-DerivacionIntegracion/practica_pde.html">4.5. Práctica Grupal: Problemas de Contorno</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../05-SistemasNoLineales/Ecuaciones%20y%20sistemas%20de%20ecuaciones%20no%20lineales.html">5. Ecuaciones no lineales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-EDOs/Introducci%C3%B3nEDOs.html">6. Ecuaciones diferenciales ordinarias</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/02-Autovalores/autovalores.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/02-Autovalores/autovalores.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Métodos para el Cálculo de Autovalores</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">2.1. Contenido</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-iterativos-para-el-calculo-de-un-autovector">2.2. Métodos iterativos para el cálculo de un autovector.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-la-potencia">2.2.1. Método de la potencia.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#criterio-de-convergencia">2.2.1.1. Criterio de Convergencia.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-la-potencia-inversa-shift-invert">2.2.2. Método de la potencia inversa. (shift &amp; invert)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-la-potencia-inversa-con-i-shift-i">2.2.2.1. Método de la potencia inversa con <i> shift</i>.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-para-el-calculo-del-espectro-completo-de-autovalores">2.3. Métodos para el cálculo del espectro completo de autovalores.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">2.4. Introducción.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-qr-i-qr-decomposition-i">2.4.1. Descomposición QR.  <i> QR-decomposition</i>.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-la-iteracion-simultanea-i-simultaneous-iteration-i">2.5. Método de la Iteración Simultánea.  <i> Simultaneous Iteration</i>.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-qr-para-el-calculo-del-espectro-completo">2.6. Algoritmo QR para el cálculo del espectro completo.</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="metodos-para-el-calculo-de-autovalores">
+<h1><span class="section-number">2. </span>Métodos para el Cálculo de Autovalores<a class="headerlink" href="#metodos-para-el-calculo-de-autovalores" title="Permalink to this heading">#</a></h1>
+<section id="contenido">
+<h2><span class="section-number">2.1. </span>Contenido<a class="headerlink" href="#contenido" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><span class="xref myst">Semana 1</span>: Métodos iterativos para el cálculo de autovectores dominantes.</p></li>
+</ul>
+<ul>
+<li>Método de la potencia.</li>
+<li>Método de la potencia inversa (shift & invert).</li>
+</ul>
+* [Semana 2](#Full): Métodos para el cálculo del espectro completo de autovalores.<ul>
+<li> Empezamos importando los módulos necesarios y definiendo la matriz de la que queremos calcular los autovalores.
+</ul><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">v</span><span class="p">,(</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># Matriz de 1 fila y 4 columnas (Vector fila)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">v</span><span class="p">,(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># Matriz de 4 filas y 1 columna (Vector columna)</span>
+<span class="n">Matriz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">A</span><span class="p">)</span> <span class="c1"># Matriz simétrica, el elemento (i,j) es v(i)*V(j) </span>
+
+<span class="c1">#print(tabulate(Matriz))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul>
+<li> A continuación definimos algunas funciones útiles que vamos a usar
+</ul><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">norm2</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id='Single'></a></p>
+</section>
+<section id="metodos-iterativos-para-el-calculo-de-un-autovector">
+<h2><span class="section-number">2.2. </span>Métodos iterativos para el cálculo de un autovector.<a class="headerlink" href="#metodos-iterativos-para-el-calculo-de-un-autovector" title="Permalink to this heading">#</a></h2>
+<p>Vamos a hacer una serie de suposiciones necesarias para garantizar que estos métodos funcionan adecuadamente.
+En primer lugar consideramos una matriz <span class="math notranslate nohighlight">\(A \in \mathbb M_{n \times n}(\mathbb R)\)</span> no singular, cuadrada, formada por coeficientes reales y <a href="https://es.wikipedia.org/wiki/Matriz_diagonalizable">diagonalizable</a>.</p>
+<p>En segundo lugar vamos a considerar que los autovalores cumplen:</p>
+<div class="math notranslate nohighlight">
+\[|\lambda_1| \gt |\lambda_2| \ge |\lambda_3| \ge \dots \ge |\lambda_n|\]</div>
+<p>Es decir, que tenemos un autovalor <span class="math notranslate nohighlight">\(\lambda_1\)</span> que llamaremos dominante, que es mayor en valor absoluto que el resto. Además vamos a considerar que la multiplicidad geométrica (no solo la <a href="https://aga.frba.utn.edu.ar/multiplicidades-algebraica-y-geometrica-de-un-autovalor/">algebraica</a>) es uno. Eso implica que sólo tiene asociado un autovector, que llamaremos autovector dominante.</p>
+<p>Bajo estas condiciones, para calcular el <span class="math notranslate nohighlight">\(\textbf{autopar}\)</span> (autovalor y autovector asociado) podemos utilizar el método de la potencia.</p>
+<section id="metodo-de-la-potencia">
+<h3><span class="section-number">2.2.1. </span>Método de la potencia.<a class="headerlink" href="#metodo-de-la-potencia" title="Permalink to this heading">#</a></h3>
+<p>Sea <span class="math notranslate nohighlight">\(\mathbf{x} \in \mathbb R^n\)</span>, entonces, por ser <span class="math notranslate nohighlight">\(A\)</span> diagonalizable, existe una base del espacio vectorial <span class="math notranslate nohighlight">\(\mathbb R^n\)</span> formada por autovectores de <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B_v = \{\vec{v}_1, \vec{v}_2, \vec{v}_3, \dots, \vec{v}_n \}\)</span> con <span class="math notranslate nohighlight">\(A \vec{v}_i = \lambda_i \vec{v}_i\)</span>, de modo que:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{x} = c_1\vec{v}_1 + c_2\vec{v}_2 + \dots + c_n\vec{v}_n\]</div>
+<p>Entonces:</p>
+<div class="math notranslate nohighlight">
+\[A\mathbf{x} = c_1A\vec{v}_1 + c_2A\vec{v}_2 + \dots + c_nA\vec{v}_n=c_1\lambda_1\vec{v}_1 + c_2\lambda_2\vec{v}_2 + \dots + c_n\lambda_n\vec{v}_n\]</div>
+<p>Considerando que <span class="math notranslate nohighlight">\(|\lambda_1| \gt |\lambda_2|  \ge \dots \ge |\lambda_n|\)</span> podemos reescribir:</p>
+<div class="math notranslate nohighlight">
+\[A\mathbf{x} = \lambda_1 \left( c_1\vec{v}_1 + c_2\dfrac{\lambda_2}{\lambda_1}\vec{v}_2 + \dots + c_n\dfrac{\lambda_n}{\lambda_1}\vec{v}_n \right)\]</div>
+<p>Multiplicando de forma iterativa por la matriz <span class="math notranslate nohighlight">\(A\)</span> obtenemos el siguiente proceso iterativo:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{x}^1 = A\mathbf{x}\)</span>;</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{x}^2 = A\mathbf{x}^1 = A^2\mathbf{x}\)</span>;</p></li>
+<li><p>…</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{x}^p=A^p\mathbf{x} = \left(\lambda_{1}\right)^{p} \left( c_1\vec{v}_1 + c_2\left(\frac{\lambda_2}{\lambda_1}\right)^p\vec{v}_2 + \dots + c_n\left(\frac{\lambda_n}{\lambda_1}\right)^p\vec{v}_n \right)\)</span></p></li>
+</ul>
+<p>Como <span class="math notranslate nohighlight">\(|\lambda_1|\gt |\lambda_i| \quad   \forall i=2,\cdots,n\)</span>  los cocientes de autovalores se hacen cada vez más pequeños a medida que aumenta el exponente <span class="math notranslate nohighlight">\(p\)</span>. Por ello se espera que en el límite:</p>
+<div class="math notranslate nohighlight">
+\[A^p\mathbf{x} \sim c_1 \left(\lambda_{1}\right)^{p} \vec{v}_1\]</div>
+<p>Es decir, que, a medida que multiplicamos sucesivamente por la matriz <span class="math notranslate nohighlight">\(A\)</span>, la operación nos lleve en la dirección del autovalor dominante.
+Este resultado teórico tiene algunos inconvenientes a la hora de implementarlo numéricamente. Uno de los más típicos se debe a la inestabilidad numérica causada por el aumento exponencial de <span class="math notranslate nohighlight">\(\left(\lambda_{1}\right)^{p}\)</span> y el decaimiento tambien exponencial de <span class="math notranslate nohighlight">\(\left(\dfrac{\lambda_i}{\lambda_1}\right)^p\)</span>. Este inconveniente se puede solucionar facilmente normalizando el resultado de <span class="math notranslate nohighlight">\(\mathbf{x}^j=A\mathbf{x}^{j-1}\)</span> en cada iteración.</p>
+<p>El método de la potencia converge al autovector dominante normalizado <span class="math notranslate nohighlight">\(v_1\)</span>, para calcular el autovalor correspondiente podemos emplear el cociente de Rayleigh:</p>
+<div class="math notranslate nohighlight">
+\[ \lambda_1 = \dfrac{\vec{v}_1^T A\vec{v}_1}{\vec{v}_1^T\vec{v}_1}=\dfrac{\vec{v}_1^T \lambda_1\vec{v}_1}{\vec{v}_1^T\vec{v}_1}\]</div>
+<p>Veamos como implementarlo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">potencia</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">!=</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">return</span> <span class="kc">None</span>  <span class="c1">#Comprobamos que la matriz sea cuadrada</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>     <span class="c1"># Tomamos un vector aleatorio para empezar a iterar</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">norm2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>            <span class="c1"># Normalizamos dicho vector</span>
+    
+    <span class="n">convergencia</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">convergencia</span><span class="p">:</span>   <span class="c1"># Proceso iterativo hasta la convergencia</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x1</span><span class="o">/</span><span class="n">norm2</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">norm2</span><span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">0.0000001</span><span class="p">:</span>    <span class="c1"># Convergencia alcanzada en el autovector</span>
+            <span class="n">convergencia</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">eigenvalue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">x1</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">eigenvalue</span><span class="p">,</span><span class="n">x1</span>      <span class="c1"># Devolvemos como resultado el autovalor y autovector dominantes</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pongamos un ejemplo sencillo para ver como funciona.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-07ba7d28-d7c9-49ba-8e8e-62fb3f3c563c">
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-07ba7d28-d7c9-49ba-8e8e-62fb3f3c563c" title="Permalink to this equation">#</a></span>\[\begin{align}
+A = 
+\begin{pmatrix}
+1 &amp; 1 &amp; 2\\
+1 &amp; -1 &amp; 1\\
+2 &amp; 1 &amp; -1
+\end{pmatrix}
+\end{align}\]</div>
+<p>Hemos escogido una matriz real, simétrica y por tanto con todos los autovalores reales.
+Los autovalores de esta matriz son: <span class="math notranslate nohighlight">\(\lambda_1 = 2.74; \lambda_2 = -2.35; \lambda_3 = -1.4\)</span>.
+Lo podemos comprobar mediante la funcion <i> eigvals()</i> del módulo <i>scipy.linalg</i> que nos devuelve los autovalores de una matriz</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">],[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span><span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 2.74482608+0.j -1.39593186+0.j -2.34889422+0.j]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Apliquemos el método de la potencia para calcular el par dominante.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eigval</span><span class="p">,</span><span class="n">eigvec</span> <span class="o">=</span> <span class="n">potencia</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Autovalor dominante: </span><span class="si">{</span><span class="n">eigval</span><span class="si">}</span><span class="s1">, autovector: </span><span class="si">{</span><span class="n">eigvec</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Autovalor dominante: 2.7448260776819136, autovector: [0.78579653 0.34661861 0.51222979]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="criterio-de-convergencia">
+<h4><span class="section-number">2.2.1.1. </span>Criterio de Convergencia.<a class="headerlink" href="#criterio-de-convergencia" title="Permalink to this heading">#</a></h4>
+<p>El criterio de parada escogido en la implementación inicial ha sido:
+$<span class="math notranslate nohighlight">\(||\mathbf{x}^j-\mathbf{x}^{j-1}|| \lt \varepsilon\)</span>$</p>
+<p>Es decir que el módulo de la diferencia entre dos aproximaciones consecutivas del autovector sea menor que un valor pequeño <span class="math notranslate nohighlight">\(\varepsilon\)</span>.</p>
+<p>Este criterio da problemas si el autovalor dominante es negativo. En cada iteración el vector cambiará de sentido (manteniendo la dirección) lo que hará que no se cumpla el criterio de convergencia.
+Para comprobarlo basta que cambies el signo del elemento <span class="math notranslate nohighlight">\(A_{1,1}\)</span>.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e6dbdeda-6704-4017-8483-ebcae134303e">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-e6dbdeda-6704-4017-8483-ebcae134303e" title="Permalink to this equation">#</a></span>\[\begin{align}
+A = 
+\begin{pmatrix}
+-1 &amp; 1 &amp; 2\\
+1 &amp; -1 &amp; 1\\
+2 &amp; 1 &amp; -1
+\end{pmatrix}
+\end{align}\]</div>
+<p>Ahora el autovalor dominante es <span class="math notranslate nohighlight">\(\lambda_1 = -3\)</span> y el proceso iterativo devuelve:</p>
+<ul>
+...    
+<li>Iteración:  23669
+<p>x1   =  (-7.07106781e-01,  3.70074342e-17,  7.07106781e-01)</li></p>
+<li>Iteración:  23670
+<p>x1   =  ( 7.07106781e-01,  3.70074342e-17, -7.07106781e-01)</li></p>
+<li>Iteración:  23671
+<p>x1   =  (-7.07106781e-01,  3.70074342e-17,  7.07106781e-01)</li></p>
+<li>Iteración:  23672
+<p>x1   =  ( 7.07106781e-01,  3.70074342e-17, -7.07106781e-01)</li>
+…</p>
+</ul>
+El vector obtenido es el mismo, simplemente cambia el signo, pero el criterio de convergencia elegido no se cumple.
+<p>Se puede corregir usando como criterio que el coseno del ángulo que forman las aproximaciones sucesivas sea 1 o -1.</p>
+<div class="math notranslate nohighlight">
+\[|1-|\cos\left(\text{ang}  \{  \mathbf{x}^j,\mathbf{x}^{j-1} \}\right)||\lt \varepsilon\]</div>
+<p>Pero, por lo general, para evitar ese problema se suele utilizar el comportamiento de las aproximaciones del autovalor dominante como condición de parada.</p>
+<div class="math notranslate nohighlight">
+\[|\lambda_1^j-\lambda_1^{j-1}| \lt \varepsilon\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">potencia</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">!=</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">return</span> <span class="kc">None</span>     <span class="c1"># Comprobamos que la matriz sea cuadrada</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>                      <span class="c1"># Tomamos un vector aleatorio para empezar a iterar</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">norm2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                             <span class="c1"># Normalizamos dicho vector</span>
+    <span class="n">eigvalue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>        <span class="c1"># Aproximación inicial del autovalor </span>
+    <span class="n">convergencia</span> <span class="o">=</span> <span class="kc">False</span>
+    
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">convergencia</span><span class="p">:</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>                    <span class="c1"># Nueva aproximación a partir del producto matriz-vector</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x1</span><span class="o">/</span><span class="n">norm2</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="n">eigvalue1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">x1</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">eigvalue1</span><span class="o">-</span><span class="n">eigvalue</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">0.0001</span><span class="p">:</span>     <span class="c1"># Criterio de parada basado en la convergencia del autovalor  </span>
+            <span class="n">convergencia</span> <span class="o">=</span> <span class="kc">True</span>
+    
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">eigvalue</span> <span class="o">=</span> <span class="n">eigvalue1</span>
+    
+    <span class="k">return</span> <span class="n">eigvalue1</span><span class="p">,</span><span class="n">x1</span>                        <span class="c1"># Devolvemos como resultado el autovalor y autovector dominantes</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Problemas de convergencia</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">],[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span><span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
+<span class="n">eigval</span><span class="p">,</span><span class="n">eigvec</span> <span class="o">=</span> <span class="n">potencia</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Autovalor dominante: </span><span class="si">{</span><span class="n">eigval</span><span class="si">}</span><span class="s1">, autovector: </span><span class="si">{</span><span class="n">eigvec</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Autovalor dominante: -2.9999829314180904, autovector: [ 7.08564513e-01  5.74424580e-06 -7.05646038e-01]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="metodo-de-la-potencia-inversa-shift-invert">
+<h3><span class="section-number">2.2.2. </span>Método de la potencia inversa. (shift &amp; invert)<a class="headerlink" href="#metodo-de-la-potencia-inversa-shift-invert" title="Permalink to this heading">#</a></h3>
+<p>Una pequeña variación del método de la potencia nos va a servir para calcular el autovalor más proximo a cero en valor absoluto y su autovector asociado. Para ello basta recordar de Algebra Lineal que si <span class="math notranslate nohighlight">\( \lambda \)</span> es un autovalor de la matriz <span class="math notranslate nohighlight">\( A \)</span> entonces <span class="math notranslate nohighlight">\( \dfrac{1}{\lambda} \)</span> es autovalor de la inversa <span class="math notranslate nohighlight">\( A^{-1} \)</span>. Veamoslo:</p>
+<p>Sea <span class="math notranslate nohighlight">\( A \in \mathbb M_{n \times n}(\mathbb R) \)</span> matriz cuadrada, no singular de números reales y sean: <span class="math notranslate nohighlight">\( \left( \lambda, \vec{v} \right) \)</span> un par autovalor-autovector de dicha matriz. Entonces:</p>
+<div class="math notranslate nohighlight">
+\[
+A\vec{v} = \lambda \vec{v} \rightarrow A^{-1}A\vec{v} = \lambda A^{-1}\vec{v} \rightarrow \dfrac{1}{\lambda}\vec{v} =  A^{-1}\vec{v}
+\]</div>
+<p>y por tanto <span class="math notranslate nohighlight">\( \dfrac{1}{\lambda} \)</span> es autovalor de la matriz inversa <span class="math notranslate nohighlight">\( A^{-1} \)</span> asociado al mismo autovector <span class="math notranslate nohighlight">\( \vec{v} \)</span>.</p>
+<p>Como además, si <span class="math notranslate nohighlight">\( |\lambda_1| \gt |\lambda_2| \ge |\lambda_3| \ge \dots \gt |\lambda_n| \)</span> se cumple que <span class="math notranslate nohighlight">\( |\dfrac{1}{\lambda_1}| \lt |\dfrac{1}{\lambda_2}| \le |\dfrac{1}{\lambda_3}| \le \dots \lt |\dfrac{1}{\lambda_n}| \)</span> Basta repetir el proceso iterativo del método de la potencia con <span class="math notranslate nohighlight">\( A^{-1} \)</span> en lugar de <span class="math notranslate nohighlight">\( A \)</span> para hallar el autovector dominante de <span class="math notranslate nohighlight">\( A^{-1} \)</span> que será el asociado al autovector dominante <span class="math notranslate nohighlight">\( \dfrac{1}{\lambda_n} \)</span>.</p>
+<p>Habremos encontrado el autovector de  <span class="math notranslate nohighlight">\( A \)</span> asociado al autovalor <span class="math notranslate nohighlight">\( \lambda_n \)</span>, el más proximo a 0.</p>
+<p>A la hora de implementar este método tendremos en cuenta que el cálculo de la inversa es costoso y por tanto en lugar de iterar <span class="math notranslate nohighlight">\( \mathbf{x}^j=A^{-1}\mathbf{x}^{j-1} \)</span> haremos <span class="math notranslate nohighlight">\( A\mathbf{x}^j=\mathbf{x}^{j-1} \)</span> lo que supone resolver un sistema lineal en cada paso.</p>
+<p>No solo eso, como la matriz <span class="math notranslate nohighlight">\( A \)</span> del sistema lineal permanece constante en todas las iteraciones vamos a utilizar lo aprendido en el tema anterior y separaremos la resolución en 3 etapas. La factorización LU se realiza una única vez fuera del bucle de las iteraciones mientras que en cada paso solo tenemos que resolver los dos sistemas triangulares.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">potencia_inversa</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">!=</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">return</span> <span class="kc">None</span>         <span class="c1"># Comprobamos que la matriz sea cuadrada</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>                          <span class="c1"># Tomamos un vector aleatorio para empezar a iterar</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">norm2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                                 <span class="c1"># Normalizamos dicho vector</span>
+    <span class="n">eigvalue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>            <span class="c1"># Aproximación inicial del autovalor usando A</span>
+    <span class="n">convergencia</span> <span class="o">=</span> <span class="kc">False</span>
+    
+    <span class="c1"># FACTORIZACION LU de A</span>
+    <span class="n">P</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">U</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lu</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">convergencia</span><span class="p">:</span>
+        <span class="c1">#Resuelvo los dos sistemas lineales triangulares</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve_triangular</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">x</span><span class="p">),</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve_triangular</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x1</span><span class="o">/</span><span class="n">norm2</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="n">eigvalue1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">x1</span><span class="p">))</span>     <span class="c1"># Aproximación del autovalor asociado al autovector menos dominante usando A</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">eigvalue1</span><span class="o">-</span><span class="n">eigvalue</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">0.0001</span><span class="p">:</span>         <span class="c1"># Criterio de parada basado en la convergencia del autovalor</span>
+            <span class="n">convergencia</span> <span class="o">=</span> <span class="kc">True</span>
+    
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">eigvalue</span> <span class="o">=</span> <span class="n">eigvalue1</span>
+     
+    <span class="k">return</span> <span class="n">eigvalue1</span><span class="p">,</span><span class="n">x1</span>                            <span class="c1"># Devolvemos como resultado el autovalor más próximo a 0 y su autovector </span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vamos a probarlo con la matriz <span class="math notranslate nohighlight">\(A\)</span> cuyos autovalores eran: <span class="math notranslate nohighlight">\(\lambda_1 = 2.74; \lambda_2 = -2.35; \lambda_3 = -1.4\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">],[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span><span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
+<span class="n">eigval</span><span class="p">,</span><span class="n">eigvec</span> <span class="o">=</span> <span class="n">potencia_inversa</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Autovalor más próximo a 0: </span><span class="si">{</span><span class="n">eigval</span><span class="si">}</span><span class="s1">, autovector asociado: </span><span class="si">{</span><span class="n">eigvec</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Autovalor más próximo a 0: -1.3959271284263144, autovector asociado: [ 0.46244736 -0.87971496 -0.11065275]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="metodo-de-la-potencia-inversa-con-i-shift-i">
+<h4><span class="section-number">2.2.2.1. </span>Método de la potencia inversa con <i> shift</i>.<a class="headerlink" href="#metodo-de-la-potencia-inversa-con-i-shift-i" title="Permalink to this heading">#</a></h4>
+<p>Una vez que hemos usado la potencia sobre la matriz inversa para calcular el autovalor más proximo a cero podemos modificarlo para calcular el autovalor más próximo a un valor dado.
+Basta comprobar que si <span class="math notranslate nohighlight">\(\mu\)</span> es un autovalor de <span class="math notranslate nohighlight">\(A\)</span> y <span class="math notranslate nohighlight">\(\vec{v}\)</span> su autovector asociado, entonces la matriz <span class="math notranslate nohighlight">\(A-\alpha I\)</span> tiene como autovalor <span class="math notranslate nohighlight">\(\mu-\alpha\)</span> asociado al mismo autovector <span class="math notranslate nohighlight">\(\vec{v}\)</span>.
+$<span class="math notranslate nohighlight">\(   \left( A-\alpha I\right )\vec{v}= A\vec{v}-\alpha \vec{v} =\mu \vec{v} -\alpha \vec{v} = \left( \mu-\alpha \right)\vec{v}\)</span>$</p>
+<p>Por tanto si aplicamos el metodo de la potencia inversa a la matriz <span class="math notranslate nohighlight">\( A-\beta I\)</span> hallaremos el autovector de la matriz <span class="math notranslate nohighlight">\(A\)</span> cuyo autovalor está más proximo a <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+<p>Al igual que antes la manera eficiente de implementarlo es a través de la resolución de un sistema lineal en cada paso separando la descomposición LU (única) de la resolución de los sistemas triangulares.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">potencia_inversa_shift</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">beta</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">!=</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="k">return</span> <span class="kc">None</span>         <span class="c1"># Comprobamos que la matriz sea cuadrada</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+    <span class="n">B</span> <span class="o">=</span> <span class="n">A</span><span class="o">-</span><span class="n">beta</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>                          <span class="c1"># Tomamos un vector aleatorio para empezar a iterar</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">norm2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                                 <span class="c1"># Normalizamos dicho vector</span>
+    <span class="n">eigvalue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>            <span class="c1"># Aproximación inicial del autovalor usando A</span>
+    <span class="n">convergencia</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="c1"># FACTORIZACION LU de B = A-betaI</span>
+    <span class="n">P</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">U</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">lu</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+    
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">convergencia</span><span class="p">:</span>
+        <span class="c1">#Resuelvo los dos sistemas lineales triangulares</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve_triangular</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">x</span><span class="p">),</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">solve_triangular</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x1</span><span class="o">/</span><span class="n">norm2</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+        <span class="n">eigvalue1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">x1</span><span class="p">))</span>     <span class="c1"># Aproximación del autovalor asociado al autovector menos dominante usando A</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">eigvalue1</span><span class="o">-</span><span class="n">eigvalue</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">0.0001</span><span class="p">:</span>         <span class="c1"># Criterio de parada basado en la convergencia del autovalor</span>
+            <span class="n">convergencia</span> <span class="o">=</span> <span class="kc">True</span>
+    
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">eigvalue</span> <span class="o">=</span> <span class="n">eigvalue1</span>
+     
+    <span class="k">return</span> <span class="n">eigvalue1</span><span class="p">,</span><span class="n">x1</span>                            <span class="c1"># Devolvemos como resultado el autovalor más próximo a 0 y su autovector </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">],[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">1.</span><span class="p">,</span><span class="o">-</span><span class="mf">1.</span><span class="p">]])</span>
+<span class="n">eigval</span><span class="p">,</span><span class="n">eigvec</span> <span class="o">=</span> <span class="n">potencia_inversa_shift</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Autovalor más próximo a -2: </span><span class="si">{</span><span class="n">eigval</span><span class="si">}</span><span class="s1">, autovector asociado: </span><span class="si">{</span><span class="n">eigvec</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Autovalor más próximo a -2: -2.348870149758691, autovector asociado: [ 0.40855941  0.33086577 -0.85065095]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id='Full'></a></p>
+</section>
+</section>
+</section>
+<section id="metodos-para-el-calculo-del-espectro-completo-de-autovalores">
+<h2><span class="section-number">2.3. </span>Métodos para el cálculo del espectro completo de autovalores.<a class="headerlink" href="#metodos-para-el-calculo-del-espectro-completo-de-autovalores" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="introduccion">
+<h2><span class="section-number">2.4. </span>Introducción.<a class="headerlink" href="#introduccion" title="Permalink to this heading">#</a></h2>
+<p>Vamos a centrarnos unicamente en el cálculo del espectro para <strong>matrices reales, simétricas y con autovalores distintos</strong>. Aunque parece una restricción muy fuerte existen numerosos problemas interesantes con esas características. Por ejemplo el PCA <em>Principal Component Analysis</em>, utilizado en problemas de reducción de dimensionalidad para compresión de información o reconocimiento de imágenes, precisa el calculo del espectro completo de la matriz de covarianza de un conjunto de datos siendo dicha matriz simétrica y definida positiva.</p>
+<p>La simetría de la matriz nos permite asegurar que los autovalores van a ser reales. Además, al pedir que esos autovalores sean distintos entre sí podemos garantizar que los autovectores asociados sean ortogonales entre si.</p>
+<p>Podemos demostrar esto último facilmente:
+Operando podemos comprobar que si <span class="math notranslate nohighlight">\(A\)</span> es una matriz real:</p>
+<div class="math notranslate nohighlight">
+\[\left&lt;A\vec{x},\vec{y}\right&gt; = \left&lt;\vec{x},A^T\vec{y}\right&gt;\]</div>
+<p>Si suponemos además que <span class="math notranslate nohighlight">\(\vec{x}\)</span> e <span class="math notranslate nohighlight">\(\vec{y}\)</span> son autovectores asociados a los autovalores distintos <span class="math notranslate nohighlight">\(\lambda\)</span> y <span class="math notranslate nohighlight">\(\beta\)</span> respectivamente:</p>
+<div class="math notranslate nohighlight">
+\[\lambda\left&lt;\vec{x},\vec{y}\right&gt; = \left&lt;\lambda\vec{x},\vec{y}\right&gt;=\left&lt;A\vec{x},\vec{y}\right&gt;=\left&lt;\vec{x},A^T\vec{y}\right&gt;\]</div>
+<p>Como <span class="math notranslate nohighlight">\(A\)</span> es simétrica <span class="math notranslate nohighlight">\(A=A^T\)</span>, entonces:</p>
+<div class="math notranslate nohighlight">
+\[\left&lt;\vec{x},A^T\vec{y}\right&gt;=\left&lt;\vec{x},A\vec{y}\right&gt;=\left&lt;\vec{x},\beta\vec{y}\right&gt;=\beta\left&lt;\vec{x},\vec{y}\right&gt;\]</div>
+<p>Hemos probado que:</p>
+<div class="math notranslate nohighlight">
+\[\lambda\left&lt;\vec{x},\vec{y}\right&gt; =\beta\left&lt;\vec{x},\vec{y}\right&gt; \longrightarrow (\lambda-\beta)\left&lt;\vec{x},\vec{y}\right&gt; = 0 \]</div>
+<p>Como <span class="math notranslate nohighlight">\(\lambda \ne \beta\)</span> para que se cumpla es necesario que <span class="math notranslate nohighlight">\(\left&lt;\vec{x},\vec{y}\right&gt; = 0\)</span>. Es decir que <span class="math notranslate nohighlight">\(\vec{x}\)</span> e <span class="math notranslate nohighlight">\(\vec{y}\)</span> sean ortogonales entre si.</p>
+<p>En ese contexto intentaremos extender el método de la potencia para calcular el espectro completo de la matriz. Y veremos que podemos extender el método de la potencia de modo inteligente en este caso sencillo como hace el método de <em>Iteración Simultanea</em>. E iremos un paso más allá, aprovechando la idea que nos da la <em>Iteración Simultánea</em> para explicar uno de los métodos más utilizado para el cálculo del espectro completo, el algoritmo <em>QR</em>. Este algoritmo es equivalente a la <em>Iteración Simultánea</em> para matrices reales, simétricas con autovalores diferentes pero se puede utilizar también para el cálculo de autovalores y autovectores de matrices no simétricas o complejas. En cualquier caso estas variaciones van mucho más allá de los objetivos de este curso donde solo se pretende mostrar las versiones más sencillas de los algoritmos.</p>
+<p>Antes de entrar en los métodos de cálculo de autovalores nos vamos a detener en una herramienta que va a ser de gran utilidad: la factorización <em>QR</em> de una matriz.</p>
+<section id="descomposicion-qr-i-qr-decomposition-i">
+<h3><span class="section-number">2.4.1. </span>Descomposición QR.  <i> QR-decomposition</i>.<a class="headerlink" href="#descomposicion-qr-i-qr-decomposition-i" title="Permalink to this heading">#</a></h3>
+<p>La descomposición <em>QR</em> de una matriz <span class="math notranslate nohighlight">\(A \in \mathbb M_{n \times n}(\mathbb R)\)</span>  es una factorización de la forma:
+$<span class="math notranslate nohighlight">\(A = QR\)</span><span class="math notranslate nohighlight">\(
+donde \)</span>Q<span class="math notranslate nohighlight">\( es una matriz ortogonal y \)</span>R<span class="math notranslate nohighlight">\( una matriz triangular superior. 
+Recordad que una matriz ortogonal cumple: \)</span>Q^TQ = I<span class="math notranslate nohighlight">\(, es decir, su inversa es su traspuesta. Además, como consecuencia directa de que \)</span>Q^TQ = I<span class="math notranslate nohighlight">\(  las columnas de \)</span>Q$ son vectores ortogonales.</p>
+<p>Geometricamente, si las columnas de <span class="math notranslate nohighlight">\(A\)</span> son una base de <span class="math notranslate nohighlight">\(\mathbb R^n\)</span> entonces las columnas de <span class="math notranslate nohighlight">\(Q\)</span> son una base ortogonal de <span class="math notranslate nohighlight">\(\mathbb R^n\)</span> y la matriz de cambio de base sería <span class="math notranslate nohighlight">\(R\)</span>.
+Existen diferentes maneras de calcular la descomposición <em>QR</em> de una matriz <span class="math notranslate nohighlight">\(A\)</span>. Nos vamos a centrar en la que habéis visto en Álgebra que es el método de Gram-Schmidt. Este método tiene gran importancia académica pero no es el habitualmente usado por ser numericamente inestable. Esto quiere decir que los errores de precisión pueden provocar que los vectores que devuelve no sean ortogonales entre sí. Otros métodos con mejor comportamiento numérico son las transformaciones Householder o las rotaciones de Givens.</p>
+<p>El método de Gram-Schmidt parte de un conjunto de vectores linealmente independientes entre si. El primero es normalizado antes de añadirlo a la nueva base ortogonal. A partir de aquí a cada vector del conjunto original se le resta su proyección ortogonal sobre los ya incluidos en la nueva base antes de añadirlo. Se puede normalizar cada vector para obtener una base ortonormal.</p>
+<div class="math notranslate nohighlight">
+\[B = \{ \vec{v}_1, \vec{v}_2, \vec{v}_3,\dots, \vec{v}_n\}\]</div>
+<div class="math notranslate nohighlight">
+\[B^{\perp} = \{ \vec{e}_1, \vec{e}_2, \vec{e}_3,\dots, \vec{e}_n\}\]</div>
+<p>con</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+&amp;\vec{u}_1 = \vec{v}_1 \longrightarrow \vec{e}_1 = \dfrac{\vec{u}_1}{||\vec{u}_1||} \\
+&amp;\vec{u}_2 = \vec{v}_2-\mbox{proy}_{\vec{e}_1}(\vec{v}_2) \longrightarrow \vec{e}_2 = \dfrac{\vec{u}_2}{||\vec{u}_2||} \\
+&amp;\vec{u}_3 = \vec{v}_3-\mbox{proy}_{\vec{e}_1}(\vec{v}_3)-\mbox{proy}_{\vec{e}_2}(\vec{v}_3) \longrightarrow \vec{e}_3 = \dfrac{\vec{u}_3}{||\vec{u}_3||}\\
+&amp;\dots \\
+&amp;\vec{u}_n = \vec{v}_n-\mbox{proy}_{\vec{e}_1}(\vec{v}_n)-\dots-\mbox{proy}_{\vec{e}_{n-1}}(\vec{v}_n) \longrightarrow \vec{e}_n = \dfrac{\vec{u}_n}{||\vec{u}_n||}
+\end{align*}\]</div>
+<p>Geometricamente:</p>
+<div>
+<img src="attachment:b06574cd-c591-444c-b0d4-56dadf84f539.png" width="300"/>
+</div>
+<p>Si partimos de las columnas de la matriz <span class="math notranslate nohighlight">\(A\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e60d3dfc-bd91-4a4d-a65c-d384fa982111">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-e60d3dfc-bd91-4a4d-a65c-d384fa982111" title="Permalink to this equation">#</a></span>\[\begin{align}
+A = 
+\begin{pmatrix}
+\vdots &amp; \vdots&amp; \vdots &amp; \vdots\\
+a_1 &amp; a_2 &amp;\dots &amp; a_n\\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots
+\end{pmatrix}
+\end{align}\]</div>
+<p>Entonces:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+&amp;\vec{u}_1 = \vec{a}_1 \longrightarrow \vec{e}_1 = \dfrac{\vec{u}_1}{||\vec{u}_1||} \\
+&amp;\vec{u}_2 = \vec{a}_2-\left&lt;\vec{a}_2,\vec{e}_1\right&gt; \vec{e}_1 \longrightarrow \vec{e}_2 = \dfrac{\vec{u}_2}{||\vec{u}_2||} \\
+&amp;\vec{u}_3 = \vec{a}_3-\left&lt;\vec{a}_3,\vec{e}_1\right&gt; \vec{e}_1-\left&lt;\vec{a}_3,\vec{e}_2\right&gt; \vec{e}_2 \longrightarrow \vec{e}_3 = \dfrac{\vec{u}_3}{||\vec{u}_3||}\\
+&amp;\dots \\
+&amp;\vec{u}_n = \vec{a}_n-\left&lt;\vec{a}_n,\vec{e}_1\right&gt; \vec{e}_1-\dots-\left&lt;\vec{a}_n,\vec{e}_{n-1}\right&gt; \vec{e}_{n-1} \longrightarrow \vec{e}_n = \dfrac{\vec{u}_n}{||\vec{u}_n||}
+\end{align*}\]</div>
+<p>En esta nueva base, al ser ortonormal, se cumple:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+&amp;\vec{a}_1 = \left&lt;\vec{a}_1,\vec{e}_1\right&gt;\vec{e}_1  \\
+&amp;\vec{a}_2 = \left&lt;\vec{a}_2,\vec{e}_1\right&gt;\vec{e}_1 +  \left&lt;\vec{a}_2,\vec{e}_2\right&gt;\vec{e}_2  \\
+&amp;\vec{a}_3 = \left&lt;\vec{a}_3,\vec{e}_1\right&gt;\vec{e}_1 +  \left&lt;\vec{a}_3,\vec{e}_2\right&gt;\vec{e}_2  +  \left&lt;\vec{a}_3,\vec{e}_3\right&gt;\vec{e}_3\\
+&amp;\dots \\
+&amp;\vec{a}_n = \left&lt;\vec{a}_n,\vec{e}_1\right&gt;\vec{e}_1 +  \left&lt;\vec{a}_n,\vec{e}_2\right&gt;\vec{e}_2  + \dots +  \left&lt;\vec{a}_n,\vec{e}_n\right&gt;\vec{e}_n\\
+\end{align*}\]</div>
+<p>Que matricialmente:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5c392eac-104e-4167-8faf-2a1a94cf4c79">
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-5c392eac-104e-4167-8faf-2a1a94cf4c79" title="Permalink to this equation">#</a></span>\[\begin{align}
+A = 
+\begin{pmatrix}
+  &amp;  &amp;   &amp;  \\
+\vdots &amp; \vdots&amp; \vdots &amp; \vdots\\
+a_1 &amp; a_2 &amp;\dots &amp; a_n\\
+\vdots &amp; \vdots&amp; \vdots &amp; \vdots\\
+  &amp;   &amp;   &amp;  
+\end{pmatrix}
+= \begin{pmatrix}
+  &amp;  &amp;   &amp;  \\
+\vdots &amp; \vdots&amp; \vdots &amp; \vdots\\
+e_1 &amp; e_2 &amp;\dots &amp; e_n\\
+\vdots &amp; \vdots&amp; \vdots &amp; \vdots\\
+  &amp;   &amp;   &amp;  
+\end{pmatrix}
+\begin{pmatrix}
+\left&lt;\vec{a}_1,\vec{e}_1\right&gt; &amp; \left&lt;\vec{a}_2,\vec{e}_1\right&gt;&amp; \vdots &amp; \left&lt;\vec{a}_n,\vec{e}_1\right&gt;\\
+0 &amp; \left&lt;\vec{a}_2,\vec{e}_2\right&gt;&amp; \vdots &amp; \left&lt;\vec{a}_n,\vec{e}_2\right&gt;\\
+\vdots &amp; \vdots &amp;\ddots &amp; \vdots\\
+0 &amp; 0 &amp; \dots &amp; \left&lt;\vec{a}_n,\vec{e}_n\right&gt;
+\end{pmatrix}
+= QR
+\end{align}\]</div>
+<p>Se puede codificar facilmente en Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">QR_decomposition</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>                    <span class="c1"># Las columnas de Q guardaran la base ortonormal</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:,</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>                  <span class="c1"># Iteramos sobre los vectores ya incluidos en la base ortonormal</span>
+            <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span><span class="n">j</span><span class="p">],</span><span class="n">Q</span><span class="p">[:,</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">v</span> <span class="o">-</span> <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">Q</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>           <span class="c1"># Restamos la proyección sobre el vector Q[:,i] ya calculado</span>
+            
+        <span class="n">Q</span><span class="p">[:,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">/</span><span class="n">norm2</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>                 <span class="c1"># Normalizamos antes de añadirlo</span>
+        <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">Q</span><span class="p">[:,</span><span class="n">j</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">Q</span><span class="p">,</span><span class="n">R</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Veamos como se comporta:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Matriz A</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">],[</span><span class="mf">4.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">],[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;A= </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">Q</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="n">QR_decomposition</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q= </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;R= </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;QR = </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">Q</span><span class="nd">@R</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A= 
+ --  --  --
+ 1  -1  -2
+ 4   0   3
+-1   1   1
+--  --  --
+Q= 
+ ---------  ---------  ------------
+ 0.235702  -0.666667  -0.707107
+ 0.942809   0.333333  -9.42055e-16
+-0.235702   0.666667  -0.707107
+---------  ---------  ------------
+R= 
+ -------  ---------  --------
+4.24264  -0.471405  2.12132
+0         1.33333   3
+0         0         0.707107
+-------  ---------  --------
+QR = 
+ --  ------------  --
+ 1  -1            -2
+ 4   1.23358e-17   3
+-1   1             1
+--  ------------  --
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tambiem podemos utilizar la función de <em>numpy</em> ** np.linalg.qr()** que llama a una subrutina de LAPACK que emplea transformaciones de Householder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q= </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;R= </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;QR = </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">Q</span><span class="nd">@R</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Q= 
+ ---------  ---------  ------------
+-0.235702   0.666667   0.707107
+-0.942809  -0.333333  -3.83424e-17
+ 0.235702  -0.666667   0.707107
+---------  ---------  ------------
+R= 
+ --------  ---------  ---------
+-4.24264   0.471405  -2.12132
+ 0        -1.33333   -3
+ 0         0         -0.707107
+--------  ---------  ---------
+QR = 
+ --  -----------  --
+ 1  -1           -2
+ 4   6.7847e-17   3
+-1   1            1
+--  -----------  --
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="metodo-de-la-iteracion-simultanea-i-simultaneous-iteration-i">
+<h2><span class="section-number">2.5. </span>Método de la Iteración Simultánea.  <i> Simultaneous Iteration</i>.<a class="headerlink" href="#metodo-de-la-iteracion-simultanea-i-simultaneous-iteration-i" title="Permalink to this heading">#</a></h2>
+<p>Como hemos dicho antes nos vamos a centrar en el cálculo de autovalores y autovectores de matrices reales, simétricas y con autovalores distintos.
+El primer método que vamos a ver es el de la <em>Iteración Simultánea</em> que es una extensión inteligente de los métodos de la potencia a este caso particular.</p>
+<p>Los métodos de la potencia nos permiten calcular un único autovalor-autovector cada vez. Si aplicamos el método de la potencia a un conjunto de vectores linealmente independientes entre sí: <span class="math notranslate nohighlight">\( V = \{\vec{v}_1, \vec{v}_2, \vec{v}_3, \dots, \vec{v}_n \} \)</span>, despues de suficientes iteraciones, todos los vectores <span class="math notranslate nohighlight">\( \{ A^{k}\vec{v}_i \} \)</span> habrán convergido al autovector dominante. ¿Hay algún modo de que cada vector converja en un autovector diferente?.</p>
+<p>Ahora es cuando entra en juego la descomposición <em>QR</em> y el hecho de que la matriz <span class="math notranslate nohighlight">\( A \)</span> sea simétrica. Recordemos que la simetría nos garantiza que todos los autovalores son reales y, la suposición extra de que los autovalores sean diferentes, nos asegura la ortogonalidad de los autovectores asociados. Si queremos encontrar la base de autovectores ortogonales, en cada paso del método de la potencia, debemos ortogonalizar (ortonormalizar) el conjunto de vectores <span class="math notranslate nohighlight">\( \{ A\vec{v}_i \} \)</span>. De esta manera forzamos que las aproximaciones sean ortonormales entre si.</p>
+<p>El algoritmo es sencillo y se puede escribir en pocas líneas:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-37bf0f3c-480e-4657-99f1-1896aba5b004">
+<span class="eqno">(2.5)<a class="headerlink" href="#equation-37bf0f3c-480e-4657-99f1-1896aba5b004" title="Permalink to this equation">#</a></span>\[\begin{align}
+&amp;\text{Escoger una base de }\mathbb R^n \text{  y almacenarla como matriz   }Q^0.   \text{ Por ejemplo: } \quad Q^0 = I.\\
+&amp;\text{Bucle hasta convergencia o número máximo de iteraciones} \\
+&amp;\quad\quad Z = AQ^{k-1}\\
+&amp;\quad\quad Q^{k}R^{k} = Z \quad \text{ Factorización QR con las columnas de }Q \mathbf{\text{ ortonormales}}\\
+&amp;\text{Las columnas de }Q \text{ contienen los autovectores.}
+\end{align}\]</div>
+<p>Para calcular los autovalores asociados a cada autovector bastará aplicar el cociente de Rayleigh a cada autovector.</p>
+<div class="math notranslate nohighlight">
+\[\lambda_i = \dfrac{Q_i^T A Q_i}{Q_i^TQ_i}\]</div>
+<p>La elección de <span class="math notranslate nohighlight">\(Q^0=I\)</span> garantiza la ortonormalidad en el paso inicial.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simultaneous_iteration</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">eigenvalue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">Q</span><span class="p">)</span>
+        <span class="n">Q</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+    <span class="c1"># Los autovectores están en las columnas de Q</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">eigenvalue</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Q</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">Q</span><span class="p">[:,</span><span class="n">i</span><span class="p">]))</span> <span class="c1"># No hace falta dividir por la norma ya que ||Q_i||=1</span>
+        
+    <span class="k">return</span> <span class="n">eigenvalue</span><span class="p">,</span><span class="n">Q</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Veamoslo en un ejemplo sencillo <span class="math notranslate nohighlight">\(3x3\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Matriz simetrica </span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">4.</span><span class="p">,</span><span class="o">-</span><span class="mf">14.</span><span class="p">,</span> <span class="o">-</span><span class="mf">12.</span><span class="p">],[</span><span class="o">-</span><span class="mf">14.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">,</span> <span class="mf">13.</span><span class="p">],[</span><span class="o">-</span><span class="mf">12.</span><span class="p">,</span> <span class="mf">13.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">S</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>---  ---  ---
+  4  -14  -12
+-14   10   13
+-12   13    1
+---  ---  ---
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cuyos autovalores y autovectores asociados, calculados con la función específica de <em>numpy</em>, son:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values</span><span class="p">,</span> <span class="n">vect</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Autovalores: &#39;</span><span class="p">,</span><span class="n">values</span><span class="p">)</span>
+
+<span class="n">columna</span> <span class="o">=</span> <span class="n">vect</span><span class="o">.</span><span class="n">T</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">vec</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">columna</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Autovector </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">vec</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Autovalores:  [31.53568967 -9.64366467 -6.89202501]
+Autovector 0: [-0.55567116  0.6635882   0.50087949] 
+Autovector 1: [ 0.59474589 -0.10370353  0.7971969 ] 
+Autovector 2: [-0.58095343 -0.74087535  0.3370413 ] 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mediante el método de Iteración Simultánea queda:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">values</span><span class="p">,</span><span class="n">vect</span> <span class="o">=</span> <span class="n">simultaneous_iteration</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Autovalores: &#39;</span><span class="p">,</span><span class="n">values</span><span class="p">)</span>
+<span class="n">columna</span> <span class="o">=</span> <span class="n">vect</span><span class="o">.</span><span class="n">T</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">vec</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">columna</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Autovector </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">vec</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Autovalores:  [31.53568967 -9.64366467 -6.89202501]
+Autovector 0: [-0.55567116  0.6635882   0.50087949] 
+Autovector 1: [-0.59474589  0.10370353 -0.7971969 ] 
+Autovector 2: [-0.58095343 -0.74087535  0.3370413 ] 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recuerda que si <span class="math notranslate nohighlight">\(\vec{v}\)</span> es un autovector asociado a <span class="math notranslate nohighlight">\(\lambda\)</span> también lo es <span class="math notranslate nohighlight">\(-\vec{v}\)</span>. <span class="math notranslate nohighlight">\(A(-\vec{v}) = -A\vec{v}= -\lambda \vec{v} = \lambda (-\vec{v})\)</span></p>
+</section>
+<section id="algoritmo-qr-para-el-calculo-del-espectro-completo">
+<h2><span class="section-number">2.6. </span>Algoritmo QR para el cálculo del espectro completo.<a class="headerlink" href="#algoritmo-qr-para-el-calculo-del-espectro-completo" title="Permalink to this heading">#</a></h2>
+<p>Empezaremos con algunas generalidades del algoritmo y proposiones algebráicas teóricas que nos van a permitir situar el <em>algoritmo QR</em> dentro de un contexto más general. Es decir, aunque nosotros nos vamos a centrar en una matriz con ciertas restricciones, el algoritmo QR es aplicable para un rango de matrices mucho más extenso: no simetricas, con multiplicidad algebraica de los autovalores e incluso con valores complejos.</p>
+<ul>
+    <li>
+        <i>Definición 1</i>:
+     </li>
+</ul>
+&nbsp;&nbsp;&nbsp;&nbsp; Dos matrices son semejantes si poseen los mismos autovalores.
+<ul>
+    <li>
+        <i>Proposición 1</i>:
+     </li>
+</ul>
+&nbsp;&nbsp;&nbsp;&nbsp; $A$ y $B \in \mathbb{R}^{n\times n}$ son semejantes si $\exists P \in \mathbb{R}^{n\times n}$ no singular, tal que $B = P^{-1}AP$.
+Es decir un cambio de base preserva los autovalores. (¡Ojo, los autovectores no!)
+<ul>
+    <li>
+        <i>Definición 2</i>:
+     </li>
+</ul>
+&nbsp;&nbsp;&nbsp;&nbsp;Una matriz $H \in \mathbb{C}^{n\times n}$ es unitaria si verifica que su inversa es igual a su traspuesta conjugada $H^{-1}= H^*$.
+<ul>
+    <li>
+        <i>Definición 3</i> (ya vista):
+     </li>
+</ul>
+&nbsp;&nbsp;&nbsp;&nbsp;Una matriz $Q \in \mathbb{R}^{n\times n}$ es ortogonal si verifica que su inversa es igual a su traspuesta $Q^{-1}= Q^T$. Esta definición es la equivalente a ser unitaria en el campo complejo. 
+<ul>
+    <li>
+        <i>Proposición 2</i>:
+     </li>
+</ul>
+&nbsp;&nbsp;&nbsp;&nbsp;Si $Q_1$ y $Q_2$ son matrices ortogonales $Q= Q_1Q_2$ es una matriz ortogonal y $Q^{-1} = Q_2^{-1} Q_1^{-1}$.
+<ul>
+    <li>
+        <i>Proposición 3</i>:
+     </li>
+</ul>
+<p>Toda matriz cuadrada  <span class="math notranslate nohighlight">\(A \in \mathbb{C}^{n\times n}\)</span> se puede escribir como <span class="math notranslate nohighlight">\(A = HTH^{-1}\)</span> donde <span class="math notranslate nohighlight">\(H\)</span> es una matriz unitaria y <span class="math notranslate nohighlight">\(T\)</span> es una matriz <em>quasi-triangular</em>.
+Si <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n\times n}\)</span> entonces la factorización se convierte en <span class="math notranslate nohighlight">\(A = QTQ^{-1}\)</span> con <span class="math notranslate nohighlight">\(Q\)</span> matriz ortogonal. En ambos casos a esta factorización se la conoce como <strong>descomposición de Schur</strong> o <em>Schur decomposition</em>.</p>
+<p>Como <span class="math notranslate nohighlight">\(A\)</span> y <span class="math notranslate nohighlight">\(T\)</span> son semejantes (Proposición 1) tienen los mismos autovalores.
+Si todos los autovalores de <span class="math notranslate nohighlight">\(A\)</span> son reales la matriz <span class="math notranslate nohighlight">\(T\)</span> será triangular y los autovalores estarán en la diagonal. Si <span class="math notranslate nohighlight">\(A\)</span> posee algún autovalor complejo, en la diagonal apareceran bloques de tamaño <span class="math notranslate nohighlight">\(2x2\)</span> que contendrán los autovalores complejos conjugados.</p>
+<p>Para ilustrar esto último, aunque no sea el caso que vamos a estudiar, veamos que ocurre si particularizamos al caso de una matriz <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{4x4}\)</span> con dos autovalores reales y un par de complejos conjugados, la forma de Schur será: <span class="math notranslate nohighlight">\(A = QTQ^{-1}\)</span> con,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c92526eb-e335-4804-9491-e0a632708b2a">
+<span class="eqno">(2.6)<a class="headerlink" href="#equation-c92526eb-e335-4804-9491-e0a632708b2a" title="Permalink to this equation">#</a></span>\[\begin{align}
+T = 
+\begin{pmatrix}
+\lambda_1 &amp; t_{12} &amp; t_{13} &amp; t_{14} \\
+0 &amp; \lambda_2 &amp; t_{23} &amp; t_{24} \\
+0 &amp; 0 &amp; a &amp; b \\
+0 &amp; 0 &amp; c &amp; a
+\end{pmatrix}
+\end{align}\]</div>
+<p>Y los autovalores son: <span class="math notranslate nohighlight">\(\lambda_1, \lambda_2, \lambda_{3,4}= a\pm \sqrt{cb}\)</span>.</p>
+<p>Veamos un ejemplos:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-56245174-b0ea-402c-b710-be7045588b8b">
+<span class="eqno">(2.7)<a class="headerlink" href="#equation-56245174-b0ea-402c-b710-be7045588b8b" title="Permalink to this equation">#</a></span>\[\begin{align}
+A = 
+\begin{pmatrix}
+1 &amp; 2 &amp; 0 &amp; 0 \\
+2 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 2 &amp; -3 \\
+0 &amp; 0 &amp; 3 &amp; 2
+\end{pmatrix}
+\end{align}\]</div>
+<p>cuyos autovalores son  <span class="math notranslate nohighlight">\(\lambda_1 = 3, \lambda_2= -1, \lambda_3= 2+3i,\lambda_4= 2-3i\)</span>.
+La descomposición de Schur de la matriz es:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1dbcc7c1-c9b0-4c13-a2d5-d11efec59c16">
+<span class="eqno">(2.8)<a class="headerlink" href="#equation-1dbcc7c1-c9b0-4c13-a2d5-d11efec59c16" title="Permalink to this equation">#</a></span>\[\begin{align}
+A = 
+\begin{pmatrix}
+1 &amp; 2 &amp; 0 &amp; 0 \\
+2 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 2 &amp; -3 \\
+0 &amp; 0 &amp; 3 &amp; 2
+\end{pmatrix}
+= \begin{pmatrix}
+0.707 &amp; 0.707 &amp; 0 &amp; 0 \\
+-0.707 &amp; 0.707 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{pmatrix}
+\begin{pmatrix}
+3 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; -1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 2 &amp; -3 \\
+0 &amp; 0 &amp; 3 &amp; 2
+\end{pmatrix}
+\begin{pmatrix}
+0.707 &amp; -0.707 &amp; 0 &amp; 0 \\
+0.707 &amp; 0.707 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{pmatrix}
+\end{align}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Matriz real</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],[</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="c1">#print(tabulate(A))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="n">values</span><span class="p">,</span><span class="n">vect</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Autovalores: </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">T</span><span class="p">,</span><span class="n">Q</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">schur</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T= </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q= </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q^-1TQ = </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">Q</span><span class="nd">@T@Q</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-  -  -  --
+1  2  0   0
+2  1  0   0
+0  0  2  -3
+0  0  3   2
+-  -  -  --
+Autovalores: [ 3.+0.j -1.+0.j  2.+3.j  2.-3.j]
+T= 
+ -  --  -  --
+3   0  0   0
+0  -1  0   0
+0   0  2  -3
+0   0  3   2
+-  --  -  --
+Q= 
+ --------  ---------  -  -
+0.707107  -0.707107  0  0
+0.707107   0.707107  0  0
+0          0         1  0
+0          0         0  1
+--------  ---------  -  -
+Q^-1TQ = 
+ -  -  -  --
+1  2  0   0
+2  1  0   0
+0  0  2  -3
+0  0  3   2
+-  -  -  --
+</pre></div>
+</div>
+</div>
+</div>
+<p>Si nos centramos en el caso que vamos a ver este curso con la matriz <span class="math notranslate nohighlight">\(A\)</span> real y simétrica, la matriz <span class="math notranslate nohighlight">\(T\)</span> en la descomposición de Schur toma forma diagonal.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5620a6c3-fc4d-4144-b533-b1b5ae5e77bb">
+<span class="eqno">(2.9)<a class="headerlink" href="#equation-5620a6c3-fc4d-4144-b533-b1b5ae5e77bb" title="Permalink to this equation">#</a></span>\[\begin{align}
+A = 
+\begin{pmatrix}
+1 &amp; 2 &amp; 3 \\
+2 &amp; 5 &amp; 0  \\
+3 &amp; 0 &amp; 5
+\end{pmatrix} = \\
+= \begin{pmatrix}
+-0.8617 &amp; 0.5074  &amp; 0 \\
+0.2814 &amp;   0.4779 &amp;  -0.8320 \\
+ 0.4221 &amp;   0.7169 &amp;   0.5547
+\end{pmatrix}
+\begin{pmatrix}
+-1.123 &amp; 0 &amp; 0 \\
+0 &amp; 7.123 &amp; 0  \\
+0 &amp; 0 &amp; 5 
+\end{pmatrix}
+\begin{pmatrix}
+-0.8617 &amp; 0.2814  &amp;  0.4221 \\
+0.5074 &amp;   0.4779 &amp;  0.7169 \\
+ 0 &amp;   -0.8320 &amp;   0.5547
+\end{pmatrix}= \\
+=QTQ^T
+\end{align}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="n">values</span><span class="p">,</span><span class="n">vect</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Autovalores: </span><span class="si">{</span><span class="n">values</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">T</span><span class="p">,</span><span class="n">Q</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">schur</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T= </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q= </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q^-1TQ = </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">Q</span><span class="nd">@T@Q</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-  -  -
+1  2  3
+2  5  0
+3  0  5
+-  -  -
+Autovalores: [-1.12310563  7.12310563  5.        ]
+T= 
+ --------  -----------  -----------
+-1.12311  4.44089e-16  1.03256e-16
+ 0        7.12311      9.6992e-16
+ 0        0            5
+--------  -----------  -----------
+Q= 
+ ---------  --------  --------
+-0.861705  0.507409   0
+ 0.28146   0.477988  -0.83205
+ 0.42219   0.716982   0.5547
+---------  --------  --------
+Q^-1TQ = 
+ -  ------------  -----------
+1   2            3
+2   5            3.66873e-16
+3  -2.18176e-16  5
+-  ------------  -----------
+</pre></div>
+</div>
+</div>
+</div>
+<p>El <em>algoritmo QR</em> calcula el espectro completo de la matriz <span class="math notranslate nohighlight">\(A\)</span> encontrando una forma semejante de <span class="math notranslate nohighlight">\(A\)</span> a través de la transformación de Schur. Para ello utiliza un proceso iterativo. La idea básica es, en cada iteración, hacer una descomposición <em>QR</em> de la matriz original, construir una nueva matriz como el producto de los factores de la descomposición cambiados de orden y repetir hasta la convergencia:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9c037861-3f40-4e50-9970-fbb388fd8756">
+<span class="eqno">(2.10)<a class="headerlink" href="#equation-9c037861-3f40-4e50-9970-fbb388fd8756" title="Permalink to this equation">#</a></span>\[\begin{align}
+&amp;\text{Factorizar la matriz  } A\text{:} \quad A = Q_0R_0.  \\
+&amp;\mbox{Bucle hasta convergencia o número máximo de iteraciones} \\
+&amp;\quad\quad A_k = R_{k}Q_{k}\\
+&amp;\quad\quad Q_{k+1}R_{k+1} = A_k \quad \mbox{ Factorización QR  }\\
+&amp;\mbox{La matriz }A_k \mbox{ converge a una matriz quasi-triangular. La matriz $T$ en forma de Schur.}
+\end{align}\]</div>
+<p>Veamos paso a paso que ocurre en este proceso iterativo:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5fbb6cf9-3803-4d57-9c56-511fb1496666">
+<span class="eqno">(2.11)<a class="headerlink" href="#equation-5fbb6cf9-3803-4d57-9c56-511fb1496666" title="Permalink to this equation">#</a></span>\[\begin{align}
+&amp; \text{Factorización 1:} \quad Q_0R_0 = A.  \\
+&amp; A_0 = R_0Q_0 =  Q_0^{-1}Q_0R_0Q_0 = Q_0^{-1}AQ_0 \\
+&amp; \text{Factorización 2:} \quad Q_1R_1 = A_0 \\
+&amp; A_1 = R_1Q_1 =  Q_1^{-1}Q_1R_1Q_1 =  Q_1^{-1}A_0Q_1 =  Q_1^{-1}Q_0^{-1}AQ_0Q_1 \\
+&amp; \text{Factorización 3:} \quad Q_2R_2 = A_1 \\
+&amp; A_2 = R_2Q_2 =  Q_2^{-1}Q_2R_2Q_2 =  Q_2^{-1}A_1Q_2 =  Q_2^{-1}Q_1^{-1}Q_0^{-1}AQ_0Q_1Q_2 \\
+&amp;\dots \\
+&amp; \text{Factorización k+1:} \quad Q_kR_k = A_{k-1} \\
+&amp; A_k = R_kQ_k =  Q_k^{-1}Q_kR_kQ_k =  Q_k^{-1}A_{k-1}Q_k =  Q_k^{-1} \dots Q_2^{-1}Q_1^{-1}Q_0^{-1}AQ_0Q_1Q_2 \dots Q_k 
+\end{align}\]</div>
+<p>De la proposición 2 podemos concluir que <span class="math notranslate nohighlight">\(Q = Q_0Q_1Q_2 \dots Q_k \)</span> es una matriz ortogonal y que <span class="math notranslate nohighlight">\(Q^{-1} = Q_k^{-1} \dots Q_2^{-1}Q_1^{-1}Q_0^{-1}\)</span> es su inversa. Por tanto $<span class="math notranslate nohighlight">\( A_k = Q^{-1}AQ = QAQ^{T} \)</span><span class="math notranslate nohighlight">\(
+&lt;br&gt;
+Eso implica que \)</span>A_k<span class="math notranslate nohighlight">\( y \)</span>A$ son semejantes y por tanto tienen los mismos autovalores.<br></p>
+<p>Lo que no hemos demostrado (ni vamos a hacerlo en el caso general) es que este proceso iterativo termine con <span class="math notranslate nohighlight">\(A_k\)</span> triangular, o <em>quasi-triangular</em> en el caso de autovalores complejos. Sirva como argumento intuitivo la proximidad con el algoritmo de iteración simultánea en el caso de empezar con una matriz real y simétrica.
+Si la matriz es real y simétrica ambos algoritmos son equivalentes. El algoritmo <em>QR</em> convergerá a una forma de Schur donde T es diagonal y contendrá a los autovalores. Recordad que en el método de <em>Iteración Simultánea</em> aplicabamos el coeficiente de Rayleigh a las columnas de la matriz <span class="math notranslate nohighlight">\(Q\)</span> (autovectores) para obtener los autovalores.</p>
+<p>Vamos a verlo con una versión no completa de ambos algoritmos. Nos detendremos al final del proceso iterativo y compararemos las matrices que ambos algoritmos generan.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">QR_algorithm_init</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    
+    <span class="n">A_copy</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="n">Q</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">A_copy</span><span class="p">)</span>
+        <span class="n">A_copy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="n">Q</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">A_copy</span>
+
+<span class="k">def</span> <span class="nf">simultaneous_iteration_init</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">eigenvalue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">Q</span><span class="p">)</span>
+        <span class="n">Q</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Q</span><span class="o">.</span><span class="n">T</span><span class="nd">@A@Q</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">QR_algorithm_init</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T= </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">simultaneous_iteration_init</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T= </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T= 
+ -  ------------  ------------
+6   5.76557e-16   1.99679e-16
+0  -3             4.91798e-16
+0   0            -1
+-  ------------  ------------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T= 
+ ------------  ------------  ------------
+ 6            -9.21538e-16   8.92486e-17
+-7.97807e-16  -3             2.61115e-17
+ 6.74891e-17  -9.28324e-17  -1
+------------  ------------  ------------
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ya vimos que el método de iteración simultanea solo funciona cuando los autovectores son ortogonales entre sí. En cambio el método QR es válido para todo tipo de matrices. La clave es la convergencia de <span class="math notranslate nohighlight">\(A_k\)</span> a una matriz <span class="math notranslate nohighlight">\(T\)</span> <em>quasi-triangular</em>.
+A modo ilustrativo veremos como se produce esa convergencia. Partiremos de una matriz aleatoria de tamaño <span class="math notranslate nohighlight">\(100\times100\)</span> e iremos aplicando el algoritmo QR. Cada cierto número de iteraciones comprobaremos la forma de la matriz <span class="math notranslate nohighlight">\(A_k\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">Q</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="n">Q</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">10</span><span class="p">:</span> 
+        <span class="n">A10</span><span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">i</span><span class="o">==</span><span class="mi">100</span><span class="p">:</span> 
+        <span class="n">A100</span><span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">i</span><span class="o">==</span><span class="mi">1000</span><span class="p">:</span> 
+        <span class="n">A1000</span><span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">i</span><span class="o">==</span><span class="mi">9999</span><span class="p">:</span> 
+        <span class="n">A10000</span><span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A10</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">1e-4</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A100</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">1e-4</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A1000</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">1e-4</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A10000</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">1e-4</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;A_10 iteraciones&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;A_100 iteraciones&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;A_1000 iteraciones&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;A_10000 iteraciones&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+<span class="ne">----&gt; </span><span class="mi">4</span>     <span class="n">Q</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="n">Q</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">10</span><span class="p">:</span> 
+
+<span class="nn">File &lt;__array_function__ internals&gt;:200,</span> in <span class="ni">qr</span><span class="nt">(*args, **kwargs)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/numpy/linalg/linalg.py:958,</span> in <span class="ni">qr</span><span class="nt">(a, mode)</span>
+<span class="g g-Whitespace">    </span><span class="mi">956</span> <span class="n">signature</span> <span class="o">=</span> <span class="s1">&#39;DD-&gt;D&#39;</span> <span class="k">if</span> <span class="n">isComplexType</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;dd-&gt;d&#39;</span>
+<span class="g g-Whitespace">    </span><span class="mi">957</span> <span class="n">extobj</span> <span class="o">=</span> <span class="n">get_linalg_error_extobj</span><span class="p">(</span><span class="n">_raise_linalgerror_qr</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">958</span> <span class="n">q</span> <span class="o">=</span> <span class="n">gufunc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">signature</span><span class="o">=</span><span class="n">signature</span><span class="p">,</span> <span class="n">extobj</span><span class="o">=</span><span class="n">extobj</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">959</span> <span class="n">r</span> <span class="o">=</span> <span class="n">triu</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="n">mc</span><span class="p">,</span> <span class="p">:])</span>
+<span class="g g-Whitespace">    </span><span class="mi">961</span> <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">result_t</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ahora que nos creemos el algoritmo podemos completarlo para extraer los autovalores y autovectores.</p>
+<p>El algoritmo <em>QR</em> convierte la matriz <span class="math notranslate nohighlight">\(A\)</span> en una triangular superior si todos sus autovalores son reales. Esta matriz triangular es semejante a <span class="math notranslate nohighlight">\(A\)</span> y por tanto sus autovalores, situados en la diagonal principal, son los mismos que los de <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>El cálculo de los autovectores asociados se puede hacer resolviendo el sistema lineal <span class="math notranslate nohighlight">\((A-\lambda I)\vec{v} = \bf{0}\)</span> o aplicando el método de la potencia inversa a la matriz <span class="math notranslate nohighlight">\(A-\lambda I\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">QR_algorithm</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">eigvectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">eigvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">A_copy</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="n">Q</span><span class="p">,</span><span class="n">R</span> <span class="o">=</span> <span class="n">QR_decomposition</span><span class="p">(</span><span class="n">A_copy</span><span class="p">)</span>
+        <span class="c1">#Q,R = np.linalg.qr(A_copy)</span>
+        <span class="n">A_copy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">R</span><span class="p">,</span><span class="n">Q</span><span class="p">)</span>
+    <span class="c1"># los autovalores están en la diagonal de A_copy </span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">eigvalues</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">eigvectors</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">potencia_inversa_shift</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">A_copy</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">eigvalues</span><span class="p">,</span> <span class="n">eigvectors</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Veamos cómo funciona con un par de ejemplos:</p>
+<p><strong>Matriz simétrica</strong></p>
+<div class="amsmath math notranslate nohighlight" id="equation-e6955b10-f73f-40c0-8976-a135d450eaa2">
+<span class="eqno">(2.12)<a class="headerlink" href="#equation-e6955b10-f73f-40c0-8976-a135d450eaa2" title="Permalink to this equation">#</a></span>\[\begin{align}
+A = 
+\begin{pmatrix}
+-1 &amp; 0 &amp; 1 &amp; -1 \\
+0 &amp; 1 &amp; -1 &amp; 0 \\
+1 &amp; -2 &amp; 0 &amp; 1 \\
+-1 &amp; 0 &amp; 1 &amp; 2 
+\end{pmatrix}
+\end{align}\]</div>
+<p>cuyos autovalores son <span class="math notranslate nohighlight">\(\lambda_1 = 3. ; \lambda_2 = -2.5141; \lambda_3 =  2.0861\)</span> y <span class="math notranslate nohighlight">\(\lambda_4 = -0.5720\)</span>.</p>
+<p>Al aplicar el algoritmo QR, nos devuelve:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mi">1</span><span class="p">],[</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">]])</span>
+<span class="n">values</span><span class="p">,</span><span class="n">vect</span> <span class="o">=</span> <span class="n">QR_algorithm</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;La matriz T de la forma de Schur de A es: </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">QR_algorithm_init</span><span class="p">(</span><span class="n">S</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Autovalores QR: &#39;</span><span class="p">,</span><span class="n">values</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Autovector </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">vect</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La matriz T de la forma de Schur de A es: 
+ ------------  -------------  ------------  ------------
+3              1.12854e-15    2.06049e-16   1.21419e-17
+4.94066e-323  -2.51414       -6.11399e-16   5.8193e-16
+1.97626e-323  -6.42285e-323   2.08613       4.64344e-16
+0              0              0            -0.571993
+------------  -------------  ------------  ------------
+Autovalores QR:  [ 3.         -2.51413693  2.0861302  -0.57199327]
+Autovector 1: [-1.09323154e-14  5.77350269e-01 -5.77350269e-01 -5.77350269e-01]
+Autovector 2: [ 0.6096698  -0.36717314 -0.64514835  0.27797521]
+Autovector 3: [-0.332506    0.49189489 -0.26713095  0.75902584]
+Autovector 4: [0.71954325 0.5384143  0.42319183 0.11522247]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se puede ver que la matriz T en la forma de Schur <span class="math notranslate nohighlight">\(A = QTQ^T\)</span> es una matriz diagonal como era de esperar.</p>
+<p>Veamos un ejemplo no simétrico:</p>
+<p><strong>Matriz no simétrica</strong></p>
+<div class="amsmath math notranslate nohighlight" id="equation-d284a148-c8ce-4ba4-8633-e613486eabaa">
+<span class="eqno">(2.13)<a class="headerlink" href="#equation-d284a148-c8ce-4ba4-8633-e613486eabaa" title="Permalink to this equation">#</a></span>\[\begin{align}
+A = 
+\begin{pmatrix}
+3 &amp; 2 &amp; -1 &amp; 1 \\
+0 &amp; -1 &amp; 0 &amp; 0 \\
+1 &amp; 3 &amp; 2 &amp; 0 \\
+0 &amp; 1 &amp; 2 &amp; 0 
+\end{pmatrix}
+\end{align}\]</div>
+<p>cuyos autovalores son <span class="math notranslate nohighlight">\(\lambda_1 = 2.6180 ; \lambda_2 = 2; \lambda_3 =  -1\)</span> y <span class="math notranslate nohighlight">\(\lambda_4 = 0.3819\)</span>.</p>
+<p>En este caso la matriz T en la forma de Schur <span class="math notranslate nohighlight">\(A = QTQ^T\)</span> no es una matriz diagonal pero sí triangular superior.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mi">0</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
+<span class="n">values</span><span class="p">,</span><span class="n">vect</span> <span class="o">=</span> <span class="n">QR_algorithm</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;La matriz T de la forma de Schur de A es: </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">QR_algorithm_init</span><span class="p">(</span><span class="n">S</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Autovalores QR: &#39;</span><span class="p">,</span><span class="n">values</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Autovector </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">vect</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+<span class="n">T</span><span class="p">,</span><span class="n">Q</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">schur</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;T= </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q= </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q^-1TQ = </span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><span class="n">Q</span><span class="nd">@T@Q</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>La matriz T de la forma de Schur de A es: 
+ -------------  -------------  -------------  ---------
+ 2.61803        1.20414        1.67222        0.487199
+-3.95253e-323   2             -0.614403       2.86883
+ 0             -9.88131e-324  -1             -0.999347
+ 0              0              4.94066e-324   0.381966
+-------------  -------------  -------------  ---------
+Autovalores QR:  [ 2.61803399  2.00009997 -1.          0.38196601]
+Autovector 1: [4.40828244e-01 6.19456654e-32 7.13275081e-01 5.44893676e-01]
+Autovector 2: [ 1.41353708e-04 -0.00000000e+00  7.07106774e-01  7.07106774e-01]
+Autovector 3: [-0.18315512  0.70444276 -0.00939257 -0.68565762]
+Autovector 4: [-2.90446181e-01  9.58076452e-33  1.79505612e-01  9.39903586e-01]
+T= 
+ -------  -------  ---------  ---------
+2.61803  1.20414  -0.585089  -1.64053
+0        2         2.68472   -1.1832
+0        0         0.381966  -0.999347
+0        0         0         -1
+-------  -------  ---------  ---------
+Q= 
+ ---------  ---------  ---------  -
+-0.440828  -0.858884  -0.260748  0
+ 0          0          0         1
+-0.713275   0.15885    0.682646  0
+-0.544894   0.486914  -0.682646  0
+---------  ---------  ---------  -
+Q^-1TQ = 
+ -----------  ----  --  -----------
+3             2    -1  1
+0            -1     0  0
+1             0.3   2  2.77556e-16
+7.77156e-16   1     2  2.77556e-17
+-----------  ----  --  -----------
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/02-Autovalores"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../01-SistemasLineales/sistemas_lineales.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Sistemas lineales</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../03-Interpolacion/interpolacion_lagrange.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Interpolación de Lagrange</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">2.1. Contenido</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-iterativos-para-el-calculo-de-un-autovector">2.2. Métodos iterativos para el cálculo de un autovector.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-la-potencia">2.2.1. Método de la potencia.</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#criterio-de-convergencia">2.2.1.1. Criterio de Convergencia.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-la-potencia-inversa-shift-invert">2.2.2. Método de la potencia inversa. (shift &amp; invert)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-la-potencia-inversa-con-i-shift-i">2.2.2.1. Método de la potencia inversa con <i> shift</i>.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-para-el-calculo-del-espectro-completo-de-autovalores">2.3. Métodos para el cálculo del espectro completo de autovalores.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">2.4. Introducción.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-qr-i-qr-decomposition-i">2.4.1. Descomposición QR.  <i> QR-decomposition</i>.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-la-iteracion-simultanea-i-simultaneous-iteration-i">2.5. Método de la Iteración Simultánea.  <i> Simultaneous Iteration</i>.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algoritmo-qr-para-el-calculo-del-espectro-completo">2.6. Algoritmo QR para el cálculo del espectro completo.</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Universidad Politécnica de Madrid
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

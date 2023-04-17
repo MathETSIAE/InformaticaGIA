@@ -1,0 +1,1423 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>5. Ecuaciones no lineales &#8212; Curso de Informática ETSIAE</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/05-SistemasNoLineales/Ecuaciones y sistemas de ecuaciones no lineales';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="6. Ecuaciones diferenciales ordinarias" href="../06-EDOs/Introducci%C3%B3nEDOs.html" />
+    <link rel="prev" title="4.5. Práctica Grupal: Problemas de Contorno" href="../04-DerivacionIntegracion/practica_pde.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Curso de Informática
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01-SistemasLineales/sistemas_lineales.html">1. Sistemas lineales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02-Autovalores/autovalores.html">2. Métodos para el Cálculo de Autovalores</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03-Interpolacion/interpolacion_lagrange.html">3. Interpolación de Lagrange</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03-Interpolacion/practica_minimos_cuadrados.html">3.1. Práctica: método de mínimos cuadrados</a></li>
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04-DerivacionIntegracion/derivacion_numerica.html">4. Derivación Numérica.</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04-DerivacionIntegracion/practica_pde.html">4.5. Práctica Grupal: Problemas de Contorno</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Ecuaciones no lineales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-EDOs/Introducci%C3%B3nEDOs.html">6. Ecuaciones diferenciales ordinarias</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/RayleighLord/ProgrammingETSIAE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/05-SistemasNoLineales/Ecuaciones y sistemas de ecuaciones no lineales.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/notebooks/05-SistemasNoLineales/Ecuaciones y sistemas de ecuaciones no lineales.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Ecuaciones no lineales</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">5.1. Contenido</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dada-una-funcion-f-a-b-subset-mathbb-r-rightarrow-mathbb-r-encontrar-x-in-mathbb-a-b-tal-que-f-x-0">5.2. Dada una función <span class="math notranslate nohighlight">\(f: [a, b] \subset \mathbb R \rightarrow \mathbb R\)</span>: encontrar <span class="math notranslate nohighlight">\(x \in \mathbb [a, b]\)</span> tal que
+$<span class="math notranslate nohighlight">\(f(x) = 0.\)</span>$</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-del-error-de-aproximacion">5.3. Estimación del error de aproximación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-biseccion">5.4. Método de bisección</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia-del-metodo">5.4.1. Convergencia del método</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algunas-observaciones-sobre-el-metodo">5.4.2. Algunas observaciones sobre el método</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-newton-raphson">5.5. Método de Newton-Raphson</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">5.5.1. Algunas observaciones sobre el método</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia-local-del-metodo">5.5.2. Convergencia local del método</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#algunas-observaciones-sobre-la-convergencia-del-metodo">5.5.2.1. Algunas observaciones sobre la convergencia del método</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia-global-del-metodo">5.5.3. Convergencia global del método</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-la-secante">5.6. Método de la secante</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orden-de-convergencia">5.7. Orden de convergencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-de-ecuaciones-no-lineales">5.8. Sistemas de ecuaciones no lineales</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-newton">5.8.1. Método de Newton</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia-del-metodo-de-newton">5.8.2. Convergencia del método de Newton</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modificaciones-del-metodo-de-newton">5.8.3. Modificaciones del método de Newton</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-newton-amortiguado">5.8.3.1. Método de Newton amortigüado</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#combinacion-de-direcciones">5.8.3.2. Combinación de direcciones</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-matriz-jacobiana">5.8.3.3. Cálculo de matriz jacobiana</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-broyden">5.8.3.3.1. Método de Broyden</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-usando-esquema-centrado-de-derivacion-numerica">5.8.3.3.2. Método usando esquema centrado de derivación numérica</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ecuaciones-no-lineales">
+<h1><span class="section-number">5. </span>Ecuaciones no lineales<a class="headerlink" href="#ecuaciones-no-lineales" title="Permalink to this heading">#</a></h1>
+<section id="contenido">
+<h2><span class="section-number">5.1. </span>Contenido<a class="headerlink" href="#contenido" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Resolución de ecuaciones no lineales</p>
+<ul>
+<li><p>Método de la bisección</p></li>
+<li><p>Método de Newton-Raphson</p></li>
+<li><p>Método de la secante</p></li>
+<li><p>Orden de convergencia</p></li>
+</ul>
+</li>
+<li><p>Resolución de sistemas no lineales</p>
+<ul>
+<li><p>Método de Newton</p></li>
+<li><p>Modificaciones del método de Newton</p></li>
+</ul>
+</li>
+</ul>
+<p>Existe multitud de problemas prácticos donde, dada una cierta ecuación que relaciona un variable con unos determinados parámetros, se quiere <em>despejar</em> el valor de la variable en función de los parámetros. El caso más elemental lo constituyen las ecuaciones de primer o segundo grado, cuya resolución se estudia en los primeros cursos de Matemáticas, aunque existen también algoritmos para resolver ecuaciones de tercer y cuarto grado (desde luego más difíciles de recordar), como</p>
+<p><em>Encontrar <span class="math notranslate nohighlight">\(x\)</span> solución de la ecuación <span class="math notranslate nohighlight">\(x^3 - 6x - 4 = 0\)</span></em></p>
+<p>de donde obtenemos como soluciones <span class="math notranslate nohighlight">\(x=-2\)</span>, <span class="math notranslate nohighlight">\(x=1+\sqrt{3}\)</span> y <span class="math notranslate nohighlight">\(x=1-\sqrt{3}\)</span>.</p>
+<p>Cuando la ecuación hace aparecer la variable solamente a través de una función elemental, la solución se escribe en términos de la función inversa (que se define precisamente como la solución del correspondiente problema). Así podemos considerar el problema</p>
+<p><em>Encontrar <span class="math notranslate nohighlight">\(x\)</span> tal que <span class="math notranslate nohighlight">\(cos(x) = \beta\)</span></em></p>
+<p>cuya solución (que solamente existe si <span class="math notranslate nohighlight">\(\beta \in [-1,+1]\)</span>) escribimos de la forma <span class="math notranslate nohighlight">\(x = acos(\beta)\)</span>. Al definir la función <span class="math notranslate nohighlight">\(acos\)</span> (función arcocoseno) se debe aclarar qué solución se elige (pues existen infinitos valores de <span class="math notranslate nohighlight">\(x\)</span> que devuelven el mismo valor de la función coseno).</p>
+<p>En el resto de los casos, en general, no existe una forma de representar la solución en términos de funciones elementales (y de sus funciones inversas) por lo que se debe acudir a métodos numéricos para aproximar la solución. Por ejemplo, el siguiente problema no permite escribir el valor de <span class="math notranslate nohighlight">\(x\)</span> a partir de funciones elementales</p>
+<p><em>Encontrar <span class="math notranslate nohighlight">\(x\)</span> tal que <span class="math notranslate nohighlight">\(cos(x) - x^2 = \frac{1}{2}\)</span></em></p>
+<p>El objeto de este tema será estudiar técnicas numéricas que nos permitan aproximar la solución de cualquier ecuación no lineal (como se verá, eso sí, será necesaria una cierta regularidad de las funciones que aparezcan en la ecuación y las propiedades de estas funciones harán que los diferentes métodos funcionen mejor o peor).</p>
+<p>Desde un punto de vista formal, la resolución de una ecuación no lineal puede plantearse de forma abstracta como:</p>
+</section>
+<hr class="docutils" />
+<section id="dada-una-funcion-f-a-b-subset-mathbb-r-rightarrow-mathbb-r-encontrar-x-in-mathbb-a-b-tal-que-f-x-0">
+<h2><span class="section-number">5.2. </span>Dada una función <span class="math notranslate nohighlight">\(f: [a, b] \subset \mathbb R \rightarrow \mathbb R\)</span>: encontrar <span class="math notranslate nohighlight">\(x \in \mathbb [a, b]\)</span> tal que
+$<span class="math notranslate nohighlight">\(f(x) = 0.\)</span>$<a class="headerlink" href="#dada-una-funcion-f-a-b-subset-mathbb-r-rightarrow-mathbb-r-encontrar-x-in-mathbb-a-b-tal-que-f-x-0" title="Permalink to this heading">#</a></h2>
+<p>Podemos obervar que este marco abstracto incluye problemas de naturaleza muy diversa. Además de los ejemplos anteriores, donde <span class="math notranslate nohighlight">\(f\)</span> era una función (matemática) sencilla, podemos considerar otros donde <span class="math notranslate nohighlight">\(f\)</span> corresponde a la respuesta de un sistema físico o al resultado de la ejecución de un programa de ordenador. Un ejemplo cotidiano es el ajuste de la temperatura de la ducha con un monomando (sin termostato), donde <span class="math notranslate nohighlight">\(x\)</span> representa la posición del mando y <span class="math notranslate nohighlight">\(f(x)\)</span> es la diferencia entre la temperatura del agua para esa posición y la temperatura deseada (el problema es algo más complejo, pues se trata de un problema dinámico donde además el retraso entre la acción del mando y la percepción de la temperatura del agua puede jugar un papel importante). En un marco más tecnológico, podemos considerar el cálculo del ángulo de ataque que un cierto perfil debe presentar para una determinada velocidad si se desea generar una sustentación dada. Ahora <span class="math notranslate nohighlight">\(x\)</span> representará el ángulo de ataque y la función <span class="math notranslate nohighlight">\(f\)</span> puede corresponder a la diferencia entre la sustentación medida en un experimento físico (para ese valor del ángulo de ataque) y la sustentación desada. Del mismo modo, si se dispone de un código de simulación numérica capaz de proporcionar estimaciones precisas de la sustentación, se puede definir <span class="math notranslate nohighlight">\(f\)</span> como la diferencia entre la sustentación que predice el código y la sustentación desada. Cómo se defina la función <span class="math notranslate nohighlight">\(f\)</span> en el problema a tratar condicionará el tipo de técnicas más adecuadas; por ejemplo, la realización de ensayos físicos o la ejecución de determinados códigos de simulación numérica pueden involucrar unos costes (económicos o de tiempo) muy elevados por lo que se debe elegir un algoritmo que necesite <em>evaluar</em> la función <span class="math notranslate nohighlight">\(f\)</span> el número de veces más reducido posible.</p>
+<p>A continuación se presentan varios métodos generales para la resolución de ecuaciones no lineales de una variable:</p>
+<ul class="simple">
+<li><p>Método de bisección</p></li>
+<li><p>Método de Newton-Raphson</p></li>
+<li><p>Método de la secante</p></li>
+</ul>
+<p>Una tarea importante previa al empleo de métodos numéricos consiste en la localización o separación de raíces, ya de que otro modo resulta complicado que los métodos numéricos puedan converger. Además, desde el punto de vista práctico, el empleo de métodos numéricos cuando se desconoce el valor aproximado de la solución es un ejercicio muy arriesgado y completamente desaconsejado.</p>
+<p>Se denomina <em>raíz de <span class="math notranslate nohighlight">\(f\)</span></em> a todo aquel <span class="math notranslate nohighlight">\(x_* \in [a, b]\)</span> tal que <span class="math notranslate nohighlight">\(f(x_*) = 0\)</span>. Además, se dirá que <span class="math notranslate nohighlight">\(x_*\)</span> es una <em>raíz separada</em> si es la única raíz de <span class="math notranslate nohighlight">\(f\)</span> en un entorno del punto <span class="math notranslate nohighlight">\(x_*\)</span>.</p>
+<p>Cuando <span class="math notranslate nohighlight">\(f\)</span> viene dada por una expresión matemática sencilla (como ocurrirá en los ejemplos que se consideran aquí), para separar las raíces de una función, se pueden utilizar tanto técnicas gráficas como analíticas. Respecto a las primeras, se puede representar la función para detectar un intervalo con un cambio de signo de la misma. Por otro lado, los métodos analíticos utilizan las propiedades de la función y sus derivadas para obtener conclusiones sobre el número de raíces en un cierto intervalo. Para ello resultan muy útiles el teorema de Bolzano y el de Rolle, así como las propiedades de monotonía de una función.</p>
+<p>En la práctica, el conocimiento (físico y/o tecnológico) del problema que se trata de resolver será fundamental para obtener una primera estimación de la solución que permite elegir adecuadamente el intervalo donde se centra la búsqueda. Este hecho tendrá un impacto importante en el coste de cálculo de la resolución del problema (que puede ser muy elevado si <span class="math notranslate nohighlight">\(f\)</span> no es una función matemática).</p>
+</section>
+<section id="estimacion-del-error-de-aproximacion">
+<h2><span class="section-number">5.3. </span>Estimación del error de aproximación<a class="headerlink" href="#estimacion-del-error-de-aproximacion" title="Permalink to this heading">#</a></h2>
+<p>Al resolver numéricamente la ecuación <span class="math notranslate nohighlight">\(f(x) = 0\)</span>, se calcula una aproximación de su solución exacta. Siendo <span class="math notranslate nohighlight">\(x_*^{aprox}\)</span> dicha aproximación, podemos definir el error, <span class="math notranslate nohighlight">\(e\)</span>, como:
+$<span class="math notranslate nohighlight">\( e = x_* - x_*^{aprox}.\)</span>$</p>
+<p>Esta definición será empleada en el estudio de las propiedades del método. Sin embargo, en la práctica la solución exacta <span class="math notranslate nohighlight">\(x_*\)</span> no es conocida y no puede medirse el error de este modo, de forma que tendrá que ser estimado (aproximado) de otra forma.</p>
+<p>Dado que la solución exacta <span class="math notranslate nohighlight">\(x_*\)</span> verifica la ecuación <span class="math notranslate nohighlight">\(f(x_*) = 0\)</span> cabe esperar que si <span class="math notranslate nohighlight">\(f(x_{*}^{aprox}) \simeq 0\)</span> entonces se tenga que el error sea peque~no: <span class="math notranslate nohighlight">\(e \simeq 0\)</span>.</p>
+<p>De este modo, la cantidad <span class="math notranslate nohighlight">\(f(x_*^{aprox})\)</span> (que denominaremos <em>residuo de la ecuación</em>) podría proporcionar una estimación del error cometido. En efecto, si <span class="math notranslate nohighlight">\(f\)</span> es regular y empleamos el desarrollo en serie de Taylor de <span class="math notranslate nohighlight">\(f\)</span> en torno a <span class="math notranslate nohighlight">\(x_*\)</span>, se tiene</p>
+<div class="math notranslate nohighlight">
+\[ f(x_*^{aprox}) \simeq f(x_*) + f'(x_*) (x_*^{aprox}-x_*) = - f'(x_*) e \]</div>
+<p>de modo que</p>
+<div class="math notranslate nohighlight">
+\[ e \simeq - \frac{1}{f'(x_*)} f(x_*^{aprox}).\]</div>
+<p>De esta forma, el residuo proporciona una buena estimación del error cometido siempre que <span class="math notranslate nohighlight">\(f'(x_*)\)</span> no sea muy pequeño (es decir, siempre que el problema esté bien condicionado). En caso de que <span class="math notranslate nohighlight">\(|f'(x_*)| \ll 1\)</span>, el problema está mal condicionado y es muy sensible a perturbaciones de los datos.</p>
+</section>
+<section id="metodo-de-biseccion">
+<h2><span class="section-number">5.4. </span>Método de bisección<a class="headerlink" href="#metodo-de-biseccion" title="Permalink to this heading">#</a></h2>
+<p>El <em>método de bisección</em> es un método elemental para determinar las raíces de una ecuación <span class="math notranslate nohighlight">\(f(x) = 0\)</span>, donde se requiere que <span class="math notranslate nohighlight">\(f: [a, b] \subset \mathbb R \rightarrow \mathbb R\)</span> sea una función continua.b</p>
+<p>Dados <span class="math notranslate nohighlight">\(a\)</span> y <span class="math notranslate nohighlight">\(b\)</span> tales que <span class="math notranslate nohighlight">\(f(a) f(b) &lt; 0\)</span>, el teorema de Bolzano garantiza que existe al menos una raíz de la función en <span class="math notranslate nohighlight">\([a,b]\)</span>. De esta forma, el método de bisección consiste en dividir el intervalo <span class="math notranslate nohighlight">\([a,b]\)</span> en dos partes iguales: <span class="math notranslate nohighlight">\([a, c]\)</span> y <span class="math notranslate nohighlight">\([c, b]\)</span>, siendo <span class="math notranslate nohighlight">\(c\)</span> el punto medio del intervalo. Al calcular <span class="math notranslate nohighlight">\(f(c)\)</span> se observa lo siguiente:</p>
+<ul class="simple">
+<li><p>o bien <span class="math notranslate nohighlight">\(f(a) f(c) &lt; 0\)</span> en cuyo caso <span class="math notranslate nohighlight">\(f\)</span> tiene al menos una raíz en <span class="math notranslate nohighlight">\([a, c]\)</span>,</p></li>
+<li><p>o bien <span class="math notranslate nohighlight">\(f(c) f(b) &lt; 0\)</span> en cuyo caso <span class="math notranslate nohighlight">\(f\)</span> tiene al menos una raíz en <span class="math notranslate nohighlight">\([c, b]\)</span>,</p></li>
+<li><p>o bien <span class="math notranslate nohighlight">\(f(c) = 0\)</span> y por lo tanto <span class="math notranslate nohighlight">\(c\)</span> es una raíz de <span class="math notranslate nohighlight">\(f\)</span>.</p></li>
+</ul>
+<p>En el tercer caso (muy poco frecuente en aritmética finita) el proceso de búsqueda habrá terminado al haberse encontrado una raíz. En los dos primeros casos, el proceso puede repetirse tomando ahora como nuevo intervalo el subintervalo <span class="math notranslate nohighlight">\([a,c]\)</span> (en el primer caso) o el subintervalo <span class="math notranslate nohighlight">\([c,b]\)</span> (en el segundo). Así (descartando el improbable tercer caso), el intervalo se dividirá repetidamente, reteniendo para la siguiente etapa el subintervalo que conserve el cambio de signo. De esta forma, se tiene un proceso iterativo que construye una sucesión de intervalos encajados</p>
+<div class="math notranslate nohighlight">
+\[ (a_0, b_0) \supset (a_1, b_1) \supset \ldots \supset (a_k, b_k) \supset \ldots \]</div>
+<p>donde cada intervalo contiene una raíz y la longitud de cada intervalo es la mitad del anterior. El proceso termina una vez la amplitud del intervalo es lo suficientemente pequeña como para satisfacer una cierta precisión dada, <span class="math notranslate nohighlight">\(\varepsilon_x\)</span>.</p>
+<p>A la hora de implementar el método, es conveniente realizar un test inicial para verificar el cambio de signo de la función dentro del intervalo, asegurando por tanto que este contiene una raíz de la función. Por otro lado, suele añadirse un segundo test de convergencia sobre el residuo de la función, en cuyo caso se detendrá el proceso iterativo siempre que el residuo sea lo suficientemente pequeño, es decir, <span class="math notranslate nohighlight">\(|f(c)| &lt; \varepsilon_f\)</span>, con <span class="math notranslate nohighlight">\(\varepsilon_f\)</span> una tolerancia dada.</p>
+<p>A continuación se muestra un ejemplo de implementación del algoritmo en Python 3.8.10 (al que deberán añadirse comentarios explicando los argumentos de entrada de la función). Obsérvese que en el código se compara el signo de <span class="math notranslate nohighlight">\(f(a)\)</span> y <span class="math notranslate nohighlight">\(f(b)\)</span>, en lugar de tomar el signo de <span class="math notranslate nohighlight">\(f(a) f(b)\)</span>, puesto que el primero únicamente necesita comparar dos bits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">biseccion</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">nitmax</span><span class="p">):</span>
+
+    <span class="c1"># Comprobamos si existe una raiz en el intervalo [a,b]</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;f(a) y f(b) deben tener signo distinto. No se aplica el metodo.&#39;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">for</span> <span class="n">nit</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nitmax</span><span class="p">):</span>
+        <span class="c1"># Calculamos punto medio del intervalo</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
+
+        <span class="c1"># Comprobamos cual de los dos subintervalos conserva el cambio de </span>
+        <span class="c1"># signo entre sus extremos</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">)):</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">c</span>
+
+        <span class="c1"># Calculamos el residuo de la ecuacion</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iteracion </span><span class="si">%d</span><span class="s1">, x* = </span><span class="si">%0.9f</span><span class="s1"> y f(x*) = </span><span class="si">%0.9e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nit</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">res</span><span class="p">))</span>
+
+        <span class="c1"># Criterio de convergencia</span>
+        <span class="k">if</span> <span class="n">res</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">nit</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul>
+    <li>
+        <i>Ejemplo 1</i>:
+    </li>
+</ul>
+<p>Se propone utilizar el método de bisección para calcular una raíz de la función <span class="math notranslate nohighlight">\(f(x) = x^3+x^2-9x+7\)</span> en el intervalo <span class="math notranslate nohighlight">\([0, 1.5]\)</span>.</p>
+<p>El siguiente código utiliza la función <code class="docutils literal notranslate"><span class="pre">biseccion</span></code> definida previamente para calcular la raíz de la función en el intervalo dado. Además, se representa gráficamente la función en el mismo para verificar que la raíz está bien calculada.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definimos la funcion</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">9</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">7</span>
+
+<span class="n">a</span>      <span class="o">=</span> <span class="mi">0</span>    <span class="c1"># Punto inicial del intervalo</span>
+<span class="n">b</span>      <span class="o">=</span> <span class="mf">1.5</span>  <span class="c1"># Punto final del intervalo</span>
+<span class="n">tol</span>    <span class="o">=</span> <span class="mf">1e-8</span> <span class="c1"># Tolerancia criterio de parada</span>
+<span class="n">nitmax</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Numero maximo de iteraciones</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">nit</span> <span class="o">=</span> <span class="n">biseccion</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">nitmax</span><span class="p">)</span>
+
+<span class="c1"># Representación de la funcion</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span>             <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Definimos un vector de puntos donde evaluar la funcion</span>
+<span class="n">x_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Representamos la funcion</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vec</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x_vec</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;f(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteracion 1, x* = 0.750000000 y f(x*) = 1.234375000e+00
+Iteracion 2, x* = 1.125000000 y f(x*) = 4.355468750e-01
+Iteracion 3, x* = 0.937500000 y f(x*) = 2.653808594e-01
+Iteracion 4, x* = 1.031250000 y f(x*) = 1.210632324e-01
+Iteracion 5, x* = 0.984375000 y f(x*) = 6.347274780e-02
+Iteracion 6, x* = 1.007812500 y f(x*) = 3.100538254e-02
+Iteracion 7, x* = 0.996093750 y f(x*) = 1.568597555e-02
+Iteracion 8, x* = 1.001953125 y f(x*) = 7.797233760e-03
+Iteracion 9, x* = 0.999023438 y f(x*) = 3.910063766e-03
+Iteracion 10, x* = 1.000488281 y f(x*) = 1.952171209e-03
+Iteracion 11, x* = 0.999755859 y f(x*) = 9.768009040e-04
+Iteracion 12, x* = 1.000122070 y f(x*) = 4.882216435e-04
+Iteracion 13, x* = 0.999938965 y f(x*) = 2.441555259e-04
+Iteracion 14, x* = 1.000030518 y f(x*) = 1.220665872e-04
+Iteracion 15, x* = 0.999984741 y f(x*) = 6.103608757e-05
+Iteracion 16, x* = 1.000007629 y f(x*) = 3.051734529e-05
+Iteracion 17, x* = 0.999996185 y f(x*) = 1.525884727e-05
+Iteracion 18, x* = 1.000001907 y f(x*) = 7.629379979e-06
+Iteracion 19, x* = 0.999999046 y f(x*) = 3.814700904e-06
+Iteracion 20, x* = 1.000000477 y f(x*) = 1.907347723e-06
+Iteracion 21, x* = 0.999999762 y f(x*) = 9.536745438e-07
+Iteracion 22, x* = 1.000000119 y f(x*) = 4.768371014e-07
+Iteracion 23, x* = 0.999999940 y f(x*) = 2.384185933e-07
+Iteracion 24, x* = 1.000000030 y f(x*) = 1.192092860e-07
+Iteracion 25, x* = 0.999999985 y f(x*) = 5.960464566e-08
+Iteracion 26, x* = 1.000000007 y f(x*) = 2.980232239e-08
+Iteracion 27, x* = 0.999999996 y f(x*) = 1.490116119e-08
+Iteracion 28, x* = 1.000000002 y f(x*) = 7.450580597e-09
+</pre></div>
+</div>
+<img alt="../../_images/a422afeb59740fe7007c00336cb7da6ae3badae97f11f9dbe8b0e195c99dce45.png" src="../../_images/a422afeb59740fe7007c00336cb7da6ae3badae97f11f9dbe8b0e195c99dce45.png" />
+</div>
+</div>
+<section id="convergencia-del-metodo">
+<h3><span class="section-number">5.4.1. </span>Convergencia del método<a class="headerlink" href="#convergencia-del-metodo" title="Permalink to this heading">#</a></h3>
+<p>Tomando <span class="math notranslate nohighlight">\(c_n\)</span> como aproximación de la raíz <span class="math notranslate nohighlight">\(x_*\)</span> de una función <span class="math notranslate nohighlight">\(f\)</span>, el error en la iteración <span class="math notranslate nohighlight">\(n\)</span>-ésima verifica:</p>
+<div class="math notranslate nohighlight">
+\[|e_n| = |x_* - c_n| \leq \frac{1}{2} |b_n - a_n|.\]</div>
+<p>Por otro lado,</p>
+<div class="math notranslate nohighlight">
+\[|b_n - a_n| = \frac{1}{2} |b_{n-1} - a_{n-1}|, \quad n = 1,2,3, \ldots\]</div>
+<p>Entonces,</p>
+<div class="math notranslate nohighlight">
+\[|e_n| \leq \frac{1}{2^{n+1}} |b_0 - a_0|,\]</div>
+<p>siendo <span class="math notranslate nohighlight">\(a_0 = a\)</span> y <span class="math notranslate nohighlight">\(b_0 = b\)</span>. De esta forma, <span class="math notranslate nohighlight">\(|e_n| \rightarrow 0\)</span> cuando <span class="math notranslate nohighlight">\(n \rightarrow \infty\)</span>.</p>
+<p>Obsérvese que es posible obtener <em>a priori</em> el número de iteraciones necesario para lograr una cierta precisión <span class="math notranslate nohighlight">\(\varepsilon_x\)</span>. Puesto que <span class="math notranslate nohighlight">\(|e_n| \leq \displaystyle\frac{1}{2^{n+1}} |b_0 - a_0|\)</span>, basta con obtener el primer valor de <span class="math notranslate nohighlight">\(n\)</span> tal que:</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{2^{n+1}} |b_0 - a_0| \leq \varepsilon_x,\]</div>
+<p>esto es,</p>
+<div class="math notranslate nohighlight">
+\[n \geq \frac{\log(|b_0 - a_0|) - \log(\varepsilon_x)}{\log(2)} - 1.\]</div>
+<p>A continuación se recoge un resultado formal de convergencia del método de bisección.</p>
+<ul>
+    <li>
+        <i>Teorema 1</i>:
+    </li>
+</ul>
+<p>Sea <span class="math notranslate nohighlight">\(f: [a, b] \subset \mathbb R \rightarrow \mathbb R\)</span> una función continua sobre el intervalo <span class="math notranslate nohighlight">\([a, b]\)</span> y tal que <span class="math notranslate nohighlight">\(f(a) f(b) &lt; 0\)</span>. Sean <span class="math notranslate nohighlight">\(\{a_n\}_{n=0}^{\infty}\)</span>, <span class="math notranslate nohighlight">\(\{b_n\}_{n=0}^{\infty}\)</span> y <span class="math notranslate nohighlight">\(\{c_n\}_{n=0}^{\infty}\)</span> las sucesiones generadas por el método de bisección. Entonces, denotando mediante <span class="math notranslate nohighlight">\(x_*\)</span> una raíz de <span class="math notranslate nohighlight">\(f\)</span> en <span class="math notranslate nohighlight">\([a, b]\)</span>, se tiene:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\lim_{n\rightarrow\infty} a_n = \displaystyle\lim_{n\rightarrow\infty} b_n = \displaystyle\lim_{n\rightarrow\infty} c_n = x_*\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(|x_* - c_n| \leq 2^{-(n+1)}(b-a)\)</span>.</p></li>
+</ul>
+</section>
+<section id="algunas-observaciones-sobre-el-metodo">
+<h3><span class="section-number">5.4.2. </span>Algunas observaciones sobre el método<a class="headerlink" href="#algunas-observaciones-sobre-el-metodo" title="Permalink to this heading">#</a></h3>
+<p>El método de bisección es un método robusto, pero con una convergencia relativamente lenta. En caso de que la raíz esté más cerca de uno de los extremos (esperable si los valores absolutos de la función en los dos extremos son muy diferentes), una mejora del algoritmo consistiría en dividir el intervalo de otra manera.</p>
+<p>Para emplear correctamente el método es necesario separar previamente una raíz, ya que el algoritmo únicamente puede calcular una. Además, la función debe ser continua, puesto que en otro caso se podría confundir una singularidad con una raíz al utilizar el criterio de parada sobre <span class="math notranslate nohighlight">\(\varepsilon_x\)</span>. Puede usarse el código anterior para comprobar fácilmente esto con algún ejemplo.</p>
+<p>La combinación de los criterios de parada sobre el valor del residuo y sobre la amplitud del intervalo permite detectar problemas mal condicionados, ya que en estos el primero de los criterios se satisface fácilmente, pero no el segundo.</p>
+<p>Como se ha visto, es fácil predecir el número necesario de etapas del método de bisección para lograr una determinada precisión. Para una estimación <em>grosera</em> de este número obsérvese que <span class="math notranslate nohighlight">\(2^{10} = 1024 \simeq 10^3\)</span> por lo que cada <span class="math notranslate nohighlight">\(10\)</span> iteraciones del método la longitud del intervalo se habrá dividido aproximadamente por <span class="math notranslate nohighlight">\(1000\)</span>. Así, si la separación de la raíz que se busca proporciona un intervalo de una longitud (de orden) unidad serán necesarias unas <span class="math notranslate nohighlight">\(10\)</span> iteraciones para tener una precisión de milésimas (de forma que se calculan correctamente dos decimales) y unas <span class="math notranslate nohighlight">\(20\)</span> si se quiere un precisión de millonésimas (cinco decimales correctos).</p>
+</section>
+</section>
+<section id="metodo-de-newton-raphson">
+<h2><span class="section-number">5.5. </span>Método de Newton-Raphson<a class="headerlink" href="#metodo-de-newton-raphson" title="Permalink to this heading">#</a></h2>
+<p>Dada una función <span class="math notranslate nohighlight">\(f: [a, b] \subset \mathbb R \rightarrow \mathbb R\)</span> cualquiera, tal y como se ha commentado, en general no se dispone de técnicas analíticas para resolver de forma exacta la ecuación</p>
+<div class="math notranslate nohighlight">
+\[f(x) = 0.\]</div>
+<p>Sin embargo, sí se dispone de técnicas para calcularla cuando <span class="math notranslate nohighlight">\(f\)</span> es una función simple, por ejemplo un polinomio de orden uno o dos.</p>
+<p>El método de Newton-Raphson propone sustituir la función <span class="math notranslate nohighlight">\(f\)</span> por el polinomio de Taylor de orden uno en el entorno de una aproximación de la raíz <span class="math notranslate nohighlight">\(x_*\)</span> para resolver la ecuación. Así, si se cuenta con una cierta aproximación de <span class="math notranslate nohighlight">\(x_*\)</span>, que denotamos <span class="math notranslate nohighlight">\(x_{n}\)</span>, el método de Newton-Raphson propone calcular una nueva aproximación <span class="math notranslate nohighlight">\(x_{n+1}\)</span> resolviendo:</p>
+<div class="math notranslate nohighlight">
+\[P_n(x_{n+1}) = 0,\]</div>
+<p>donde</p>
+<div class="math notranslate nohighlight">
+\[P_n(x) = f(x_n) + f'(x_n)(x-x_n).\]</div>
+<p>De esta forma, el método genera una sucesión a partir de un iterante inicial <span class="math notranslate nohighlight">\(x_0\)</span> y la siguiente fórmula de recurrencia</p>
+<div class="math notranslate nohighlight">
+\[x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\]</div>
+<p>que se espera que converja a <span class="math notranslate nohighlight">\(x_*\)</span>.</p>
+<p>A continuación se muestra un ejemplo de implementación del algoritmo en una función (para Python 3.8.10) donde, como en el ejemplo anterior, deberán comentarse adecuadamente los argumentos de entrada.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tol_x</span><span class="p">,</span> <span class="n">tol_f</span><span class="p">,</span> <span class="n">nitmax</span><span class="p">):</span>
+
+    <span class="k">for</span> <span class="n">nit</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nitmax</span><span class="p">):</span>
+
+        <span class="c1"># Calcular valor de x (si es posible)</span>
+        <span class="k">if</span> <span class="n">df</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="o">!=</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span><span class="o">/</span><span class="n">df</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No es posible iterar: f&#39;(xn)=0&quot;</span><span class="p">)</span>
+            <span class="k">break</span>
+
+        <span class="c1"># Calcular valor de la diferencia entre x y x0</span>
+        <span class="n">dif</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span>
+        <span class="c1"># Calcular valor del residuo</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iteracion </span><span class="si">%d</span><span class="s1">, x = </span><span class="si">%0.9f</span><span class="s1">, |x-xn| = </span><span class="si">%0.6e</span><span class="s1"> y f(x) = </span><span class="si">%0.6e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nit</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">dif</span><span class="p">,</span> <span class="n">res</span><span class="p">))</span>
+
+        <span class="c1"># Criterios de convergencia</span>
+        <span class="k">if</span> <span class="n">dif</span> <span class="o">&lt;</span> <span class="n">tol_x</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x0</span> <span class="o">=</span> <span class="n">x</span>
+
+        <span class="k">if</span> <span class="n">res</span> <span class="o">&lt;</span> <span class="n">tol_f</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">nit</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul>
+    <li>
+        <i>Ejemplo 2</i>:
+    </li>
+</ul>
+<p>Se propone utilizar el método de Newton-Raphson para calcular la única raíz de  <span class="math notranslate nohighlight">\(f(x) = x^3+x^2-9x+7\)</span> en el intervalo <span class="math notranslate nohighlight">\([0, 1.5]\)</span>, tomando como iterante inicial el punto medio del intervalo <span class="math notranslate nohighlight">\(x_0 = 0.75\)</span>. Se sugiere emplear la representación de esta función (en una figura anterior) para generar gráficamente los iterantes del método de Newton-Raphson (obsérvese que se tratará de la intersección de la recta tangente al grafo de la función en el punto correspondiente al iterante con el eje de abscisas) y comprombar la rápida convergencia de la sucesión.</p>
+<p>El siguiente código utiliza la función <code class="docutils literal notranslate"><span class="pre">newton</span></code> definida previamente para calcular la raíz de la función en el intervalo dado. Obsérvese que el método de Newton-Raphson converge a la raíz con una tolerancia de <span class="math notranslate nohighlight">\(10^{-8}\)</span> en 4 iteraciones, cuando el método de bisección requería 28 iteraciones para detenerse con esa misma tolerancia.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definimos la funcion</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">9</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">7</span>
+
+<span class="c1"># Definimos la derivada de la funcion</span>
+<span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">-</span><span class="mi">9</span>
+
+<span class="n">x0</span>     <span class="o">=</span> <span class="mf">0.75</span> <span class="c1"># Iterante inicial</span>
+<span class="n">b</span>      <span class="o">=</span> <span class="mf">1.5</span>  <span class="c1"># Punto final del intervalo</span>
+<span class="n">tol_x</span>  <span class="o">=</span> <span class="mf">1e-8</span> <span class="c1"># Tolerancia</span>
+<span class="n">tol_f</span>  <span class="o">=</span> <span class="mf">1e-8</span> <span class="c1"># Tolerancia</span>
+<span class="n">nitmax</span> <span class="o">=</span> <span class="mi">20</span>   <span class="c1"># Numero maximo de iteraciones</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">nit</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tol_x</span><span class="p">,</span> <span class="n">tol_f</span><span class="p">,</span> <span class="n">nitmax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteracion 1, x = 0.962365591, |x-xn| = 2.123656e-01 y f(x) = 1.561497e-01
+Iteracion 2, x = 0.998706304, |x-xn| = 3.634071e-02 y f(x) = 5.181477e-03
+Iteracion 3, x = 0.999998332, |x-xn| = 1.292028e-03 y f(x) = 6.673023e-06
+Iteracion 4, x = 1.000000000, |x-xn| = 1.668250e-06 y f(x) = 1.113243e-11
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h3><span class="section-number">5.5.1. </span>Algunas observaciones sobre el método<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>En la implementación del método ha de incluirse un test de parada sobre los iterantes <span class="math notranslate nohighlight">\(|x_{n+1}-x_{n}|\)</span> y otro sobre el valor del residuo <span class="math notranslate nohighlight">\(f(x_n)\)</span>. Del mismo modo que en el método de la bisección, la relación entre ambos se encuentra ligada al condicionamiento del problema. Sin embargo, para el método de Newton-Raphson (a diferencia del método de bisección) la información sobre el condicionamiento se obtiene de modo directo pues se calcula explícitamente el valor de <span class="math notranslate nohighlight">\(f'(x_n)\)</span> como parte de la iteración.</p>
+<p>El método solo funcionará bien si se arranca de un iterante inicial cercano a la solución. En otro caso, el resultado de una iteración puede hacer que el siguiente iterante se aleje de la raíz y que la sucesión no converja o que lo haga a otra raíz (que inicialmente podría estar más alejada). Empléese el código anterior para hacer variar el iterante inicial y observar el comportamiento de la sucesión generada por el método de Newton-Raphson en cada caso.</p>
+<p>Calcular la derivada de la función <span class="math notranslate nohighlight">\(f\)</span> puede ser difícil (piénsese en alguno de los ejemplos comentados anteriormente, como la obtención de <span class="math notranslate nohighlight">\(f\)</span> mediante la realización de un ensayo experimental o la ejecución de un programa de simulación). Incluso en aquellos casos donde <span class="math notranslate nohighlight">\(f\)</span> corresponde a una expresión matemática puede ser costoso obtenerla (si la expresión es muy complicada) y resultará sencillo cometer errores en el cálculo de la derivada (lo que hará que ya no se esté usando la recta tangente al grafo de la función sino una recta que pasa por el punto pero tiene una pediente arbitraria, con lo que se perderán todas las propiedades de convergencia del esquema). Para solventar estas dificultades se pueden utilizar adoptar diferentes estrategias, como el empleo de fórmulas de derivación numérica o la reformulación del método. Se volverá sobre esta cuestión más adelante.</p>
+</section>
+<section id="convergencia-local-del-metodo">
+<h3><span class="section-number">5.5.2. </span>Convergencia local del método<a class="headerlink" href="#convergencia-local-del-metodo" title="Permalink to this heading">#</a></h3>
+<p>Definiendo el error absoluto en la etapa <span class="math notranslate nohighlight">\(n\)</span>-ésima del método como:</p>
+<div class="math notranslate nohighlight">
+\[ e_{n} = x_{n} - x_*,\]</div>
+<p>se deduce que</p>
+<div class="math notranslate nohighlight">
+\[ e_{n+1} = x_{n+1} - x_* = x_n - \frac{f(x_n)}{f'(x_n)} - x_* = e_n - \frac{f(x_n)}{f'(x_n)} = \frac{e_n f'(x_n) - f(x_n)}{f'(x_n)}.\]</div>
+<p>Por otro lado, utilizando el desarrollo en serie de Taylor centrado en <span class="math notranslate nohighlight">\(x_n\)</span></p>
+<div class="math notranslate nohighlight">
+\[0 = f(x_*) = f(x_n - e_n) = f(x_n) - e_n f'(x_n) + \frac{1}{2} e_n^2f''(\xi_n),\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\xi_n \in (a_n, b_n)\)</span>. Combinando las dos expresiones anteriores se llega a una relación entre <span class="math notranslate nohighlight">\(e_{n+1}\)</span> y <span class="math notranslate nohighlight">\(e_n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[e_{n+1} = \frac{f''(\xi_n)}{2f'(x_n)}e_n^2.\]</div>
+<p>De esta forma, conforme <span class="math notranslate nohighlight">\(x_n\)</span> se acerque a <span class="math notranslate nohighlight">\(x_*\)</span> se espera que:</p>
+<div class="math notranslate nohighlight">
+\[e_{n+1} = \frac{f''(\xi_n)}{2f'(x_n)}e_n^2 \simeq \frac{f''(x_*)}{2f'(x_n)}e_n^2.\]</div>
+<p>A continuación se recoge un resultado formal de convergencia local del método.</p>
+<ul>
+    <li>
+        <i>Teorema 2 (Convergencia local del método de Newton-Raphson)</i>:
+    </li>
+</ul>
+<p>Sea <span class="math notranslate nohighlight">\(f: [a, b] \subset \mathbb R \rightarrow \mathbb R\)</span> una función <span class="math notranslate nohighlight">\(\mathcal C^2([a,b])\)</span> en un entorno de <span class="math notranslate nohighlight">\(x_*\)</span> y sea <span class="math notranslate nohighlight">\(x_*\)</span> una raíz simple de <span class="math notranslate nohighlight">\(f\)</span>, esto es <span class="math notranslate nohighlight">\(f'(x_*) \neq 0\)</span>. Existe un entorno <span class="math notranslate nohighlight">\((x_*-\delta, x_*+\delta)\)</span> tal que si se toma <span class="math notranslate nohighlight">\(x_0 \in (x_*-\delta, x_*+\delta)\)</span> se tiene:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\lim_{n\rightarrow\infty} x_n = x_*\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\exists C&gt;0\)</span> tal que <span class="math notranslate nohighlight">\(|x_{n+1} - x_*| \leq C |x_{n} - x_*|^2\)</span>, <span class="math notranslate nohighlight">\(\forall n \geq 0\)</span>.</p></li>
+</ul>
+<p>Desde el punto de vista computacional, el resultado de convergencia cuadrática del método posee gran interés. Este indica, <em>grosso modo</em>, que el número de decimales exactos en la aproximación de la raíz se dobla en cada iteración. Veamos un ejemplo.</p>
+<ul>
+    <li>
+        <i> Ejemplo 3</i>:
+    </li>
+</ul>
+<p>Para un número real positivo <span class="math notranslate nohighlight">\(r\)</span> se considera el cálculo de su raíz cuadrada <span class="math notranslate nohighlight">\(s = \sqrt{r}\)</span> como solución de la ecuación</p>
+<div class="math notranslate nohighlight">
+\[f(x) = x^2 - r = 0.\]</div>
+<p>Tomando <span class="math notranslate nohighlight">\(r = 17\)</span> y partiendo de <span class="math notranslate nohighlight">\(x_0 = 4\)</span>, se obtienen los siguientes 4 iterantes:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{rcl} 
+x_1 &amp; = &amp; 4.12,\\
+x_2 &amp; = &amp; 4.123106, \\
+x_3 &amp; = &amp; 4.1231056256177, \\
+x_4 &amp; = &amp; 4.123105625617660549821409856,
+\end{array}
+\end{split}\]</div>
+<p>donde únicamente se representan decimales exactos en cada paso. Nótese que el almacenamiento de decimales exactos en <span class="math notranslate nohighlight">\(x_4\)</span> requiere más precisión que la norma ANSI/IEEE de doble precisión (8 bytes).</p>
+<p>A partir del resultado anterior, se sabe que <span class="math notranslate nohighlight">\(e_{n+1} \simeq C e_n^2\)</span>, donde <span class="math notranslate nohighlight">\(C = \displaystyle\frac{f''(x_*)}{2f'(x_*)}\)</span>. Aplicando esto al ejemplo se tiene que:</p>
+<div class="math notranslate nohighlight">
+\[C = \displaystyle\frac{1}{2\sqrt{17}} \simeq 0.12127 \quad \text{y} \quad e_0 = x_0 - \sqrt{17} \simeq -0.12311.\]</div>
+<p>De esta forma:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{rcl} 
+e_1 \simeq C e_0^2 &amp; \simeq &amp; 1.8383 \cdot 10^{-3},\\
+e_2 \simeq C e_1^2 &amp; \simeq &amp; 4.0959 \cdot 10^{-7}, \\
+e_3 \simeq C e_2^2 &amp; \simeq &amp; 2.0344 \cdot 10^{-14}, \\
+e_4 \simeq C e_3^2 &amp; \simeq &amp; 5.0191 \cdot 10^{-29}.
+\end{array}
+\end{split}\]</div>
+<p>Como curiosidad, se puede mencionar que la implementación del cálculo de la raíz cuadrada en un microprocesador se hace con frecuencia empleando esquemas de este tipo. La razón es que las unidades ALU de los microprocesadores habitualmente solo pueden calcular sumas, restas, productos y multiplicaciones, de modo que el resto de las funciones y operaciones se deben implementar vía <em>software</em> (de bajo nivel). Las iteraciones del método de Newton-Raphson para el cálculo de la raíz cuadrada en este ejemplo efectivamente solo requieren usar sumas y productos pues se puede escribir</p>
+<div class="math notranslate nohighlight">
+\[ x_{n+1} = \frac{x_n^2 + r}{2 x_n} \]</div>
+<section id="algunas-observaciones-sobre-la-convergencia-del-metodo">
+<h4><span class="section-number">5.5.2.1. </span>Algunas observaciones sobre la convergencia del método<a class="headerlink" href="#algunas-observaciones-sobre-la-convergencia-del-metodo" title="Permalink to this heading">#</a></h4>
+<p>El resultado de convergencia expuesto únicamente tiene sentido (e interés) cerca de la solución de la ecuación, donde <span class="math notranslate nohighlight">\(e_{n+1} \approx C e_n^2\)</span>. Por otro lado, una vez cerca de la solución y para un problema donde <span class="math notranslate nohighlight">\(C\)</span> tiene orden unidad (lo que excluye los casos mal condicionados o casos donde la derivada segunda puede tomar valores absolutos muy grandes), la relación anterior muestra que la rápida convergencia del ejemplo anterior ocurrirá también de forma general: arrancando con un iterante inicial con error <span class="math notranslate nohighlight">\(e_0 \sim 10^{-1}\)</span> cabe esperar que <span class="math notranslate nohighlight">\(e_1 \sim 10^{-2}\)</span>, <span class="math notranslate nohighlight">\(e_2 \sim 10^{-4}\)</span>, <span class="math notranslate nohighlight">\(e_3 \sim 10^{-8}\)</span> y <span class="math notranslate nohighlight">\(e_4 \sim 10^{-16}\)</span> y bastarán entonces cuatro iteraciones para tener tanta precisión como permite el almacenamiento en coma flotante con 64 bits. Obsérvese que, en comparación, el método de bisección necesita <span class="math notranslate nohighlight">\(50\)</span> iteraciones para reducir un intervalo de longitud de unas d’ecimas a un intervalo de longitud del orden de <span class="math notranslate nohighlight">\(10^{-16}\)</span>.</p>
+<p>De modo resumido, el resultado expuesto no asegura la convergencia del método de Newton-Raphson ni permite estimar el número de iteraciones. Sin embargo, sí que garantiza que serán necesarias pocas iteraciones muy cerca de la solución, siempre que <span class="math notranslate nohighlight">\(f\)</span> sea regular y <span class="math notranslate nohighlight">\(f'(x_*) \neq 0\)</span>.</p>
+<p>La convergencia del método de Newton-Raphson es peor en problemas mal condicionados, donde <span class="math notranslate nohighlight">\(|f'(x_*)|\)</span> toma un valor muy reducido (o es incluso nulo). Puede comprobarse esto adaptando el código anterior para encontrar la única solución de la ecuación <span class="math notranslate nohighlight">\(x^2 - 2x + 1 = 0\)</span>. Resultará útil, de cara a comprender el comportamiento del método en este caso (infinitamente mal condicionado) representar la correspondiente función <span class="math notranslate nohighlight">\(f(x)\)</span> y esbozar los primeros iterantes (comparando la situación con la que se presentaba en el ejemplo 2).</p>
+<p>La implementación en aritmética finita introduce una complejidad adicional en casos como el anterior. Una ecuación con una raíz doble puede dar lugar a que, al operar en aritmética finita, aparezcan dos raíces reales distintas (pero muy próximas) o a que desaparezca esa raíz (apareciendo dos raíces complejas conjugadas, con una parte imaginaria muy reducida). Es fácil interpretar este hecho observando que la aritmética finita hace que en vez de operar con la función <span class="math notranslate nohighlight">\(f(x)\)</span> se haga (debido a los errores de redondeo) con una función <span class="math notranslate nohighlight">\(f(x) + \epsilon(x)\)</span> (donde <span class="math notranslate nohighlight">\(\epsilon(x)\)</span> representa el efecto de los redondeos).</p>
+</section>
+</section>
+<section id="convergencia-global-del-metodo">
+<h3><span class="section-number">5.5.3. </span>Convergencia global del método<a class="headerlink" href="#convergencia-global-del-metodo" title="Permalink to this heading">#</a></h3>
+<p>Bajo ciertas hipótesis es posible asegurar la convergencia del método de Newton-Raphson arrancando desde un iterante cualquiera en un cierto conjunto. Es raro que se puedan aplicar resultados de convergencia de este tipo (global) en la práctica, pues necesitan imponer condiciones sobre la función <span class="math notranslate nohighlight">\(f\)</span> difíciles de verificar (ya se ha comentado que <span class="math notranslate nohighlight">\(f\)</span> puede no ser siquiera una expresión matemática conocida), pero sí hay algunas situaciones donde es crítico poder hacerlo (como en la implementación del cálculo de la raíz cuadrada mencionado anteriormente).</p>
+<p>A continuación se muestra un resultado que garantiza la convergencia con (cierta) independencia del iterante incial.</p>
+<ul>
+    <li>
+        <i>Teorema 3 (Convergencia global del método de Newton-Raphson)</i>:
+    </li>
+</ul>
+<p>Sea <span class="math notranslate nohighlight">\(f: [a, b] \subset \mathbb R \rightarrow \mathbb R\)</span> una función <span class="math notranslate nohighlight">\(\mathcal C^2([a,b])\)</span> tal que:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f''(x) &gt; 0\)</span>, <span class="math notranslate nohighlight">\(\forall x \in (a,b)\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(f'(x) &gt; 0\)</span>, <span class="math notranslate nohighlight">\(\forall x \in (a,b)\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(a) f(b) &lt; 0\)</span>.</p></li>
+</ul>
+<p>Entonces <span class="math notranslate nohighlight">\(f\)</span> tiene exactamente una raíz en <span class="math notranslate nohighlight">\((a,b)\)</span> y el método de Newton-Raphson converge a ella para cualquier iterante inicial <span class="math notranslate nohighlight">\(x_0 \in (a,b)\)</span>, siempre que el primer iterante <span class="math notranslate nohighlight">\(x_1\)</span> se encuentre en <span class="math notranslate nohighlight">\((a,b)\)</span>.</p>
+</section>
+</section>
+<section id="metodo-de-la-secante">
+<h2><span class="section-number">5.6. </span>Método de la secante<a class="headerlink" href="#metodo-de-la-secante" title="Permalink to this heading">#</a></h2>
+<p>Existen otros métodos numéricos para la resolución de ecuaciones no lineales que buscan propiedades de convergencia similares a las del método de Newton-Raphson pero evitando la evaluación de la derivada de la función <span class="math notranslate nohighlight">\(f\)</span>, tratando con aproximaciones numéricas de esta. Uno de estos métodos es el llamado método de la secante.</p>
+<p>La idea de este método es muy simple y se basa en las técnicas de derivación numérica ya estudiadas. En particular, si el método ya ha calculado al menos un iterante, de modo que se dispone de dos aproximaciones <span class="math notranslate nohighlight">\(x_{n}\)</span> y <span class="math notranslate nohighlight">\(x_{n-1}\)</span>, es posible aproximar el valor de <span class="math notranslate nohighlight">\(f'(x_n)\)</span> utilizando el esquema descentrado</p>
+<div class="math notranslate nohighlight">
+\[ f'(x_n) \simeq \frac{f(x_n) - f(x_{n-1})}{x_n - x_{n-1}} \]</div>
+<p>Así, dada <span class="math notranslate nohighlight">\(f: [a, b] \subset \mathbb R \rightarrow \mathbb R\)</span> una función regular y <span class="math notranslate nohighlight">\(x_{0}\)</span> y <span class="math notranslate nohighlight">\(x_{1}\)</span> dos valores próximos a la raíz buscada, el <em>método de la secante</em> propone generar una sucesión a través de la fórmula de recurrencia (de tres términos)</p>
+<div class="math notranslate nohighlight">
+\[x_{n+1} = x_n - f(x_n)\frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})} 
+          = \frac{x_{n-1} f(x_n) - x_n f(x_{n-1})}{f(x_n) - f(x_{n-1})} .\]</div>
+<p>Nótese que a medida que <span class="math notranslate nohighlight">\(x_n\)</span> se acerca a <span class="math notranslate nohighlight">\(x_*\)</span> la aproximación de la derivada mejora, aunque debe prestarse atención a la pérdida de precisión debido a la división por un valor pequeño.</p>
+<p>Puesto que se trata de un método basado en el método de Newton-Raphson donde la derivada se sustituye por una aproximación, se espera que sus propiedades sean similares. En cierto modo, así es pero con algunos matices, como se va a ver.</p>
+<p>Por un lado, se había observado que el método de Newton-Raphson podría tener dificultades al arrancar si el iterante inicial <span class="math notranslate nohighlight">\(x_0\)</span> no estaba muy cerca de la solución. Aunque el método de la secante puede presentar dificultades similares a las de Newton-Raphson en cuanto a convergencia global, es posible hacer que se comporte de forma mucho más robusta y evite esas dificultades en la mayor parte de los casos. Así, por ejemplo, pueden tomarse <span class="math notranslate nohighlight">\(x_0\)</span> y <span class="math notranslate nohighlight">\(x_1\)</span> rodeando a la raíz <span class="math notranslate nohighlight">\(x_{*}\)</span> que se busca (en vez de tomar dos valores muy próximos entre sí, como sugeriría la aproximación de la derivada con un error reducido). Existe una variante del método de la secante, conocido como método de <em>regula falsi</em>, que resuelve las dificultades de convergencia global del método de la secante y de Newton-Raphson (a coste de una pérdida de velocidad de convergencia) eligiendo no solo <span class="math notranslate nohighlight">\(x_0\)</span> y <span class="math notranslate nohighlight">\(x_1\)</span> de forma que contengan un cambio de signo de <span class="math notranslate nohighlight">\(f\)</span> (lo que asegura que el intervalo contiene a la raíz <span class="math notranslate nohighlight">\(x_{*}\)</span>) sino seleccionando tras cada nueva iteración (hecha con la misma fórmula que el método de la secante) las dos aproximaciones que se emplearán en la siguiente iteración de modo que contengan un cambio de signo de <span class="math notranslate nohighlight">\(f\)</span> (en ese sentido, el método de <em>regula falsi</em> es más parecido al método de bisección, modificando simplemente la forma de dividir el intervalo: si el método de bisección divide el intervalo siempre por la mitad, el método de <em>regula falsi</em> lo hace mediante el punto de corte de la secante con el eje de abscisas).</p>
+<p>Por otro lado, también hay una pequeña diferencia en la velocidad con la que la sucesión generada por el método converge a la raíz (derivada del hecho de emplear una aproximación de la derivada y no la propia derivada). A continuación se presenta un teorema que asegura la convergencia local del método y estima el deterioro de la convergencia (en comparación con el método de Newton-Raphson) causado por el empleo de una aproximación de la derivada.</p>
+<ul>
+    <li>
+        <i>Teorema 4 (Convergencia local del método de la secante)</i>:
+    </li>
+</ul>
+<p>Sea <span class="math notranslate nohighlight">\(f: [a, b] \subset \mathbb R \rightarrow \mathbb R\)</span> una función <span class="math notranslate nohighlight">\(\mathcal C^2([a,b])\)</span> en un entorno de <span class="math notranslate nohighlight">\(x_*\)</span> y sea <span class="math notranslate nohighlight">\(x_*\)</span> una raíz simple de <span class="math notranslate nohighlight">\(f\)</span>. Entonces, existe un entorno <span class="math notranslate nohighlight">\((x_*-\delta, x_*+\delta)\)</span> tal que si se toman <span class="math notranslate nohighlight">\(x_0, x_1 \in (x_*-\delta, x_*+\delta)\)</span> se tiene:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\displaystyle\lim_{n\rightarrow\infty} x_n = x_*\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\exists C'&gt;0\)</span> tal que <span class="math notranslate nohighlight">\(|x_{n+1} - x_*| \leq C' |x_{n} - x_*|^\alpha\)</span>, <span class="math notranslate nohighlight">\(\forall n \geq 0\)</span> y con <span class="math notranslate nohighlight">\(\alpha = (1+\sqrt{5})/2\approx 1.62.\)</span></p></li>
+</ul>
+<p>Puede retomarse de nuevo el ejemplo con el que se ha ilustrado la aplicación del método de bisección y el método de Newton-Raphson para aplicar ahora el método de la secante y observar las diferencias entre las tres técnicas. Téngase en cuenta que, para la programación de la función que implemente el método de la secante (a diferencia de la función que implementa el método de Newton-Raphson), es necesario contar con dos pasos anteriores y no con uno.</p>
+<p>Por otro lado, para comparar el método de la secante con el método de Newton-Raphson considérense dos situaciones distintas:</p>
+<ul class="simple">
+<li><p>un caso donde el método de Newton-Raphson converge rápidamente a la solución y donde, al arrancar el método de la secante con dos puntos próximos entre sí (y próximos al iterante inicial usado para el método de Newton-Raphson), se obtiene una convergencia similar pero ligeramente más lenta.</p></li>
+<li><p>un caso (anteriormente se sugirió un ejemplo) donde el método de Newton-Raphson arranca de un punto alejado de la raíz y no convergee (o lo hace tras muchas iteraciones) para, en este caso, observar que el método de la secante arrancando de los puntos relativamente alejados de la raíz pero encerrando a ésta, sí es capaz de converger.</p></li>
+</ul>
+</section>
+<section id="orden-de-convergencia">
+<h2><span class="section-number">5.7. </span>Orden de convergencia<a class="headerlink" href="#orden-de-convergencia" title="Permalink to this heading">#</a></h2>
+<p>Se introduce a continuación la definición de orden de convergencia que resultará de gran utilidad a la hora de comprender la velocidad de convergencia de los diferentes métodos.</p>
+<ul>
+    <li>
+        <i>Definición 1 (Orden de convergencia)</i>:
+    </li>
+</ul>
+<p>Sea <span class="math notranslate nohighlight">\(\{x_n\}\)</span> una sucesión generada por un cierto método numérico, la cual converge a un valor <span class="math notranslate nohighlight">\(x_*\)</span>. Se denomina <em>orden de convergencia</em> al mayor número real <span class="math notranslate nohighlight">\(q\)</span> tal que el límite</p>
+<div class="math notranslate nohighlight">
+\[ \lim_{n\rightarrow\infty} \frac{|x_{n+1} - x_*|}{|x_{n} - x_*|^q} \]</div>
+<p>existe y es distinto de cero.</p>
+<p>Nótese que puede ocurrir que este número no exista. Un ejemplo de esto serían las sucesiones generadas por el método de la bisección.</p>
+<p>El orden de convergencia, junto con la robustez y el coste computacional, es una propiedad muy importante de los métodos numéricos. Recordando los resultados de convergencia local de los métodos de Newton-Raphson y la secante y utilizando la definición de orden, se observa que el método de Newton tiene orden dos mientras que el de la secante es solo de orden <span class="math notranslate nohighlight">\(\alpha = 1.62\)</span>. Por tanto, es posible anticipar de a partir de esta información que el método de Newton-Raphson converge más rápidamente cerca de la raíz.</p>
+</section>
+<section id="sistemas-de-ecuaciones-no-lineales">
+<h2><span class="section-number">5.8. </span>Sistemas de ecuaciones no lineales<a class="headerlink" href="#sistemas-de-ecuaciones-no-lineales" title="Permalink to this heading">#</a></h2>
+<p>Se considera ahora el problema de encontrar el valor de varias variables a partir de un sistema de ecuaciones. En particular, dado un sistema de <span class="math notranslate nohighlight">\(N\)</span> ecuaciones, se buscará el valor de <span class="math notranslate nohighlight">\(N\)</span> incógnitas. Obsérvese, por un lado, que en caso de tener un número de incóginas (<span class="math notranslate nohighlight">\(M\)</span>) mayor que el número de ecuaciones, se tendrá que bajo ciertas condiciones (tal y como se ha estudiado en la asignatura <em>Matemáticas II</em>) se podrá asegurar que <span class="math notranslate nohighlight">\(N\)</span> variables pueden escribirse como funciones del resto (<span class="math notranslate nohighlight">\(M-N\)</span>), pudiendo entonces considerar al resto de las variables (<span class="math notranslate nohighlight">\(M-N\)</span>) como parámetros de las ecuaciones. En lo sucesivo, se considerará exclusivamente el caso de un sistema de <span class="math notranslate nohighlight">\(N\)</span> ecuaciones con <span class="math notranslate nohighlight">\(N\)</span> incógnitas.</p>
+<p>Un caso particular es, desde luego, cuando todas las ecuaciones hacen aparecer linealmente a las variables (esto es, tenemos un sistema de <span class="math notranslate nohighlight">\(N\)</span> ecuaciones lineales). En este caso, ya se han estudiado métodos (tanto directos como iterativos) para resolver el sistema de ecuaciones. Lo que se va a estudiar a continuación es cómo resolver numéricamente el caso general, donde las ecuaciones hacen aparecer de forma cualquiera a las variables (aunque sí se deberá asumir, como se detallará, una cierta regularidad en las funciones que aparecen).</p>
+<p>De modo general, se considera entonces el problema de encontrar los valores <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, <span class="math notranslate nohighlight">\(\ldots\)</span> y <span class="math notranslate nohighlight">\(x_N\)</span> que satisfacen el siguiente sistema de (<span class="math notranslate nohighlight">\(N\)</span>) ecuaciones</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{cc} 
+F_1(x_1, x_2, \ldots, x_N) &amp; = 0, \\
+F_2(x_1, x_2, \ldots, x_N) &amp; = 0, \\
+\vdots &amp; \\
+F_N(x_1, x_2, \ldots, x_N) &amp; = 0,
+\end{array}
+\end{split}\]</div>
+<p>Podemos reescribir el problema de forma vectorial, a fin de tener una expresión más compacta de los métodos. Se introduce para ello una función vectorial <span class="math notranslate nohighlight">\(\mathbf F: D \subset \mathbb R^N \rightarrow \mathbb R^N\)</span>. De esta forma, resolver el sistema de ecuaciones no lineales consistirá en encontrar <span class="math notranslate nohighlight">\(\mathbf x_* \in D\)</span> tal que <span class="math notranslate nohighlight">\(\mathbf F(\mathbf x_*) = \mathbf 0\)</span>.</p>
+<section id="metodo-de-newton">
+<h3><span class="section-number">5.8.1. </span>Método de Newton<a class="headerlink" href="#metodo-de-newton" title="Permalink to this heading">#</a></h3>
+<p>Una de las ventajas del método de Newton-Raphson, además de su velocidad de convergencia, es que puede extenderse de forma más o menos inmediata para resolver sistemas de ecuaciones no lineales. Suponiendo <span class="math notranslate nohighlight">\(\mathbf x_n\)</span> una cierta aproximación de <span class="math notranslate nohighlight">\(\mathbf x_*\)</span>, es posible sustituir <span class="math notranslate nohighlight">\(\mathbf F(\mathbf x)\)</span> por su desarrollo de Taylor de grado uno en torno a <span class="math notranslate nohighlight">\(\mathbf x_n\)</span>, esto es,</p>
+<div class="math notranslate nohighlight">
+\[\mathbf P_n(\mathbf x) = \mathbf F(\mathbf x_n) + (\mathbf x -\mathbf x_n) D\mathbf F(\mathbf x_n),\]</div>
+<p>donde la <em>matriz jacobiana</em> de <span class="math notranslate nohighlight">\(\mathbf F\)</span> en <span class="math notranslate nohighlight">\(\mathbf x_n\)</span> se define como:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D\mathbf F(\mathbf x_n) = 
+\left(\begin{array}{ccc} 
+\displaystyle\frac{\partial F_1}{\partial x_1}(\mathbf x_n) &amp; \ldots &amp; \displaystyle\frac{\partial F_1}{\partial x_N}(\mathbf x_n)\\
+\vdots &amp; &amp; \vdots \\
+\displaystyle\frac{\partial F_N}{\partial x_1}(\mathbf x_n) &amp; \ldots &amp; \displaystyle\frac{\partial F_N}{\partial x_N}(\mathbf x_n)
+\end{array}\right).
+\end{split}\]</div>
+<p>De esta forma, siempre que <span class="math notranslate nohighlight">\(D\mathbf F\)</span> sea invertible en el entorno de <span class="math notranslate nohighlight">\(\mathbf x_*\)</span>, se puede calcular <span class="math notranslate nohighlight">\(\mathbf x_{n+1}\)</span> resolviendo
+$<span class="math notranslate nohighlight">\( \mathbf P_n(\mathbf x_{n+1}) = \mathbf 0  \)</span><span class="math notranslate nohighlight">\(
+tal y como se hacía en el método de Newton-Raphson (cuando solamente se tenía una ecuación y el polinomio de Taylor era una función escalar de una sola variable). La ecuación vectorial anterior representa entonces un sistema de ecuaciones lineales para las compoenntes del vector \)</span>\mathbf x_{n+1}$:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf F(\mathbf x_n) + (\mathbf x_{n+1} -\mathbf x_n) D\mathbf F(\mathbf x_n) = \mathbf 0.\]</div>
+<p>Reorganizando términos para reducir el número de operaciones realizadas, se calcula <span class="math notranslate nohighlight">\(\mathbf x_{n+1}\)</span> como:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf x_{n+1} = \mathbf x_n + \boldsymbol \Delta x_n,\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\boldsymbol \Delta x_n\)</span> es la solución del sistema lineal:</p>
+<div class="math notranslate nohighlight">
+\[D\mathbf F(\mathbf x_n) \boldsymbol \Delta x_n = - \mathbf F(\mathbf x_n).\]</div>
+<p>A continuación se muestra un ejemplo de implementación del algoritmo en Python 3.8.10 donde, como en los casos anteriores, será conveniente añadir unas líneas de comentarios describiendo los argumentos de la función.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">newton_sist</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">nitmax</span><span class="p">):</span>
+
+    <span class="c1"># Inicializacion</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="k">for</span> <span class="n">nit</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nitmax</span><span class="p">):</span>
+
+        <span class="c1"># Calculo de f(x_n)</span>
+        <span class="n">f0</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+
+        <span class="c1"># Calculo de Jf(x_n)</span>
+        <span class="n">jacob</span> <span class="o">=</span> <span class="n">df</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+
+        <span class="c1"># Calculo de dxn</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">jacob</span><span class="p">,</span> <span class="n">f0</span><span class="p">)</span>
+
+        <span class="c1"># Calculo de xn+1</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">-</span> <span class="n">dx</span>
+
+        <span class="c1"># Criterio de convergencia</span>
+        <span class="n">norma_dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iteracion </span><span class="si">%d</span><span class="s1">, x* = [</span><span class="si">%0.9f</span><span class="s1">, </span><span class="si">%0.9f</span><span class="s1">] y |x-xn| = </span><span class="si">%0.9e</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">nit</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">norma_dx</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">norma_dx</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+            <span class="k">break</span> <span class="c1"># Convergencia alcanzada</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x0</span> <span class="o">=</span> <span class="n">x</span> <span class="c1"># Actualizacion para nueva iteracion</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">norma_dx</span><span class="p">,</span> <span class="n">nit</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul>
+    <li>
+        <i>Ejemplo 4</i>:
+    </li>
+</ul>
+<p>Se propone utilizar el anterior código para calcular los puntos de corte de la circunferencia <span class="math notranslate nohighlight">\(x^2 + y^2 = 2\)</span> y la recta <span class="math notranslate nohighlight">\(x = y\)</span>. De otro modo, se buscan <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span> tales que se verifique el sistema de ecuaciones (no lineales):</p>
+<div class="math notranslate nohighlight">
+\[ x^2 + y^2 = 2\]</div>
+<div class="math notranslate nohighlight">
+\[ x = y\]</div>
+<p>Para escribir el sistema de la forma (vectorial) <span class="math notranslate nohighlight">\(\mathbf F (\mathbf x) = \mathbf 0\)</span>, se tomará <span class="math notranslate nohighlight">\(\mathbf x = (x, y)\)</span> así como <span class="math notranslate nohighlight">\(\mathbf F = (F_1, F_2)\)</span>. De esta forma, se define</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{rcl} 
+F_1(x_1,x_2) &amp; = &amp; x^2 + y^2 - 2,\\
+F_2(x_1,x_2) &amp; = &amp; x - y.
+\end{array}
+\end{split}\]</div>
+<p>Así, se obtiene la siguiente matriz jacobiana:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D\mathbf F(x, y) = 
+\left(\begin{array}{cc} 
+\displaystyle\frac{\partial F_1}{\partial x}(x, y) &amp; \displaystyle\frac{\partial F_1}{\partial y}(x, y)\\
+\\
+\displaystyle\frac{\partial F_2}{\partial x}(x, y) &amp; \displaystyle\frac{\partial F_2}{\partial y}(x, y)
+\end{array}\right) =
+\left(\begin{array}{cc} 
+2x &amp; 2y\\
+1 &amp; -1
+\end{array}\right).
+\end{split}\]</div>
+<p>El siguiente código resuelve el sistema de ecuaciones no lineales utilizando la implementación previa del método de Newton. Como se ve, el comportamiento del método en lo que tiene que ver con la velocidad de convergencia es muy similar al que presentaba en el caso escalar (esto es, para una única ecuación con una incógnita). A continuación se verá un resultado que muestra, en efecto, la generalización de las propiedades de convergencia local del método.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Definimos la funcion</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+
+    <span class="n">fval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span>
+                     <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+
+    <span class="k">return</span> <span class="n">fval</span>
+
+<span class="c1"># Definimos de la matriz jacobiana</span>
+<span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+
+    <span class="n">jac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+                    <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span>    <span class="o">-</span><span class="mf">1.0</span><span class="p">]])</span>
+
+    <span class="k">return</span> <span class="n">jac</span>
+
+<span class="n">x0</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">])</span> <span class="c1"># Iterante inicial</span>
+<span class="n">tol</span>    <span class="o">=</span> <span class="mf">1e-8</span> <span class="c1"># Tolerancia</span>
+<span class="n">nitmax</span> <span class="o">=</span> <span class="mi">40</span>   <span class="c1"># Numero maximo de iteraciones</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">nit</span> <span class="o">=</span> <span class="n">newton_sist</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">nitmax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteracion 1, x* = [1.065789474, 1.065789474] y |x-xn| = 5.213582304e-01
+Iteracion 2, x* = [1.002030539, 1.002030539] y |x-xn| = 9.016874971e-02
+Iteracion 3, x* = [1.000002057, 1.000002057] y |x-xn| = 2.868706676e-03
+Iteracion 4, x* = [1.000000000, 1.000000000] y |x-xn| = 2.909553861e-06
+Iteracion 5, x* = [1.000000000, 1.000000000] y |x-xn| = 2.992910245e-12
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="convergencia-del-metodo-de-newton">
+<h3><span class="section-number">5.8.2. </span>Convergencia del método de Newton<a class="headerlink" href="#convergencia-del-metodo-de-newton" title="Permalink to this heading">#</a></h3>
+<p>Cabe esperar que las propiedades de convergencia local del método sean similares a las del método de Newton-Raphson para ecuaciones no lineales escalares. Recordemos que en el caso escalar para asegurar la convergencia cuadrática del algoritmo era necesario que la raíz fuese simple, lo que implicaba <span class="math notranslate nohighlight">\(f'(x_*) \neq 0\)</span>. Por tanto, para el método de Newton para sistemas de ecuaciones no lineales parece natural que dicha condición se transforme en una hipótesis de regularidad sobre la matriz jacobiana <span class="math notranslate nohighlight">\(D\mathbf F(\mathbf x_*)\)</span>.</p>
+<p>En efecto, puede demostrarse que el método de Newton para la resolución de sistemas de ecuaciones no lineales converge local y cuadráticamente siempre que <span class="math notranslate nohighlight">\(\mathbf F \in \mathcal C^2(D)\)</span> en el entorno de la solución <span class="math notranslate nohighlight">\(\mathbf x_*\)</span> y que <span class="math notranslate nohighlight">\(D\mathbf F(\mathbf x)\)</span> sea regular en dicho entorno. A continuación se recoge un resultado formal de convergencia del algoritmo con condiciones más débiles.</p>
+<ul>
+    <li>
+        <i>Teorema 5 (Convergencia local del método de Newton para sistemas)</i>:
+    </li>
+</ul>
+<p>Sea <span class="math notranslate nohighlight">\(\mathbf F: D \subset \mathbb R^N \rightarrow \mathbb R^N\)</span> tal que <span class="math notranslate nohighlight">\(\mathbf F \in \mathcal C^1(D)\)</span>, donde <span class="math notranslate nohighlight">\(D\)</span> es convexo, abierto y contiene a la raíz <span class="math notranslate nohighlight">\(\mathbf x_*\)</span>. Supongamos que <span class="math notranslate nohighlight">\(D\mathbf F^{-1}(\mathbf x)\)</span> existe y que existen unas constantes positivas <span class="math notranslate nohighlight">\(R\)</span>, <span class="math notranslate nohighlight">\(C\)</span> y <span class="math notranslate nohighlight">\(L\)</span> tales que <span class="math notranslate nohighlight">\(\| D\mathbf F^{-1}(\mathbf x_*) \| \leq C\)</span> y</p>
+<div class="math notranslate nohighlight">
+\[\| D\mathbf F(\mathbf x) - D\mathbf F(\mathbf y) \|_M \leq L \| \mathbf x - \mathbf y \|, \quad \forall \mathbf x, \mathbf y \in B(\mathbf x_*; R),\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\| \cdot \|\)</span> denota la norma euclídea en <span class="math notranslate nohighlight">\(\mathbb R^{N}\)</span> y <span class="math notranslate nohighlight">\(\| \cdot \|_M\)</span> la correspondiente norma matricial subordinada. Entonces existe <span class="math notranslate nohighlight">\(r&gt;0\)</span> tal que, para cualquier <span class="math notranslate nohighlight">\(\mathbf x_0 \in B(\mathbf x_*; R)\)</span>, la sucesión generada por el método de Newton está definida de forma única y converge a <span class="math notranslate nohighlight">\(\mathbf x_*\)</span> con</p>
+<div class="math notranslate nohighlight">
+\[\|\mathbf x_{n+1} - \mathbf x_*\| \leq C L \|\mathbf x_n - \mathbf x_*\|^2.\]</div>
+<p>Obsérvese que el problema considerado en el ejemplo 4 verifica en efecto las hipótesis de este teorema y la convergencia observada refleja, en efecto, la convergencia cuadrática que este teorema asegura. Se va a considerar ahora un caso en que falla la condición sobre la invertibilidad de la matriz jacobiana (que correspondería en el caso escalar a que la derivada de <span class="math notranslate nohighlight">\(f\)</span> se cancele en la raíz donde, como se pedía comprobar, la convergencia del método de Newton-Raphson era mucho más lenta).</p>
+<ul>
+    <li>
+        <i>Ejemplo 5</i>:
+    </li>
+</ul>
+<p>Se va a usar el método de Newton para encontrar la (única) solución del siguiente sistema de ecuaciones no lineales:</p>
+<div class="math notranslate nohighlight">
+\[ \exp(x^2 + y^2) - 1 = 0,\]</div>
+<div class="math notranslate nohighlight">
+\[ \exp(x^2 - y^2) - 1 = 0.\]</div>
+<p>que está situada en el origen. Definiendo <span class="math notranslate nohighlight">\(\mathbf F(x,y) = (F_1(x,y), F_2(x,y))\)</span> con <span class="math notranslate nohighlight">\(F_1(x,y) = \exp(x^2 + y^2) - 1\)</span> y <span class="math notranslate nohighlight">\(F_2(x,y) = \exp(x^2 - y^2) - 1\)</span>, se calcula la siguiente matriz jacobiana:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D\mathbf F(x, y) = 
+\left(\begin{array}{cc} 
+2x\exp(x^2 + y^2) &amp; 2y\exp(x^2 + y^2)\\
+2x\exp(x^2 - y^2) &amp; -2y\exp(x^2 - y^2)\\
+\end{array}\right).
+\end{split}\]</div>
+<p>Obsérvese que la matriz <span class="math notranslate nohighlight">\(D \mathbf F\)</span> es singular en la solución <span class="math notranslate nohighlight">\((x,y)=(0,0)\)</span>.</p>
+<p>El siguiente código resuelve el sistema de ecuaciones no lineales utilizando la implementación previa del método de Newton.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Definimos la funcion</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+
+    <span class="n">fval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                     <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">fval</span>
+
+<span class="c1"># Definimos de la matriz jacobiana</span>
+<span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+
+    <span class="n">jac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>  <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+                    <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]])</span>
+
+    <span class="k">return</span> <span class="n">jac</span>
+
+<span class="n">x0</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span> <span class="c1"># Iterante inicial</span>
+<span class="n">tol</span>    <span class="o">=</span> <span class="mf">1e-8</span> <span class="c1"># Tolerancia</span>
+<span class="n">nitmax</span> <span class="o">=</span> <span class="mi">40</span>   <span class="c1"># Numero maximo de iteraciones</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">nit</span> <span class="o">=</span> <span class="n">newton_sist</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">nitmax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteracion 1, x* = [0.050496683, 0.050496683] y |x-xn| = 7.000826191e-02
+Iteracion 2, x* = [0.025312613, 0.025312613] y |x-xn| = 3.561565308e-02
+Iteracion 3, x* = [0.012664413, 0.012664413] y |x-xn| = 1.788725730e-02
+Iteracion 4, x* = [0.006333222, 0.006333222] y |x-xn| = 8.953655842e-03
+Iteracion 5, x* = [0.003166738, 0.003166738] y |x-xn| = 4.478084434e-03
+Iteracion 6, x* = [0.001583385, 0.001583385] y |x-xn| = 2.239199379e-03
+Iteracion 7, x* = [0.000791694, 0.000791694] y |x-xn| = 1.119619338e-03
+Iteracion 8, x* = [0.000395847, 0.000395847] y |x-xn| = 5.598121249e-04
+Iteracion 9, x* = [0.000197924, 0.000197924] y |x-xn| = 2.799063695e-04
+Iteracion 10, x* = [0.000098962, 0.000098962] y |x-xn| = 1.399532233e-04
+Iteracion 11, x* = [0.000049481, 0.000049481] y |x-xn| = 6.997661623e-05
+Iteracion 12, x* = [0.000024740, 0.000024740] y |x-xn| = 3.498830865e-05
+Iteracion 13, x* = [0.000012370, 0.000012370] y |x-xn| = 1.749415586e-05
+Iteracion 14, x* = [0.000006185, 0.000006185] y |x-xn| = 8.747077007e-06
+Iteracion 15, x* = [0.000003093, 0.000003093] y |x-xn| = 4.373532351e-06
+Iteracion 16, x* = [0.000001546, 0.000001546] y |x-xn| = 2.186763292e-06
+Iteracion 17, x* = [0.000000773, 0.000000773] y |x-xn| = 1.093377321e-06
+Iteracion 18, x* = [0.000000387, 0.000000387] y |x-xn| = 5.466821734e-07
+Iteracion 19, x* = [0.000000193, 0.000000193] y |x-xn| = 2.733313564e-07
+Iteracion 20, x* = [0.000000097, 0.000000097] y |x-xn| = 1.368541329e-07
+Iteracion 21, x* = [0.000000048, 0.000000048] y |x-xn| = 6.830359887e-08
+Iteracion 22, x* = [0.000000024, 0.000000024] y |x-xn| = 3.416971562e-08
+Iteracion 23, x* = [0.000000013, 0.000000013] y |x-xn| = 1.629695048e-08
+Iteracion 24, x* = [0.000000008, 0.000000008] y |x-xn| = 6.249375634e-09
+</pre></div>
+</div>
+</div>
+</div>
+<p>Como se ve, la velocidad de convergencia del método ya no es en esta caso cuadrática sino lineal. Se repite así la misma situación que en el caso escalar (una ecuación con una incógnita).</p>
+</section>
+<section id="modificaciones-del-metodo-de-newton">
+<h3><span class="section-number">5.8.3. </span>Modificaciones del método de Newton<a class="headerlink" href="#modificaciones-del-metodo-de-newton" title="Permalink to this heading">#</a></h3>
+<p>Al igual que en el caso escalar, el método de Newton para sistemas de ecuaciones no lineales presenta dificultades en relación con la convergencia global: es necesario un iterante inicial cercano a la raíz <span class="math notranslate nohighlight">\(\mathbf x_*\)</span> para que el algoritmo converja. De este modo, aunque resulte seguro emplear este método cuando ya se está muy cerca de la solución, es preciso modificar la estrategia en tanto no pueda asegurarte la cercanía a la solución. Por esta razón la implementación del método suele hacerse en combinación con otro tipo de técnicas o modificando el método para hacerlo más robusto.</p>
+<p>En el diseño de estrategias para hacer más robusto el método es habitual usar la información sobre la reducción del residuo del sistema de ecuaciones no lineales. Puede observarse que el problema de encontrar <span class="math notranslate nohighlight">\(\mathbf x_* \in \mathbb R^N\)</span> tal que <span class="math notranslate nohighlight">\(\mathbf F(\mathbf x_*) = \mathbf 0\)</span> se puede escribir como un problema de minimización del residuo, de la forma:</p>
+<div class="math notranslate nohighlight">
+\[\min_{\mathbf x \in \mathbb R^N} J(\mathbf x)\]</div>
+<p>donde <span class="math notranslate nohighlight">\(J(\mathbf x) = \|\mathbf F(\mathbf x) \|^2\)</span>. Así, el problema consiste en encontrar aquel <span class="math notranslate nohighlight">\(\mathbf x_*\)</span> tal que:</p>
+<div class="math notranslate nohighlight">
+\[\|\mathbf F(\mathbf x_*) \|^2 \leq \|\mathbf F(\mathbf x) \|^2, \quad \forall \mathbf x \in \mathbb R^N.\]</div>
+<p>Entre las diferentes estrategias para hacer el algoritmo más robusto, hay dos técnicas bastante extendidas:</p>
+<ul class="simple">
+<li><p>Modificar el valor del paso (con el que el método de Newton pasa de <span class="math notranslate nohighlight">\(\mathbf x_n\)</span> a <span class="math notranslate nohighlight">\(\mathbf x_{n+1}\)</span>).</p></li>
+<li><p>Combinar distintas direcciones (para pasar de <span class="math notranslate nohighlight">\(\mathbf x_n\)</span> a <span class="math notranslate nohighlight">\(\mathbf x_{n+1}\)</span>).</p></li>
+</ul>
+<p>que se detallarán a continuación.</p>
+<section id="metodo-de-newton-amortiguado">
+<h4><span class="section-number">5.8.3.1. </span>Método de Newton amortigüado<a class="headerlink" href="#metodo-de-newton-amortiguado" title="Permalink to this heading">#</a></h4>
+<p>El método de Newton acepta como buena la aproximación lineal que devuelve el polinomio de Taylor de grado uno, lo cual solo está justificado cuando se está muy cerca de la solución. De esta forma, si se está lejos de la solución el algoritmo puede proporcionar una buena dirección para buscar <span class="math notranslate nohighlight">\(\mathbf x_{n+1}\)</span>, ya que la corrección propuesta por el método de Newton, <span class="math notranslate nohighlight">\(\boldsymbol \Delta x_n = -(D\mathbf F(\mathbf x_n))^{-1} \mathbf F(\mathbf x_n)\)</span>, es una dirección de descenso del funcional <span class="math notranslate nohighlight">\(J\)</span> en <span class="math notranslate nohighlight">\(\mathbf x_n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol \nabla J (\mathbf x_n) \cdot \boldsymbol \Delta x_n = 2 (D\mathbf F (\mathbf x_n))^T \mathbf F(\mathbf x_n) \ \boldsymbol \Delta x_n = -2 \|\mathbf F(\mathbf x_n)\|^2 \leq 0.\]</div>
+<p>Sin embargo, el valor del paso puede no ser adecuado. Así, se propone modificar el paso del algoritmo de forma que cada iteración del mismo calcule</p>
+<div class="math notranslate nohighlight">
+\[\mathbf x_{n+1} = \mathbf x_n + \omega_n \boldsymbol \Delta x_n,\]</div>
+<p>dando lugar al llamado <em>método de Newton amortigüado</em>. Para la selección de <span class="math notranslate nohighlight">\(\omega_n\)</span> se considera la minimización de la función de una variable <span class="math notranslate nohighlight">\(f(\omega)\)</span> definida mediante</p>
+<div class="math notranslate nohighlight">
+\[f(\omega) = \| \mathbf F (\mathbf x_n + \omega \boldsymbol \Delta x_n)\|\]</div>
+<p>para lo cual se usan diferentes técnicas iterativas (que, en general, tienen en cuenta que bastará con una solución aproximada del problema). De este forma se tienen dos bucles anidados: el bucle externo itera con el método de Newton (y elige la dirección en que se avanza hacia el siguiente iterante) en tanto que el bucle interno itera con un determinado método de optimización (para una función de una variable) para elegir la distancia a la que se toma el siguiente iterante (asegurándose de que se produce una reducción aceptable del resiudo).</p>
+</section>
+<section id="combinacion-de-direcciones">
+<h4><span class="section-number">5.8.3.2. </span>Combinación de direcciones<a class="headerlink" href="#combinacion-de-direcciones" title="Permalink to this heading">#</a></h4>
+<p>A la hora de eligir una dirección para el vector <span class="math notranslate nohighlight">\(\mathbf x_{n+1} - \mathbf x_n\)</span> es posible escoger una que combine la dirección proporcionada por el método de Newton con la que devuelven otras técnicas más robustas. De este modo se espera combinar la robustez de esas otras técnicas con la rápida convergencia local cuadrática del método de Newton. La idea consiste en otorgar un mayor peso a la predicción del paso del método de Newton cuando se está cerca de la solución, mientras que en caso contrario se daría más peso a la dirección de búsqueda que proponen los otros métodos.</p>
+<p>Un ejemplo de esto es el <em>método híbrido de Powell</em>, el cual combina la dirección propuesta por el método de Newton y la dirección que proporciona el máximo descenso para el problema de minimización del funcional <span class="math notranslate nohighlight">\(J(\mathbf x) = \displaystyle\frac{1}{2}\|\mathbf F(\mathbf x) \|^2\)</span>, la cual viene dada por</p>
+<div class="math notranslate nohighlight">
+\[\mathbf d = - \boldsymbol \nabla J (\mathbf x) = - (D\mathbf F (\mathbf x))^T \ \mathbf F(\mathbf x).\]</div>
+<p>De esta forma, en cada iteración se elige un parámetro <span class="math notranslate nohighlight">\(\beta_n\)</span> en función de lo cerca que parezca que el iterante se encuentra de la solución, y se construye:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf x_{n+1} = \mathbf x_n + \beta_n \mathbf d_n + (1 - \beta_n) \boldsymbol \Delta \mathbf x_n.\]</div>
+<p>Se debe establecer además una estrategia para la selección de <span class="math notranslate nohighlight">\(\beta_n\)</span> que haga que <span class="math notranslate nohighlight">\(\beta_n \simeq 0\)</span> cuando se está cerca de la solución <span class="math notranslate nohighlight">\(\mathbf x_*\)</span> en tanto que deberá seleccionar <span class="math notranslate nohighlight">\(\beta_n \simeq 1\)</span> en tanto no se cumpla esa condición.</p>
+</section>
+<section id="calculo-de-matriz-jacobiana">
+<h4><span class="section-number">5.8.3.3. </span>Cálculo de matriz jacobiana<a class="headerlink" href="#calculo-de-matriz-jacobiana" title="Permalink to this heading">#</a></h4>
+<p>Además de las dificultades de convergencia global, el método de Newton presenta una grave deficiencia desde el punto de vista computacional. Esta está ligada al uso de la matriz jacobiana en cada paso, pues requiere conocer explícitamente dicha matriz, lo que puede originar a un alto coste computacional en cada iteración. La resolución de un sistema de <span class="math notranslate nohighlight">\(N\)</span> ecuaciones no lineales utilizando este algoritmo obliga a escribir <span class="math notranslate nohighlight">\(N\)</span> funciones para describir el sistema y <span class="math notranslate nohighlight">\(N^2\)</span> funciones para describir cada componente de la matriz jacobiana. La implementacón y el cálculo de estas <span class="math notranslate nohighlight">\(N^2\)</span> funciones puede convertirse en una tarea muy tediosa, así como en una fuente de errores. Para aliviar estas tareas existen dos alternativas:</p>
+<ul class="simple">
+<li><p>Utilizar cálculo simbólico para obtener la matriz jacobiana a partir de las expresiones de las funciones.</p></li>
+<li><p>Usar aproximaciones de la matriz jacobiana.</p></li>
+</ul>
+<p>Sin embargo, estas alternativas para el cálculo de la matriz jacobiana no evitan el problema del alto coste computacional por iteración, resultado de evaluar una matriz de tamaño <span class="math notranslate nohighlight">\(N^2\)</span> y la resolución del sistema asociado. Obsérvese que si dicha matriz no varía entre iteraciones se evitaría la evaluación y factorización de la matriz en cada iteración, reduciendo significativamente el coste computacional del método de Newton. Así, es habitual en la implementación del algoritmo no actualizar la matriz en todas las iteraciones sino hacerlo cada cierto número de etapas. En este caso es necesario prestar especial atención a que el ahorro del coste computacional no deteriore la convergencia del esquema.</p>
+<p>A partir de la segunda estrategia surgen los <em>métodos cuasi-Newton</em>. Estos calculan una aproximación de la matriz jacobiana utilizando derivación numérica o generando una sucesión de matrices que aproximan la matriz. Un ejemplo de este último caso sería el conocido método de Broyden.</p>
+<section id="metodo-de-broyden">
+<h5><span class="section-number">5.8.3.3.1. </span>Método de Broyden<a class="headerlink" href="#metodo-de-broyden" title="Permalink to this heading">#</a></h5>
+<p>Del mismo modo que el método de la secante, el <em>método de Broyden</em> utiliza información de iterantes anteriores para aproximar la matriz jacobiana <span class="math notranslate nohighlight">\(D \mathbf F(\mathbf x)\)</span> en cada etapa.</p>
+<p>Sea <span class="math notranslate nohighlight">\(B_n\)</span> la aproximación de la matriz jacobiana en la iteración <span class="math notranslate nohighlight">\(n\)</span>-ésima del algoritmo. La aproximación de la matriz jacobiana <span class="math notranslate nohighlight">\(B_{n+1}\)</span> debe satisfacer la ecuación:</p>
+<div class="math notranslate nohighlight">
+\[ B_{n+1} \ \boldsymbol \Delta \mathbf x_n = \mathbf F(\mathbf x_{n+1}) - \mathbf F(\mathbf x_n) = \boldsymbol \Delta \mathbf F_n.\]</div>
+<p>De esta forma, dada una matriz <span class="math notranslate nohighlight">\(B_0\)</span>, el método de Broyden genera una sucesión de matrices para aproximar la matriz jacobiana de la siguiente manera:</p>
+<div class="math notranslate nohighlight">
+\[ B_{n+1} = B_n + \displaystyle\frac{(\boldsymbol \Delta \mathbf F_n - B_n \boldsymbol \Delta \mathbf x_n) \cdot \boldsymbol \Delta \mathbf x_n}{\| \boldsymbol \Delta \mathbf x_n \|^2_2}.\]</div>
+<p>Así, el método de Broyden proporciona una aproximación razonable de la matriz jacobiana sin requerir evaluaciones adicionales de la función.</p>
+</section>
+<section id="metodo-usando-esquema-centrado-de-derivacion-numerica">
+<h5><span class="section-number">5.8.3.3.2. </span>Método usando esquema centrado de derivación numérica<a class="headerlink" href="#metodo-usando-esquema-centrado-de-derivacion-numerica" title="Permalink to this heading">#</a></h5>
+<p>En caso de utilizar fórmulas de derivación numérica para obtener una aproximación de <span class="math notranslate nohighlight">\(D \mathbf F(\mathbf x_n)\)</span>, denotada como <span class="math notranslate nohighlight">\(\mathcal G(\mathbf x_n)\)</span>, en el método de Newton se itera sobre:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal G(\mathbf x_n) (\mathbf x_{n+1} - \mathbf x_n) = -\mathbf F(\mathbf x_n).\]</div>
+<p>Así, al usar una fórmula de derivación numérica con un esquema centrado, la matriz <span class="math notranslate nohighlight">\(\mathcal G(\mathbf x_n) \in \mathcal M_{N \times N}(\mathbb R)\)</span> se calcula columna a columna. Definiendo como <span class="math notranslate nohighlight">\(\mathbf g_k\)</span> la <span class="math notranslate nohighlight">\(k\)</span>-ésima columna de la matriz, esta se encuentra determinada por:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf g_k = \displaystyle\frac{\mathbf F(\mathbf x_n + h \mathbf e_k) - \mathbf F(\mathbf x_n - h \mathbf e_k)}{2h},\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\mathbf e_k\)</span> es el <span class="math notranslate nohighlight">\(k\)</span>-ésimo vector de la base canónica de <span class="math notranslate nohighlight">\(\mathbb R^N\)</span>.</p>
+<p>A continuación se muestra un código en Python 3.8.10 que devuelve una aproximación de la matriz jacobiana para una función <span class="math notranslate nohighlight">\(\mathbf F\)</span> dada utilizando la metodología descrita.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">jac_num</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+
+    <span class="n">N</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Inicializamos matriz jacobiana</span>
+    <span class="n">jacob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">])</span>
+
+    <span class="c1"># Bucle de calculo de columnas de matriz jacobiana numerica</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+
+        <span class="c1"># Definimos vector ei</span>
+        <span class="n">ei</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s1">&#39;float&#39;</span><span class="p">)</span>
+        <span class="n">ei</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="c1"># Evaluamos f</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="o">*</span><span class="n">ei</span><span class="p">)</span>
+        <span class="n">f2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">h</span><span class="o">*</span><span class="n">ei</span><span class="p">)</span>
+
+        <span class="c1"># Calculo de la i-esima columna de la matriz jacobiana</span>
+        <span class="n">jacob</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">f1</span><span class="o">-</span><span class="n">f2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">jacob</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul>
+    <li>
+        <i>Ejemplo 6</i>:
+    </li>
+</ul>
+<p>Utilizar la implementación anterior para obtener una aproximación de la matriz jacobiana del sistema resuelto en el <em>Ejemplo 5</em>.</p>
+<p>El siguiente código calcula la matriz jacobiana analítica y numérica e imprime sus valores por pantalla.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Definimos la funcion</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+
+    <span class="n">fval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                     <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">fval</span>
+
+<span class="c1"># Definimos la matriz jacobiana analitica</span>
+<span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+
+    <span class="n">jac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>  <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+                    <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]])</span>
+
+    <span class="k">return</span> <span class="n">jac</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span> <span class="c1"># Iterante inicial</span>
+<span class="n">h</span>  <span class="o">=</span> <span class="mf">1.0e-6</span> <span class="c1"># Paso</span>
+
+<span class="n">df_exact</span> <span class="o">=</span> <span class="n">df</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span> <span class="c1"># Matriz jacobiana analitica</span>
+<span class="n">df_num</span>   <span class="o">=</span> <span class="n">jac_num</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">)</span> <span class="c1"># Matriz jacobiana numerica</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Matrix jacobiana analítica:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_exact</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Matrix jacobiana numérica:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_num</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix jacobiana analítica:
+[[ 0.20404027  0.20404027]
+ [ 0.2        -0.2       ]]
+
+Matrix jacobiana numérica:
+[[ 0.20404027  0.20404027]
+ [ 0.2        -0.2       ]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks/05-SistemasNoLineales"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../04-DerivacionIntegracion/practica_pde.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4.5. </span>Práctica Grupal: Problemas de Contorno</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../06-EDOs/Introducci%C3%B3nEDOs.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Ecuaciones diferenciales ordinarias</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido">5.1. Contenido</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dada-una-funcion-f-a-b-subset-mathbb-r-rightarrow-mathbb-r-encontrar-x-in-mathbb-a-b-tal-que-f-x-0">5.2. Dada una función <span class="math notranslate nohighlight">\(f: [a, b] \subset \mathbb R \rightarrow \mathbb R\)</span>: encontrar <span class="math notranslate nohighlight">\(x \in \mathbb [a, b]\)</span> tal que
+$<span class="math notranslate nohighlight">\(f(x) = 0.\)</span>$</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-del-error-de-aproximacion">5.3. Estimación del error de aproximación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-biseccion">5.4. Método de bisección</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia-del-metodo">5.4.1. Convergencia del método</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algunas-observaciones-sobre-el-metodo">5.4.2. Algunas observaciones sobre el método</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-newton-raphson">5.5. Método de Newton-Raphson</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">5.5.1. Algunas observaciones sobre el método</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia-local-del-metodo">5.5.2. Convergencia local del método</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#algunas-observaciones-sobre-la-convergencia-del-metodo">5.5.2.1. Algunas observaciones sobre la convergencia del método</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia-global-del-metodo">5.5.3. Convergencia global del método</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-la-secante">5.6. Método de la secante</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orden-de-convergencia">5.7. Orden de convergencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sistemas-de-ecuaciones-no-lineales">5.8. Sistemas de ecuaciones no lineales</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-newton">5.8.1. Método de Newton</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convergencia-del-metodo-de-newton">5.8.2. Convergencia del método de Newton</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modificaciones-del-metodo-de-newton">5.8.3. Modificaciones del método de Newton</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-newton-amortiguado">5.8.3.1. Método de Newton amortigüado</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#combinacion-de-direcciones">5.8.3.2. Combinación de direcciones</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-matriz-jacobiana">5.8.3.3. Cálculo de matriz jacobiana</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-de-broyden">5.8.3.3.1. Método de Broyden</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#metodo-usando-esquema-centrado-de-derivacion-numerica">5.8.3.3.2. Método usando esquema centrado de derivación numérica</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Universidad Politécnica de Madrid
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
