@@ -1,19 +1,19 @@
-# Programming Python Course
+# Curso de programación en Python
+
+Este repositorio contiene el material de la asignatura de Informática de primer curso del grado en Ingeniería Aeroespacial de la UPM. Para acceder a la web, se puede hacer click en el siguiente botón:
 
 [![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://rayleighlord.github.io/ProgrammingETSIAE/intro.html)
 
-Access to the webpage [here](https://rayleighlord.github.io/ProgrammingETSIAE/intro.html)
+## Uso local del libro con el material del curso
 
-## Usage
+### Pasos para ejecutar el libro
 
-### Building the book
+Para desarrollar localmente el libro, se deben realizar los siguientes pasos:
 
-If you'd like to develop and/or build the book, you should:
+1. Clonar este repositorio (idealmente utilizando `git clone`)
+2. Ejecutar `pip install -r requirements.txt` en la carpeta del archivo (es recomendable hacer esto en un entorno virtual de Python para no generar conflictos con el entorno existente)
+3. (Opcional) Editar los Jupyter notebooks dentro del directorio `book/notebooks`
+4. Ejecutar `jupyter-book clean book/` para eliminar cualquier construcción previa del libro
+5. Ejecutar `jupyter-book build book/` para generar el libro con el material del curso
 
-1. Clone this repository
-2. Run `pip install -r requirements.txt` (it is recommended you do this within a virtual environment)
-3. (Optional) Edit the books source files located in the `book/` directory
-4. Run `jupyter-book clean book/` to remove any existing builds
-5. Run `jupyter-book build book/`
-
-A fully-rendered HTML version of the book will be built in `book/_build/html/`.
+Una versión completamente renderizada del libro en HTML se generará en `book/_build/html/`. Se puede ejecutar en cualquier navegador.
