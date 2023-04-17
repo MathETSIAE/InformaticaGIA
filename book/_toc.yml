@@ -1,0 +1,18 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+options:
+  numbered: true
+chapters:
+  - file: notebooks/01-SistemasLineales/sistemas_lineales.ipynb
+  - file: notebooks/02-Autovalores/autovalores.ipynb
+  - file: notebooks/03-Interpolacion/interpolacion_lagrange.ipynb
+    sections:
+      - file: notebooks/03-Interpolacion/practica_minimos_cuadrados.ipynb
+  - file: notebooks/04-DerivacionIntegracion/derivacion_numerica.ipynb
+    sections:
+      - file: notebooks/04-DerivacionIntegracion/practica_pde.ipynb
+  - file: notebooks/05-SistemasNoLineales/Ecuaciones y sistemas de ecuaciones no lineales.ipynb
+  - file: notebooks/06-EDOs/IntroducciónEDOs.ipynb
