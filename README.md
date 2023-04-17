@@ -2,7 +2,7 @@
 
 Este repositorio contiene el material de la asignatura de Informática de primer curso del grado en Ingeniería Aeroespacial de la UPM. Para acceder a la web, se puede hacer click en el siguiente botón:
 
-[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://rayleighlord.github.io/ProgrammingETSIAE/intro.html)
+[![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](https://mathetsiae.github.io/InformaticaGIA/intro.html)
 
 ## Uso local del libro con el material del curso
 
