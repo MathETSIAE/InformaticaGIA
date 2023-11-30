@@ -1,39 +1,63 @@
 Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/nbclient/client.py", line 730, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/nbclient/util.py", line 96, in ensure_async
-    result = await obj
-  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/jupyter_client/channels.py", line 315, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+  File "/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
-  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+  File "/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
-    return just_run(coro(*args, **kwargs))
-  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
-    return loop.run_until_complete(coro)
-  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+  File "/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 173, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
     return future.result()
-  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+  File "/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
     await self.async_execute_cell(
-  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/nbclient/client.py", line 949, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/nbclient/client.py", line 754, in _async_poll_for_reply
-    await self._async_handle_timeout(timeout, cell)
-  File "/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/nbclient/client.py", line 801, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
-['import matplotlib.pyplot as plt', 'A = np.random.rand(100,100)', 'for i in range(10000):', '    Q,R = np.linalg.qr(A)', '    A = np.matmul(R,Q)']
-...
-["axs[0, 1].set_title('A_100 iteraciones')", "axs[1, 0].set_title('A_1000 iteraciones')", "axs[1, 1].set_title('A_10000 iteraciones')", '', 'plt.show()']
--------------------
+  File "/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+S = np.array([[3.,2., -1., 1.],[0., -1., 0., 0],[1, 0.3, 2., 0],[0., 1., 2., 0.]])
+values,vect = QR_algorithm(S)
+print(f'La matriz T de la forma de Schur de A es: \n {tabulate(QR_algorithm_init(S))}')
+print('Autovalores QR: ',values)
+for i in range(len(values)):
+    print(f'Autovector {i+1}: {vect[:,i]}')
+    
+T,Q = sp.schur(S)
+print(f'T= \n {tabulate(T)}')
+print(f'Q= \n {tabulate(Q)}')
+print(f'Q^-1TQ = \n {tabulate(Q@T@Q.T)}')
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mLinAlgError[0m                               Traceback (most recent call last)
+Cell [0;32mIn[25], line 2[0m
+[1;32m      1[0m S [38;5;241m=[39m np[38;5;241m.[39marray([[[38;5;241m3.[39m,[38;5;241m2.[39m, [38;5;241m-[39m[38;5;241m1.[39m, [38;5;241m1.[39m],[[38;5;241m0.[39m, [38;5;241m-[39m[38;5;241m1.[39m, [38;5;241m0.[39m, [38;5;241m0[39m],[[38;5;241m1[39m, [38;5;241m0.3[39m, [38;5;241m2.[39m, [38;5;241m0[39m],[[38;5;241m0.[39m, [38;5;241m1.[39m, [38;5;241m2.[39m, [38;5;241m0.[39m]])
+[0;32m----> 2[0m values,vect [38;5;241m=[39m [43mQR_algorithm[49m[43m([49m[43mS[49m[43m)[49m
+[1;32m      3[0m [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m'[39m[38;5;124mLa matriz T de la forma de Schur de A es: [39m[38;5;130;01m\n[39;00m[38;5;124m [39m[38;5;132;01m{[39;00mtabulate(QR_algorithm_init(S))[38;5;132;01m}[39;00m[38;5;124m'[39m)
+[1;32m      4[0m [38;5;28mprint[39m([38;5;124m'[39m[38;5;124mAutovalores QR: [39m[38;5;124m'[39m,values)
+
+Cell [0;32mIn[23], line 13[0m, in [0;36mQR_algorithm[0;34m(A)[0m
+[1;32m     11[0m [38;5;66;03m# los autovalores están en la diagonal de A_copy [39;00m
+[1;32m     12[0m [38;5;28;01mfor[39;00m i [38;5;129;01min[39;00m [38;5;28mrange[39m(A[38;5;241m.[39mshape[[38;5;241m0[39m]):
+[0;32m---> 13[0m     eigvalues[i], eigvectors[:,i] [38;5;241m=[39m [43mpotencia_inversa_shift[49m[43m([49m[43mA[49m[43m,[49m[43m [49m[43mA_copy[49m[43m[[49m[43mi[49m[43m,[49m[43mi[49m[43m][49m[43m)[49m
+[1;32m     14[0m [38;5;28;01mreturn[39;00m eigvalues, eigvectors
+
+Cell [0;32mIn[10], line 15[0m, in [0;36mpotencia_inversa_shift[0;34m(A, beta)[0m
+[1;32m     12[0m [38;5;28;01mwhile[39;00m [38;5;129;01mnot[39;00m convergencia:
+[1;32m     13[0m     [38;5;66;03m#Resuelvo los dos sistemas lineales triangulares[39;00m
+[1;32m     14[0m     y [38;5;241m=[39m sp[38;5;241m.[39msolve_triangular(L, np[38;5;241m.[39mmatmul(P,x), lower[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[0;32m---> 15[0m     x1 [38;5;241m=[39m [43msp[49m[38;5;241;43m.[39;49m[43msolve_triangular[49m[43m([49m[43mU[49m[43m,[49m[43m [49m[43my[49m[43m,[49m[43m [49m[43mlower[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m)[49m
+[1;32m     17[0m     x1 [38;5;241m=[39m x1[38;5;241m/[39mnorm2(x1)
+[1;32m     18[0m     eigvalue1 [38;5;241m=[39m np[38;5;241m.[39mdot(x1,np[38;5;241m.[39mmatmul(A,x1))     [38;5;66;03m# Aproximación del autovalor asociado al autovector menos dominante usando A[39;00m
+
+File [0;32m/opt/hostedtoolcache/Python/3.10.13/x64/lib/python3.10/site-packages/scipy/linalg/_basic.py:356[0m, in [0;36msolve_triangular[0;34m(a, b, trans, lower, unit_diagonal, overwrite_b, check_finite)[0m
+[1;32m    354[0m     [38;5;28;01mreturn[39;00m x
+[1;32m    355[0m [38;5;28;01mif[39;00m info [38;5;241m>[39m [38;5;241m0[39m:
+[0;32m--> 356[0m     [38;5;28;01mraise[39;00m LinAlgError([38;5;124m"[39m[38;5;124msingular matrix: resolution failed at diagonal [39m[38;5;132;01m%d[39;00m[38;5;124m"[39m [38;5;241m%[39m
+[1;32m    357[0m                       (info[38;5;241m-[39m[38;5;241m1[39m))
+[1;32m    358[0m [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([38;5;124m'[39m[38;5;124millegal value in [39m[38;5;132;01m%d[39;00m[38;5;124mth argument of internal trtrs[39m[38;5;124m'[39m [38;5;241m%[39m
+[1;32m    359[0m                  ([38;5;241m-[39minfo))
+
+[0;31mLinAlgError[0m: singular matrix: resolution failed at diagonal 3
 
