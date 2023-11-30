@@ -16,4 +16,4 @@ Para desarrollar localmente el libro, se deben realizar los siguientes pasos:
 4. Ejecutar `jupyter-book clean book/` para eliminar cualquier construcción previa del libro
 5. Ejecutar `jupyter-book build book/` para generar el libro con el material del curso
 
-Una versión completamente renderizada del libro en HTML se generará en `book/_build/html/`. Se puede ejecutar en cualquier navegador.
+Una versión completamente renderizada del libro en HTML se generará en `book/_build/html/`. Se puede ejecutar en cualquier navegador
